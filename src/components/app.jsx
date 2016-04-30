@@ -6,13 +6,11 @@ export default class App extends Component {
   render() {
     return (
       <div>
-        hello world
+        <p>hello world</p>
         <TestFile />
         {this.props.children}
-        
+
       </div>
     );
   }
 }  // ss
-
-

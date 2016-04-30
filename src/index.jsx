@@ -6,6 +6,7 @@ import { Router, browserHistory } from 'react-router';
 import reducers from './reducers';
 import routes from './routes';
 import promise from 'redux-promise';
+import './styles/app.scss';
 
 // http://www.blog.com/posts/5
 // browserhistory look at /posts/5
