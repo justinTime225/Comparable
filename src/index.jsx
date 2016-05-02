@@ -6,17 +6,17 @@ import { Router, browserHistory } from 'react-router';
 import reducers from './reducers';
 import routes from './routes';
 import promise from 'redux-promise';
+import thunkMiddleware from 'redux-thunk';
 import './styles/app.scss';
 
-// http://www.blog.com/posts/5
-// browserhistory look at /posts/5
+const createStoreWithMiddleware = applyMiddleware(thunkMiddleware)(createStore);
 
-const createStoreWithMiddleware = applyMiddleware(
-  promise
-  )(createStore);
+let store = createStoreWithMiddleware(reducers);
+
+let rootElement = document.getElementById('app');
 
 ReactDOM.render(
-  <Provider store={createStoreWithMiddleware(reducers)}>
-    <Router history={browserHistory} routes={routes}/>
-  </Provider>
-  , document.querySelector('.container'));
+  <Provider store={store}>
+    <Router history={browserHistory}>{routes}</Router>
+  </Provider>, 
+  rootElement);

@@ -1,5 +1,12 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-export default () => {
-  return <h1>List of blog posts.</h1>;
-};
+export default class Test extends Component {
+  render() {
+    console.log(this.context);
+    return (
+      <div>
+        <h1> Hello, world! </h1>
+      </div>
+    )
+  }
+}
