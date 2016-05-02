@@ -1,4 +1,4 @@
-const angelListFile = require('./angelList.json');
+const angelListFile = require('../../angelList.json');
 const _ = require('underscore');
 
 module.exports = {
@@ -11,5 +11,3 @@ module.exports = {
     callback(null, filteredData);
   },
 };
-
-// filterAngelListData('UI Engineer');

@@ -38,4 +38,4 @@ node_modules
 server/config/.secrets.json
 
 # Data
-server/angelList/angelList.json
+angelList.json

@@ -9,6 +9,7 @@ const dataAll = { jobs: [] };
 
 // GET request for angellist API
 const getAngelListData = pageNum => {
+  pageNum = pageNum || 1;
   https.get('https://api.angel.co/1/tags/1692/jobs?access_token=' + angelListToken + '&page=' + pageNum, (res) => {
 
     // temp storage for data chunks
@@ -48,5 +49,5 @@ const createDataFile = data => {
   });
 };
 
-// Uncomment and run file with node to update data
-// getAngelListData(1);
+// runs with postinstall script in package.json
+getAngelListData();
