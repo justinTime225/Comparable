@@ -18,5 +18,5 @@ let rootElement = document.getElementById('app');
 ReactDOM.render(
   <Provider store={store}>
     <Router history={browserHistory}>{routes}</Router>
-  </Provider>, 
+  </Provider>,
   rootElement);

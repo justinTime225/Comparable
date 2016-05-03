@@ -7,17 +7,16 @@ import { Link } from 'react-router';
 
 class Test extends Component {
   render() {
-    console.log(this.props);
     const { dispatch, isAuthenticated, errorMessage } = this.props;
 
     return (
       <div>
-        <Navbar 
+        <Navbar
           isAuthenticated={isAuthenticated}
           errorMessage={errorMessage}
           dispatch={dispatch}
         />
-        <Link to="/test">Link to test</Link>
+        <Link to="/offers">Link to offer</Link>
         {this.props.children}
       </div>
     );
@@ -30,8 +29,8 @@ function mapStateToProps(state) {
 
   return {
     isAuthenticated,
-    errorMessage
-  }
+    errorMessage,
+  };
 };
 
-export default connect(mapStateToProps)(Test)
+export default connect(mapStateToProps)(Test);

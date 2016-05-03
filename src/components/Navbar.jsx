@@ -15,7 +15,7 @@ export default class Navbar extends Component {
           <a href="#" className="navbar-brand">Comparable</a>
           <div className="navbar-form">
             {!isAuthenticated && 
-              <Login 
+              <Login
                 errorMessage={errorMessage}
                 onLoginClick={() => dispatch(login())}
               />
@@ -27,7 +27,7 @@ export default class Navbar extends Component {
           </div>
         </div>
       </nav>
-    )
+    );
   }
 };
 
@@ -35,4 +35,4 @@ Navbar.propTypes = {
   dispatch: PropTypes.func.isRequired,
   isAuthenticated: PropTypes.bool.isRequired,
   errorMessage: PropTypes.string
-}
+};
