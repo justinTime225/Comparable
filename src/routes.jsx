@@ -11,7 +11,7 @@ function requireAuth(nextState, replace) {
     replace({
       pathname: '/',
       state: { nextPathname: nextState.location.pathname }
-    })
+    });
   }
 }
 
