@@ -7,15 +7,7 @@ var rand = function() {
 const renderCircles = (props) => {
 
   return (coords, index) => {
-    // console.log('inside rendercircle');
-    // console.log(props);
-    // console.log(props.xScale(coords.mean[0]));
-    // coords = []
-    // coords.mean = []
-    var Xcoord = coords.mean[0];
-    // console.log(coords.mean);
-    // console.log(typeof coords.mean.length);
-    // console.log(coords);
+
     const circleProps = {
       cx: props.xScale(coords.mean[0]),
       cy: props.yScale(coords.mean[1]),
@@ -29,15 +21,16 @@ const renderCircles = (props) => {
       props.update(circleProps);
       console.log(circleProps); 
 
-      
     }}/>;
 
   };
 };
 
 export default (props) => {
+  // console.log('inside data circle');
+  // console.log(props.job);
   return (
-    <g>{ props.data.map(renderCircles(props)) } 
+    <g>{ props.job.map(renderCircles(props)) } 
       
     </g>
   );

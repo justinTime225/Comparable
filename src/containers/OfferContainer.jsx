@@ -41,7 +41,6 @@ class Offer extends Component {
 
   render() {
     const { offer } = this.props;
-    
     return (
       <div className="container">
         <OfferForm onSubmit={this.handleSubmit.bind(this)}></OfferForm>
@@ -55,10 +54,11 @@ class Offer extends Component {
 };
 
 function mapStateToProps(state) {
-  const { data, offer } = state;
+  const { data, offer, job } = state;
   return {
     data,
-    offer
+    offer,
+    job
   };
 };
 function mapDispatchToProps(dispatch) {

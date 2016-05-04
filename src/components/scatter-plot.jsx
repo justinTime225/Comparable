@@ -6,17 +6,18 @@ import XYAxis       from './x-y-axis';
 const xMax   = (data)  => d3.max(data, (d) => d[0]);
 const yMax   = (data)  => d3.max(data, (d) => d[1]);
 const xScale = (props) => {
-  var arr = props.data.map(function(obj) {
+
+  var arr = props.job.map(function(obj) {
     return obj.mean;
   });
-  // console.log(arr);
+
   return d3.scale.linear()
     .domain([0, xMax(arr)])
     .range([props.padding, props.width - props.padding * 2]);
 
 };
 const yScale = (props) => {
-  var arr = props.data.map(function(obj) {
+  var arr = props.job.map(function(obj) {
     return obj.mean;
   });
   return d3.scale.linear()

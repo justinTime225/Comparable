@@ -4,12 +4,16 @@ export default function(state = [], action) {
   // action.type is undefined for some reason
   switch(action.type) {
   case JOB_MATCH: 
-    // return state.concat([action.payload.data]);
-    // return [ action.payload.data, ...state ]; 
-    // console.log('job matched');
+
     console.log('-------');
-    console.log([...action.payload.data]);
-    return [...action.payload.data];
+    var current = [...action.payload.data];
+    var array = current.map(job => {
+      var mean = [Number((job.salary_min + job.salary_max)/2), (Number(job.equity_min) + Number(job.equity_max)) / 2];
+      job.mean = mean;
+      return job;
+    });
+
+    return array;
   }
   return state;
 }
