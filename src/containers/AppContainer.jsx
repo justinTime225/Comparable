@@ -5,7 +5,7 @@ import Login from '../components/Login';
 import Navbar from '../components/Navbar';
 import { Link } from 'react-router';
 
-class Test extends Component {
+class App extends Component {
   render() {
     const { dispatch, isAuthenticated, errorMessage } = this.props;
 
@@ -33,4 +33,4 @@ function mapStateToProps(state) {
   };
 };
 
-export default connect(mapStateToProps)(Test);
+export default connect(mapStateToProps)(App);

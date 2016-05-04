@@ -6,7 +6,6 @@ import { login, logoutUser } from '../actions/Auth_Actions';
 export default class Navbar extends Component {
   render() {
     const { dispatch, isAuthenticated, errorMessage } = this.props;
-    console.log(isAuthenticated);
 
     // Will display the Login component if the user is not authenticated, Logout otherwise
     return (

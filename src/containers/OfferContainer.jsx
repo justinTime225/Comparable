@@ -4,8 +4,11 @@ import OfferForm from '../components/OfferForm';
 import { getJobs } from '../middleware/angelListApi.js';
 import { sendJob } from '../actions/Job_Matches';
 import { reset } from 'redux-form';
+import { changeOffer } from '../actions/OfferActions';
 import ScatterPlot from '../components/scatter-plot';
 import { bindActionCreators } from 'redux';
+import OfferDisplay from '../components/OfferDisplay';
+
 
 // Deafult styles for graph
 const styles = {
@@ -28,7 +31,7 @@ class Offer extends Component {
   handleSubmit(data, dispatch) {
     // Retrieves jobs data from server
     // via angelListApi.js
-    // console.log(data.title);
+    dispatch(changeOffer(data));
     this.props.sendJob(data.title);
     // console.log(data);
 
@@ -37,11 +40,12 @@ class Offer extends Component {
   };
 
   render() {
-    // const { dispatch, data } = this.props;
+    const { offer } = this.props;
     
     return (
       <div className="container">
         <OfferForm onSubmit={this.handleSubmit.bind(this)}></OfferForm>
+        <OfferDisplay data={offer}></OfferDisplay>
         <ScatterPlot {...this.props} {...styles} update={updateCircle}/>
           <h3 id="equity">Equity</h3>
           <h3 id="salary">Salary</h3>
@@ -51,9 +55,10 @@ class Offer extends Component {
 };
 
 function mapStateToProps(state) {
-  const { data } = state;
+  const { data, offer } = state;
   return {
     data,
+    offer
   };
 };
 function mapDispatchToProps(dispatch) {

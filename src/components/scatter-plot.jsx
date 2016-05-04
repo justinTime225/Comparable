@@ -30,8 +30,6 @@ const marshalProps = (props) => {
 };
 
 export default (props) => {
-  // console.log('----sdsdfs---');
-  // console.log(props);
   const d3Props = marshalProps(props);
   return <svg width={d3Props.width} height={d3Props.height}>
     <DataCircles {...d3Props} update={props.update}/>
