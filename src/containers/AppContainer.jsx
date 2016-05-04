@@ -16,7 +16,6 @@ class App extends Component {
           errorMessage={errorMessage}
           dispatch={dispatch}
         />
-        <Link to="/offers">Link to offer</Link>
         {this.props.children}
       </div>
     );

@@ -5,16 +5,10 @@ export default class Login extends Component {
     const { errorMessage } = this.props;
 
     return (
-      <div className="pull-right">
-        <button onClick={(e) => this.handleClick(e)} className="btn btn-primary">
-          Login
-        </button>
-
-        {errorMessage &&
-          <p style={{color:'red'}}>{errorMessage}</p>
-        }
-      </div>
-    )
+      <a onClick={(e) => this.handleClick(e)}>
+        Login
+      </a>
+    );
   }
 
   handleClick(e) {
@@ -24,5 +18,9 @@ export default class Login extends Component {
 
 Login.propTypes = {
   onLoginClick: PropTypes.func.isRequired,
-  errorMessage: PropTypes.string
-}
+  errorMessage: PropTypes.string,
+};
+
+// {errorMessage &&
+//   <p style={{color:'red'}}>{errorMessage}</p>
+// }

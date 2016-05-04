@@ -5,11 +5,9 @@ export default class Logout extends Component {
     const { onLogoutClick } = this.props;
 
     return (
-      <div className="pull-right">
-        <button onClick={() => onLogoutClick()} className="btn btn-primary">
+        <a href="/" onClick={() => onLogoutClick()}>
           Logout
-        </button>
-      </div>
+        </a>
     )
   }
 };
