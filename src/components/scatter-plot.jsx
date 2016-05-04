@@ -6,16 +6,21 @@ import XYAxis       from './x-y-axis';
 const xMax   = (data)  => d3.max(data, (d) => d[0]);
 const yMax   = (data)  => d3.max(data, (d) => d[1]);
 const xScale = (props) => {
-  // console.log(xMax(props.data));
-  // console.log(yMax(props.data));
+  var arr = props.data.map(function(obj) {
+    return obj.mean;
+  });
+  // console.log(arr);
   return d3.scale.linear()
-    .domain([0, xMax(props.data)])
+    .domain([0, xMax(arr)])
     .range([props.padding, props.width - props.padding * 2]);
 
 };
 const yScale = (props) => {
+  var arr = props.data.map(function(obj) {
+    return obj.mean;
+  });
   return d3.scale.linear()
-    .domain([0, yMax(props.data)])
+    .domain([0, yMax(arr)])
     .range([props.height - props.padding, props.padding]);
 };
 const marshalProps = (props) => {
@@ -25,7 +30,8 @@ const marshalProps = (props) => {
 };
 
 export default (props) => {
-  console.log(props);
+  // console.log('----sdsdfs---');
+  // console.log(props);
   const d3Props = marshalProps(props);
   return <svg width={d3Props.width} height={d3Props.height}>
     <DataCircles {...d3Props} update={props.update}/>

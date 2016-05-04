@@ -9,7 +9,7 @@ import promise from 'redux-promise';
 import thunkMiddleware from 'redux-thunk';
 import './styles/app.scss';
 
-const createStoreWithMiddleware = applyMiddleware(thunkMiddleware)(createStore);
+const createStoreWithMiddleware = applyMiddleware(thunkMiddleware, promise)(createStore);
 
 let store = createStoreWithMiddleware(reducers);
 

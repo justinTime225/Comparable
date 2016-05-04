@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import OfferForm from '../components/OfferForm';
 import { getJobs } from '../middleware/angelListApi.js';
+import { sendJob } from '../actions/Job_Matches';
 import { reset } from 'redux-form';
 import ScatterPlot from '../components/scatter-plot';
+import { bindActionCreators } from 'redux';
 
 // Deafult styles for graph
 const styles = {
@@ -19,22 +21,27 @@ const updateCircle = (circle) => {
 };
 
 class Offer extends Component {
+  // componentWillMount() {
+  //   console.log('---');
+  //   console.log(sendJob);
+  // }
+  handleSubmit(data, dispatch) {
+    // Retrieves jobs data from server
+    // via angelListApi.js
+    // console.log(data.title);
+    this.props.sendJob(data.title);
+    // console.log(data);
+
+    // Resets form fields after submission
+    dispatch(reset('offer'));
+  };
 
   render() {
-    const { dispatch, data } = this.props;
-
-    function handleSubmit(data, dispatch) {
-      // Retrieves jobs data from server
-      // via angelListApi.js
-      getJobs(data.title);
-
-      // Resets form fields after submission
-      dispatch(reset('offer'));
-    };
-
+    // const { dispatch, data } = this.props;
+    
     return (
       <div className="container">
-        <OfferForm onSubmit={handleSubmit}></OfferForm>
+        <OfferForm onSubmit={this.handleSubmit.bind(this)}></OfferForm>
         <ScatterPlot {...this.props} {...styles} update={updateCircle}/>
           <h3 id="equity">Equity</h3>
           <h3 id="salary">Salary</h3>
@@ -49,5 +56,8 @@ function mapStateToProps(state) {
     data,
   };
 };
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({sendJob}, dispatch);
+}
 
-export default connect(mapStateToProps)(Offer);
+export default connect(mapStateToProps, mapDispatchToProps)(Offer);
