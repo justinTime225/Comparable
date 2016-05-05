@@ -12,7 +12,7 @@ import OfferDisplay from '../components/OfferDisplay';
 
 // Deafult styles for graph
 const styles = {
-  width: 1500,
+  width: 1000,
   height: 900,
   padding: 30,
 };
@@ -45,9 +45,17 @@ class Offer extends Component {
       <div className="container">
         <OfferForm onSubmit={this.handleSubmit.bind(this)}></OfferForm>
         <OfferDisplay data={offer}></OfferDisplay>
-        <ScatterPlot {...this.props} {...styles} update={updateCircle}/>
-          <h3 id="equity">Equity</h3>
-          <h3 id="salary">Salary</h3>
+        <div className="row">
+          <div className="col-md-12">
+            <div className="panel panel-default">
+              <div className="panel-body" >
+                <ScatterPlot {...this.props} {...styles} update={updateCircle}/>
+                  <h4 id="equity">Equity</h4>
+                  <h4 id="salary">Salary</h4>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }

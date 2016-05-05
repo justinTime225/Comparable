@@ -29,7 +29,7 @@ class OfferForm extends Component {
                 <div className="form-group has-warning">
                   <label className="sr-only" htmlFor="title">Title</label>
                   <input type="text" className="form-control" placeholder="Title" autoComplete="off" { ...title } />
-                  {title.touched && title.error && <div>{title.error}</div>}
+                  {title.touched && title.error && <div style={{ color: 'red' }}>{title.error}</div>}
                 </div>
                 <div className="form-group has-warning">
                   <label className="sr-only" htmlFor="location">Location</label>

@@ -127,3 +127,14 @@ p {
   background-color: #2092e1;
   color: #f8f8f8;
 }
+
+.btn.btn-success {
+  border-radius: 35px;
+  padding: 12px 18px !important;
+}
+
+.btn.btn-success:hover {
+  // background-color: #ff8a37;
+  background-color: #4caf50;
+  color: #FFFFFF;
+}
