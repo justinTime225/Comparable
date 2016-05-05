@@ -32,7 +32,7 @@ class Offer extends Component {
     // Retrieves jobs data from server
     // via angelListApi.js
     dispatch(changeOffer(data));
-    this.props.sendJob(data.title);
+    this.props.sendJob(data.title, data);
     // console.log(data);
 
     // Resets form fields after submission
