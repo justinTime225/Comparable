@@ -41,7 +41,7 @@ class Offer extends Component {
     // Resets form fields after submission
     dispatch(reset('offer'));
   };
-  displayJob() {
+  showJob() {
     if (!this.props.display) {
       return (
         <div>
@@ -71,7 +71,7 @@ class Offer extends Component {
 
   render() {
     console.log('=========');
-    console.log(this.props.display);
+  
     const { offer } = this.props;
 
     return (
@@ -80,6 +80,9 @@ class Offer extends Component {
         <OfferDisplay data={offer}></OfferDisplay>
         <div className="row">
           <div className="col-md-12">
+            <div className="panel-heading">
+              
+            </div>
             <div className="panel panel-default">
               <div className="panel-body" >
                 <ScatterPlot {...this.props} {...styles} update={this.updateCircle.bind(this)}/>
