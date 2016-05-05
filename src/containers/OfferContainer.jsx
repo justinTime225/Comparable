@@ -35,7 +35,7 @@ class Offer extends Component {
     // this.props.sendJob(data.title);
 
 
-    dispatch(sendJob(data.title));
+    // dispatch(sendJob(data.title));
 
 
     // Resets form fields after submission

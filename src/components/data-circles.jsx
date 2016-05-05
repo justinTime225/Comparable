@@ -16,7 +16,7 @@ const renderCircles = (props) => {
       fill: `rgb(47, 147, ${Math.floor((props.xScale(coords.mean[0])/2000) * 255)})`,
       stroke: `rgb(47, 147, ${Math.floor((props.xScale(coords.mean[0])/2000) * 255)})`
     };
-
+    console.log(coords);
     if (coords.user) {
       circleProps.fill = '#ff8a37';
       circleProps.stroke = '#ff8a37';
