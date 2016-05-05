@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import OfferForm from '../components/OfferForm';
-import { getJobs } from '../middleware/angelListApi.js';
+import { displayJob } from '../actions/Job_Display';
 import { sendJob } from '../actions/Job_Matches';
 import { reset } from 'redux-form';
 import { changeOffer } from '../actions/OfferActions';
 import ScatterPlot from '../components/scatter-plot';
-import { bindActionCreators } from 'redux';
+// import { bindActionCreators } from 'redux';
 import OfferDisplay from '../components/OfferDisplay';
 
 
@@ -19,27 +19,34 @@ const styles = {
 
 // When a circle/plot is clicked, modify
 // the clicked circles data
-const updateCircle = (circle) => {
-  circle.fill = 'black';
-};
 
 class Offer extends Component {
-  // componentWillMount() {
-  //   console.log('---');
-  //   console.log(sendJob);
-  // }
+  updateCircle(circle) {
+    // console.log(circle);
+    // console.log(this.props);
+    this.props.displayJob(circle);
+    // create an action function to put current user into application state
+  };
+
   handleSubmit(data, dispatch) {
     // Retrieves jobs data from server
     // via angelListApi.js
     dispatch(changeOffer(data));
-    this.props.sendJob(data.title, data);
-    // console.log(data);
 
+    // this.props.sendJob(data.title, data);
+
+    dispatch(sendJob(data.title, data));
+    // this.props.sendJob(data.title);
+
+    // console.log(data);
+    
     // Resets form fields after submission
     dispatch(reset('offer'));
   };
 
   render() {
+    console.log('=========');
+    console.log(this.props.display);
     const { offer } = this.props;
     return (
       <div className="container">
@@ -49,7 +56,7 @@ class Offer extends Component {
           <div className="col-md-12">
             <div className="panel panel-default">
               <div className="panel-body" >
-                <ScatterPlot {...this.props} {...styles} update={updateCircle}/>
+                <ScatterPlot {...this.props} {...styles} update={this.updateCircle.bind(this)}/>
                   <h4 id="equity">Equity</h4>
                   <h4 id="salary">Salary</h4>
               </div>
@@ -60,17 +67,18 @@ class Offer extends Component {
     );
   }
 };
-
+// {this.props.display && <pre>{this.props.display.title}</pre>}
 function mapStateToProps(state) {
-  const { data, offer, job } = state;
+  const { data, offer, job, display } = state;
   return {
     data,
     offer,
-    job
+    job,
+    display
   };
 };
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({sendJob}, dispatch);
-}
+// function mapDispatchToProps(dispatch) {
+//   console.log(dispatch);
+// }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Offer);
+export default connect(mapStateToProps, {displayJob})(Offer);

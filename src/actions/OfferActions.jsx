@@ -5,5 +5,5 @@ export function changeOffer(data) {
   return {
     type: CHANGE_OFFER,
     offer: data
-  }
+  };
 }
