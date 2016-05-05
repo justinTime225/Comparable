@@ -18,8 +18,7 @@ const renderCircles = (props) => {
     };
     // console.log(circleProps);
     return <circle {...circleProps} onClick={() => {
-      props.update(circleProps);
-      console.log(circleProps); 
+      props.update(coords); 
 
     }}/>;
 
