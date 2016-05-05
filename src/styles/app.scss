@@ -1,13 +1,80 @@
-h1 {
-  color: blue;
-  text-align: center;
-}
-
+// <----- START: Default styles ----->
 svg {
   display: block;
   margin: auto;
   margin-left: 70px;
 }
+
+body {
+  font-family: 'HelveticaNeue-Light' !important;
+}
+
+p {
+  font-family: 'HelveticaNeue-Light' !important;
+}
+// <----- END: Default styles ----->
+
+// <----- START: Navbar styles ----->
+.navbar-default .navbar-nav > li > a {
+  font-family: "Montserrat", sans-serif;
+  font-size: 14px;
+  text-transform: uppercase;
+}
+
+.navbar>.container .navbar-brand, .navbar>.container-fluid .navbar-brand {
+  margin-left: 0;
+}
+
+.navbar {
+  padding: 5px 0px;
+}
+
+.navbar-brand {
+  font-family: "Montserrat", sans-serif !important;
+  padding-top: 14px;
+  text-transform: uppercase;
+}
+
+.navbar-default .navbar-brand, .navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:focus, .navbar-default .navbar-nav > li > a {
+  color: #2092e1;
+}
+
+.navbar-brand:hover {
+  color: #ff8a37 !important;
+}
+
+.navbar-default .navbar-nav > li > a:hover {
+  color: #ff8a37;
+}
+
+#offer-btn {
+  border: 2px solid #2092e1;
+  border-radius: 35px;
+  background-color: #f8f8f8;
+  padding: 15px 24px !important;
+  color: #2092e1 !important;
+}
+
+#offer-btn:hover {
+  border: 2px solid #ff8a37 !important;
+  background: #ff8a37 !important;
+  color: #fff !important;
+}
+
+.has-warning .form-control:focus {
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+.has-warning .form-control {
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+.login-btn {
+  cursor: pointer;
+}
+// <----- END: Navbar styles ----->
 
 .axis path,
 .axis line {
@@ -42,4 +109,21 @@ svg {
 
 .offerTitle {
   font-size: 1.2em;
+}
+
+.offer-input .form-group {
+  margin: 0px 3px;
+}
+
+.offer-form {
+  text-align: center;
+}
+
+.offer-form .panel-default {
+  margin-top: 10px;
+}
+
+.offer-form .panel-heading {
+  background-color: #2092e1;
+  color: #f8f8f8;
 }

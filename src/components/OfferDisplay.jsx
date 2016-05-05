@@ -5,9 +5,9 @@ export default class OfferDisplay extends Component {
     const { offer } = this.props.data;
 
     return (
-      <div className="row">
+      <div className="row offer-form">
         <div className="col-md-10 col-md-offset-1">
-          {offer && 
+          {offer &&
             <ul className="displayList">
               <li className="text-center offerTitle">{offer.title}</li>
               <li className="text-center">Location: {offer.location} | Salary: {offer.salary} | Equity: {offer.equity}</li>

@@ -10,7 +10,7 @@ export default class Navbar extends Component {
 
     // Will display the Login component if the user is not authenticated, Logout otherwise
     return (
-      <nav className="navbar navbar-default">
+      <div className="navbar navbar-default">
         <div className="container">
           <div className="navbar-header">
             <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse" aria-expanded="false">
@@ -23,7 +23,7 @@ export default class Navbar extends Component {
           <div className="collapse navbar-collapse" id="navBar">
             <ul className="nav navbar-nav navbar-right">
               <li className="active">
-                <Link to="/offers">Offers
+                <Link to="/offers" id="offer-btn">Offers
                   <span className="sr-only">(current)</span>
                 </Link>
               </li>
@@ -42,7 +42,7 @@ export default class Navbar extends Component {
             </ul>
           </div>
         </div>
-      </nav>
+      </div>
     );
   }
 };
@@ -53,59 +53,85 @@ Navbar.propTypes = {
   errorMessage: PropTypes.string,
 };
 
-// <nav className="navbar navbar-default">
-//   <div className="container-fluid">
-//     <div className="navbar-header">
-//       <a href="/" className="navbar-brand">Comparable</a>
+// <div class="navbar navbar-default">
+//   <div class="container-fluid">
+//     <div class="navbar-header">
+//       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+//         <span class="icon-bar"></span>
+//         <span class="icon-bar"></span>
+//         <span class="icon-bar"></span>
+//       </button>
+//       <a class="navbar-brand" href="javascript:void(0)">Brand</a>
 //     </div>
-//
-//     <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-//       <ul className="nav navbar-nav">
-//         <li className="active"><a href="#">Link <span className="sr-only">(current)</span></a></li>
-//         <li><a href="#">Link</a></li>
-//         <li className="dropdown">
-//           <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span className="caret"></span></a>
-//           <ul className="dropdown-menu">
-//             <li><a href="#">Action</a></li>
-//             <li><a href="#">Another action</a></li>
-//             <li><a href="#">Something else here</a></li>
-//             <li role="separator" className="divider"></li>
-//             <li><a href="#">Separated link</a></li>
-//             <li role="separator" className="divider"></li>
-//             <li><a href="#">One more separated link</a></li>
+//     <div class="navbar-collapse collapse navbar-responsive-collapse">
+//       <ul class="nav navbar-nav">
+//         <li class="active"><a href="javascript:void(0)">Active</a></li>
+//         <li><a href="javascript:void(0)">Link</a></li>
+//         <li class="dropdown">
+//           <a href="bootstrap-elements.html" data-target="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown
+//             <b class="caret"></b></a>
+//           <ul class="dropdown-menu">
+//             <li><a href="javascript:void(0)">Action</a></li>
+//             <li><a href="javascript:void(0)">Another action</a></li>
+//             <li><a href="javascript:void(0)">Something else here</a></li>
+//             <li class="divider"></li>
+//             <li class="dropdown-header">Dropdown header</li>
+//             <li><a href="javascript:void(0)">Separated link</a></li>
+//             <li><a href="javascript:void(0)">One more separated link</a></li>
 //           </ul>
 //         </li>
 //       </ul>
-//       <form className="navbar-form navbar-left" role="search">
-//         <div className="form-group">
-//           <input type="text" className="form-control" placeholder="Search" />
+//       <form class="navbar-form navbar-left">
+//         <div class="form-group">
+//           <input type="text" class="form-control col-md-8" placeholder="Search">
 //         </div>
-//         <button type="submit" className="btn btn-default">Submit</button>
 //       </form>
-//       <ul className="nav navbar-nav navbar-right">
-//         <li>
-//           <li>
-//               {!isAuthenticated &&
-//                 <Login
-//                   errorMessage={errorMessage}
-//                   onLoginClick={() => dispatch(login())}
-//                 />
-//               }
-//
-//               {isAuthenticated &&
-//                 <Logout onLogoutClick={() => dispatch(logoutUser())} />
-//               }
-//           </li>
-//         </li>
-//         <li className="dropdown">
-//           <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span className="caret"></span></a>
-//           <ul className="dropdown-menu">
-//             <li><a href="#">Action</a></li>
-//             <li><a href="#">Another action</a></li>
-//             <li><a href="#">Something else here</a></li>
-//             <li role="separator" className="divider"></li>
-//             <li><a href="#">Separated link</a></li>
+//       <ul class="nav navbar-nav navbar-right">
+//         <li><a href="javascript:void(0)">Link</a></li>
+//         <li class="dropdown">
+//           <a href="bootstrap-elements.html" data-target="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown
+//             <b class="caret"></b></a>
+//           <ul class="dropdown-menu">
+//             <li><a href="javascript:void(0)">Action</a></li>
+//             <li><a href="javascript:void(0)">Another action</a></li>
+//             <li><a href="javascript:void(0)">Something else here</a></li>
+//             <li class="divider"></li>
+//             <li><a href="javascript:void(0)">Separated link</a></li>
 //           </ul>
+//         </li>
+//       </ul>
+//     </div>
+//   </div>
+// </div>
+
+// <nav className="navbar navbar-default">
+//   <div className="container">
+//     <div className="navbar-header">
+//       <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse" aria-expanded="false">
+//         <span className="icon-bar"></span>
+//         <span className="icon-bar"></span>
+//         <span className="icon-bar"></span>
+//       </button>
+//       <a href="/" className="navbar-brand">Comparable</a>
+//     </div>
+//     <div className="collapse navbar-collapse" id="navBar">
+//       <ul className="nav navbar-nav navbar-right">
+//         <li className="active">
+//           <Link to="/offers">Offers
+//             <span className="sr-only">(current)</span>
+//           </Link>
+//         </li>
+//         <li>
+//           {!isAuthenticated &&
+//             <Login
+//               errorMessage={errorMessage}
+//               onLoginClick={() => dispatch(login())}
+//             />
+//           }
+//
+//           {isAuthenticated &&
+//             <Logout onLogoutClick={() => dispatch(logoutUser())} />
+//           }
 //         </li>
 //       </ul>
 //     </div>

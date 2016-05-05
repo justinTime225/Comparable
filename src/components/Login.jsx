@@ -5,7 +5,7 @@ export default class Login extends Component {
     const { errorMessage } = this.props;
 
     return (
-      <a onClick={(e) => this.handleClick(e)}>
+      <a className="login-btn" onClick={(e) => this.handleClick(e)}>
         Login
       </a>
     );
