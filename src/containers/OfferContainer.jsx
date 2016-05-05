@@ -93,7 +93,7 @@ class Offer extends Component {
     );
   }
 };
-// {this.props.display && <pre>{this.props.display.title}</pre>}
+
 function mapStateToProps(state) {
   const { data, offer, job, display } = state;
   return {
