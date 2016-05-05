@@ -22,15 +22,11 @@ const styles = {
 
 class Offer extends Component {
   updateCircle(circle) {
-    // console.log(circle);
-    // console.log(this.props);
     this.props.displayJob(circle);
-    // create an action function to put current user into application state
   };
 
   handleSubmit(data, dispatch) {
-    // Retrieves jobs data from server
-    // via angelListApi.js
+
     dispatch(changeOffer(data));
 
     // this.props.sendJob(data.title, data);
@@ -38,16 +34,46 @@ class Offer extends Component {
     dispatch(sendJob(data.title, data));
     // this.props.sendJob(data.title);
 
-    // console.log(data);
+
+    dispatch(sendJob(data.title));
+
     
     // Resets form fields after submission
     dispatch(reset('offer'));
   };
+  displayJob() {
+    if (!this.props.display) {
+      return (
+        <div>
+          <h3>Title: xxx</h3>
+          <h3>Equity Min: xxx</h3>
+          <h3>Equity Max: xxx</h3>
+          <h3>Salary Max: xxx</h3>
+          <h3>Salary Max: xxx</h3>
+          <h3>Equity Max: xxx</h3>
+        </div>
+      );
+    }
+    else {
+      return (
+        <div>
+          <h3>Title: {this.props.display.title}</h3>
+          <h3>Equity Min: {this.props.display.equity_min}</h3>
+          <h3>Equity Max: {this.props.display.equity_max}</h3>
+          <h3>Salary Max: {this.props.display.salary_min}</h3>
+          <h3>Salary Max: {this.props.display.salary_max}</h3>
+          <h3>Equity Max: {this.props.display.equity_max}</h3>
+        </div>
+      );
+      
+    }
+  }
 
   render() {
     console.log('=========');
     console.log(this.props.display);
     const { offer } = this.props;
+
     return (
       <div className="container">
         <OfferForm onSubmit={this.handleSubmit.bind(this)}></OfferForm>

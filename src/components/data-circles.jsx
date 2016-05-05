@@ -23,7 +23,6 @@ const renderCircles = (props) => {
     // console.log(circleProps);
     return <circle {...circleProps} onClick={() => {
       props.update(coords); 
-
     }}/>;
 
   };
