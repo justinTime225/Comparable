@@ -2,6 +2,7 @@ import React from 'react';
 import { Route, IndexRoute } from 'react-router';
 import App from './containers/AppContainer';
 import Offer from './containers/OfferContainer';
+import Home from './components/Home';
 
 function requireAuth(nextState, replace) {
   var authenticated = localStorage.getItem('id_token') ? true : false;
@@ -19,6 +20,7 @@ function requireAuth(nextState, replace) {
 
 export default (
   <Route path="/" component={App}>
-    <Route path="/offers" component={Offer} onEnter={requireAuth} />
+    <IndexRoute component={Home}/>
+    <Route path="offers" component={Offer} onEnter={requireAuth} />
   </Route>
 );

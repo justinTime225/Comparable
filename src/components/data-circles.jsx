@@ -22,7 +22,7 @@ const renderCircles = (props) => {
 
     // console.log(circleProps);
     return <circle {...circleProps} onClick={() => {
-      props.update(coords); 
+      props.update(coords);
     }}/>;
 
   };
@@ -32,8 +32,8 @@ export default (props) => {
   // console.log('inside data circle');
   // console.log(props.job);
   return (
-    <g>{ props.job.map(renderCircles(props)) } 
-      
+    <g>{ props.job.map(renderCircles(props)) }
+
     </g>
   );
 };

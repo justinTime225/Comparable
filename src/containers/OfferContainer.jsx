@@ -37,7 +37,7 @@ class Offer extends Component {
 
     dispatch(sendJob(data.title));
 
-    
+
     // Resets form fields after submission
     dispatch(reset('offer'));
   };
@@ -65,13 +65,13 @@ class Offer extends Component {
           <h3>Equity Max: {this.props.display.equity_max}</h3>
         </div>
       );
-      
+
     }
   }
 
   render() {
     console.log('=========');
-  
+
     const { offer } = this.props;
 
     return (
@@ -81,7 +81,7 @@ class Offer extends Component {
         <div className="row">
           <div className="col-md-12">
             <div className="panel-heading">
-              
+
             </div>
             <div className="panel panel-default">
               <div className="panel-body" >

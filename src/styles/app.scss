@@ -7,12 +7,37 @@ svg {
 
 body {
   font-family: 'HelveticaNeue-Light', sans-serif !important;
+  background-color: #d7e9e4;
 }
 
 p {
   font-family: 'HelveticaNeue-Light', sans-serif !important;
 }
 // <----- END: Default styles ----->
+
+#home h1 {
+  color: #2092e1;
+}
+
+#home .btn.btn-lg {
+  color: #2092e1;
+  border-radius: 35px;
+}
+
+#home .btn.btn-lg:hover {
+  color: #fff;
+  background-color: #ff8a37;
+  border-radius: 35px;
+}
+
+
+.vertical-center {
+  min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
+  min-height: 100vh; /* These two lines are counted as one :-)       */
+
+  display: flex;
+  align-items: center;
+}
 
 // <----- START: Navbar styles ----->
 .navbar-default .navbar-nav > li > a {
