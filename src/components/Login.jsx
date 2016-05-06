@@ -1,6 +1,11 @@
 import React, { Component, PropTypes } from 'react';
 
 export default class Login extends Component {
+  // Handle login click events
+  handleClick() {
+    this.props.onLoginClick();
+  }
+
   render() {
     const { errorMessage } = this.props;
 
@@ -11,12 +16,7 @@ export default class Login extends Component {
       </a>
     );
   }
-
-  // Handle login click events
-  handleClick(e) {
-    this.props.onLoginClick();
-  }
-};
+}
 
 Login.propTypes = {
   onLoginClick: PropTypes.func.isRequired,

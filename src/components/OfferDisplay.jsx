@@ -20,4 +20,4 @@ export default class OfferDisplay extends Component {
       </div>
     );
   }
-};
+}

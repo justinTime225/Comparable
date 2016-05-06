@@ -6,12 +6,12 @@ export default class Logout extends Component {
 
     // Render the Logout link on the page, handles clicks as well
     return (
-        <a href="/" onClick={() => onLogoutClick()}>
-          Logout
-        </a>
+      <a href="/" onClick={() => onLogoutClick()}>
+        Logout
+      </a>
     );
   }
-};
+}
 
 Logout.propTypes = {
   onLogoutClick: PropTypes.func.isRequired,

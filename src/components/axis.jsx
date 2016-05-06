@@ -1,5 +1,5 @@
 import React from 'react';
-import d3    from 'd3';
+import d3 from 'd3';
 
 export default class Axis extends React.Component {
   componentDidMount() {
@@ -9,10 +9,10 @@ export default class Axis extends React.Component {
   componentDidUpdate() {
     this.renderAxis();
   }
-
+  // create the line and determine the scaled x/y values
   renderAxis() {
-    var node  = this.refs.axis;
-    var axis = d3.svg.axis().orient(this.props.orient).ticks(8).scale(this.props.scale);
+    const node = this.refs.axis;
+    const axis = d3.svg.axis().orient(this.props.orient).ticks(8).scale(this.props.scale);
     d3.select(node).call(axis);
   }
 
