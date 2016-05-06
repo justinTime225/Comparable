@@ -9,7 +9,7 @@ export default class Axis extends React.Component {
   componentDidUpdate() {
     this.renderAxis();
   }
-
+  // create the line and determine the scaled x/y values
   renderAxis() {
     var node  = this.refs.axis;
     var axis = d3.svg.axis().orient(this.props.orient).ticks(8).scale(this.props.scale);
