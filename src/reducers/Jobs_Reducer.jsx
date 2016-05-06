@@ -8,19 +8,20 @@ export default function (state = [], action) {
       const current = [...action.payload.data];
       // map over the object and create a mean array
       const array = current.map(job => {
-      const mean = [Number((job.salary_min + job.salary_max)/2), (Number(job.equity_min) + Number(job.equity_max)) / 2];
+        const mean = [Number((job.salary_min + job.salary_max) / 2), (Number(job.equity_min) + Number(job.equity_max)) / 2];
         job.mean = mean;
         return job;
-    });
-    // create the user data based on the offer input from meta
-    var userData = {
-      mean: [action.meta.salary, action.meta.equity],
-      title: action.meta.title,
-      user: true
-    };
+      });
 
-    array.push(userData);
-    return array;
+      // create the user data based on the offer input from meta
+      const userData = {
+        mean: [action.meta.salary, action.meta.equity],
+        title: action.meta.title,
+        user: true,
+      };
+
+      array.push(userData);
+      return array;
   }
   return state;
 }
