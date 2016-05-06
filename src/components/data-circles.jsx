@@ -1,9 +1,5 @@
 import React from 'react';
 
-var rand = function() {
-  return Math.floor(Math.random() * 256);
-};
-
 const renderCircles = (props) => {
   // return a closure function
   return (coords, index) => {
@@ -13,8 +9,8 @@ const renderCircles = (props) => {
       cy: props.yScale(coords.mean[1]),
       r: 10,
       key: index,
-      fill: `rgb(47, 147, ${Math.floor((props.xScale(coords.mean[0])/2000) * 255)})`,
-      stroke: `rgb(47, 147, ${Math.floor((props.xScale(coords.mean[0])/2000) * 255)})`
+      fill: `rgb(47, 147, ${Math.floor((props.xScale(coords.mean[0]) / 2000) * 255)})`,
+      stroke: `rgb(47, 147, ${Math.floor((props.xScale(coords.mean[0]) / 2000) * 255)})`,
     };
     // change color if the coords object is an offer that user created
     if (coords.user) {
@@ -22,10 +18,7 @@ const renderCircles = (props) => {
       circleProps.stroke = '#ff8a37';
     }
     // plot each job on the scatterplot
-    return <svg><circle {...circleProps} onClick={() => {
-      props.update(coords);
-    }}/></svg>;
-
+    return <svg><circle {...circleProps} onClick={() => { props.update(coords); }}/></svg>;
   };
 };
 
@@ -33,7 +26,7 @@ export default (props) => {
   return (
     // renderCircle(props) returns a callback
     <g>
-      { props.job.map(renderCircles(props)) }
+      {props.job.map(renderCircles(props))}
     </g>
   );
 };

@@ -8,9 +8,9 @@ export default function(state = {
   switch (action.type) {
     case CHANGE_OFFER:
       return Object.assign({}, state, {
-        offer: action.offer
-      })
+        offer: action.offer,
+      });
     default:
-      return state
+      return state,
   }
 }

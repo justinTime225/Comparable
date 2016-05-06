@@ -6,7 +6,6 @@ import { sendJob } from '../actions/Job_Matches';
 import { reset } from 'redux-form';
 import { changeOffer } from '../actions/Offer_Actions';
 import ScatterPlot from '../components/scatter-plot';
-// import { bindActionCreators } from 'redux';
 import OfferDisplay from '../components/OfferDisplay';
 
 
@@ -23,7 +22,7 @@ const styles = {
 class Offer extends Component {
   updateCircle(circle) {
     this.props.displayJob(circle);
-  };
+  }
 
   handleSubmit(data, dispatch) {
 
@@ -76,8 +75,8 @@ class Offer extends Component {
 
     return (
       <div className="container">
-        <OfferForm onSubmit={this.handleSubmit.bind(this)}></OfferForm>
-        <OfferDisplay data={offer}></OfferDisplay>
+        <OfferForm onSubmit={this.handleSubmit} />
+        <OfferDisplay data={offer} />
         <div className="row">
           <div className="col-md-12">
             <div className="panel-heading">
@@ -85,9 +84,9 @@ class Offer extends Component {
             </div>
             <div className="panel panel-default">
               <div className="panel-body" >
-                <ScatterPlot {...this.props} {...styles} update={this.updateCircle.bind(this)}/>
-                  <h4 id="equity">Equity</h4>
-                  <h4 id="salary">Salary</h4>
+                <ScatterPlot {...this.props} {...styles} update={this.updateCircle} />
+                <h4 id="equity">Equity</h4>
+                <h4 id="salary">Salary</h4>
               </div>
             </div>
           </div>
@@ -105,9 +104,6 @@ function mapStateToProps(state) {
     job,
     display
   };
-};
-// function mapDispatchToProps(dispatch) {
-//   console.log(dispatch);
-// }
+}
 
-export default connect(mapStateToProps, {displayJob})(Offer);
+export default connect(mapStateToProps, { displayJob })(Offer);

@@ -1,5 +1,5 @@
-import React, { Component, PropTypes } from 'react';
-import {reduxForm} from 'redux-form';
+import React, { Component } from 'react';
+import { reduxForm } from 'redux-form';
 
 // Prevents form from being submitted without title
 // The getJobs API call requires the title
@@ -53,7 +53,7 @@ class OfferForm extends Component {
       </div>
     );
   }
-};
+}
 
 OfferForm = reduxForm({
   form: 'offer',

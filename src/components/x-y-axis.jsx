@@ -1,5 +1,5 @@
-import React  from 'react';
-import Axis   from './axis';
+import React from 'react';
+import Axis from './axis';
 
 export default (props) => {
   const xSettings = {

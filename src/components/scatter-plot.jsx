@@ -1,13 +1,13 @@
-import React        from 'react';
-import d3           from 'd3';
-import DataCircles  from './data-circles';
-import XYAxis       from './x-y-axis';
+import React from 'react';
+import d3 from 'd3';
+import DataCircles from './data-circles';
+import XYAxis from './x-y-axis';
 
-const xMax   = (data)  => d3.max(data, (d) => d[0]);
-const yMax   = (data)  => d3.max(data, (d) => d[1]);
+const xMax = (data) => d3.max(data, (d) => d[0]);
+const yMax = (data) => d3.max(data, (d) => d[1]);
 const xScale = (props) => {
   // return the mean salary & equity from each of the objects
-  var arr = props.job.map(function (obj) {
+  const arr = props.job.map(function(obj) {
     return obj.mean;
   });
   // create the x axis values
@@ -18,7 +18,7 @@ const xScale = (props) => {
 
 const yScale = (props) => {
   // return the mean salary & equity from each of the objects
-  var arr = props.job.map(function (obj) {
+  const arr = props.job.map(function(obj) {
     return obj.mean;
   });
   // create the y axis values
