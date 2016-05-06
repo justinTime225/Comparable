@@ -4,15 +4,15 @@ export default function(state = [], action) {
   // action.type is undefined for some reason
   switch(action.type) {
   case JOB_MATCH: 
-
-    console.log('-------');
-    console.log(action);
+    // take all objects payload.data and put it into a new array
     var current = [...action.payload.data];
+    // map over the object and create a mean array
     var array = current.map(job => {
       var mean = [Number((job.salary_min + job.salary_max)/2), (Number(job.equity_min) + Number(job.equity_max)) / 2];
       job.mean = mean;
       return job;
     });
+    // create the user data based on the offer input from meta
     var userData = {
       mean: [action.meta.salary, action.meta.equity],
       title: action.meta.title,
