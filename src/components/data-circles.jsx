@@ -22,7 +22,6 @@ const renderCircles = (props) => {
       circleProps.stroke = '#ff8a37';
     }
 
-    // console.log(circleProps);
     return <svg><circle {...circleProps} onClick={() => {
       props.update(coords);
     }}/></svg>;
