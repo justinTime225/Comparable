@@ -5,19 +5,22 @@ import Offer from './containers/OfferContainer';
 import Home from './components/Home';
 
 function requireAuth(nextState, replace) {
+  // Checks to see if the user is authenticated
   var authenticated = localStorage.getItem('id_token') ? true : false;
-  console.log('changing state', nextState);
+
+  // Protect the routes
   if (!authenticated) {
-    console.log('routing back to home');
+    // Route back to home if unathenticated
     replace({
       pathname: '/',
-      state: { nextPathname: nextState.location.pathname }
+      state: {
+        nextPathname: nextState.location.pathname,
+      },
     });
   }
 }
 
-// TODO: Build the Main page component and add it as IndexRoute here
-
+// Export router so that we can use it within index
 export default (
   <Route path="/" component={App}>
     <IndexRoute component={Home}/>

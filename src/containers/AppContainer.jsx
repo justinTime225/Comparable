@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
-import {connect} from 'react-redux';
-import { loginUser } from '../actions/Auth_Actions';
-import Login from '../components/Login';
+import { connect } from 'react-redux';
 import Navbar from '../components/Navbar';
-import { Link } from 'react-router';
 
 class App extends Component {
   render() {
+    // Destructure object to create variables for these props
     const { dispatch, isAuthenticated, errorMessage } = this.props;
 
+    // Render this html on every page
     return (
       <div>
         <Navbar
@@ -22,6 +21,7 @@ class App extends Component {
   }
 }
 
+// We will use this function to connect to state
 function mapStateToProps(state) {
   const { auth } = state;
   const { isAuthenticated, errorMessage } = auth;
@@ -32,4 +32,5 @@ function mapStateToProps(state) {
   };
 };
 
+// Connect this component to our state
 export default connect(mapStateToProps)(App);
