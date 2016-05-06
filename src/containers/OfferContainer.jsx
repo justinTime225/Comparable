@@ -4,9 +4,10 @@ import OfferForm from '../components/OfferForm';
 import { displayJob } from '../actions/Job_Display';
 import { sendJob } from '../actions/Job_Matches';
 import { reset } from 'redux-form';
-import { changeOffer } from '../actions/Offer_Actions';
+import { changeOffer, clickJob, closeJob } from '../actions/Offer_Actions';
 import ScatterPlot from '../components/scatter-plot';
 import OfferDisplay from '../components/OfferDisplay';
+import Modal from 'react-modal';
 
 
 // Deafult styles for graph
@@ -16,65 +17,53 @@ const styles = {
   padding: 30,
 };
 
+// Styles for Modal
+const customStyles = {
+  content : {
+    top                   : '50%',
+    left                  : '50%',
+    right                 : 'auto',
+    bottom                : 'auto',
+    marginRight           : '-50%',
+    transform             : 'translate(-50%, -50%)'
+  }
+};
+
+
 // When a circle/plot is clicked, modify
 // the clicked circles data
 
 class Offer extends Component {
-  updateCircle(circle) {
-    this.props.displayJob(circle);
+  updateCircle = (circle, dispatch) => {
+    console.log(this.props);
+    // console.log(dispatch);
   }
 
   handleSubmit(data, dispatch) {
-
     dispatch(changeOffer(data));
 
-    // this.props.sendJob(data.title, data);
-
     dispatch(sendJob(data.title, data));
-    // this.props.sendJob(data.title);
-
-
-    // dispatch(sendJob(data.title));
-
 
     // Resets form fields after submission
     dispatch(reset('offer'));
   };
-  showJob() {
-    if (!this.props.display) {
-      return (
-        <div>
-          <h3>Title: xxx</h3>
-          <h3>Equity Min: xxx</h3>
-          <h3>Equity Max: xxx</h3>
-          <h3>Salary Max: xxx</h3>
-          <h3>Salary Max: xxx</h3>
-          <h3>Equity Max: xxx</h3>
-        </div>
-      );
-    }
-    else {
-      return (
-        <div>
-          <h3>Title: {this.props.display.title}</h3>
-          <h3>Equity Min: {this.props.display.equity_min}</h3>
-          <h3>Equity Max: {this.props.display.equity_max}</h3>
-          <h3>Salary Max: {this.props.display.salary_min}</h3>
-          <h3>Salary Max: {this.props.display.salary_max}</h3>
-          <h3>Equity Max: {this.props.display.equity_max}</h3>
-        </div>
-      );
-
-    }
-  }
 
   render() {
-    console.log('=========');
-
-    const { offer } = this.props;
+    console.log(this.props);
+    const { offer, onJobClick, onJobClose } = this.props;
+    const { display, userOffer } = offer;
 
     return (
       <div className="container">
+        <Modal
+          isOpen={display}
+          onRequestClose={onJobClose}
+          style={customStyles}>
+          <h1>Hello, world!</h1>
+          <div className="text-center">
+            <button className="btn btn-success text-center" onClick={onJobClose}>Close me!</button>
+          </div>
+        </Modal>
         <OfferForm onSubmit={this.handleSubmit} />
         <OfferDisplay data={offer} />
         <div className="row">
@@ -84,7 +73,7 @@ class Offer extends Component {
             </div>
             <div className="panel panel-default">
               <div className="panel-body" >
-                <ScatterPlot {...this.props} {...styles} update={this.updateCircle} />
+                <ScatterPlot {...this.props} {...styles} update={onJobClick} />
                 <h4 id="equity">Equity</h4>
                 <h4 id="salary">Salary</h4>
               </div>
@@ -102,8 +91,19 @@ function mapStateToProps(state) {
     data,
     offer,
     job,
-    display
   };
 }
 
-export default connect(mapStateToProps, { displayJob })(Offer);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onJobClick: (job) => {
+      dispatch(clickJob(job));
+    },
+
+    onJobClose: () => {
+      dispatch(closeJob());
+    },
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Offer);
