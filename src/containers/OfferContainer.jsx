@@ -4,7 +4,7 @@ import OfferForm from '../components/OfferForm';
 import { displayJob } from '../actions/Job_Display';
 import { sendJob } from '../actions/Job_Matches';
 import { reset } from 'redux-form';
-import { changeOffer } from '../actions/OfferActions';
+import { changeOffer } from '../actions/Offer_Actions';
 import ScatterPlot from '../components/scatter-plot';
 // import { bindActionCreators } from 'redux';
 import OfferDisplay from '../components/OfferDisplay';

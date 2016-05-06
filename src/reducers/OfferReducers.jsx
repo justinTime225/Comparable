@@ -1,4 +1,4 @@
-import { CHANGE_OFFER } from '../actions/OfferActions';
+import { CHANGE_OFFER } from '../actions/Offer_Actions';
 
 // Auth reducer, starting state sets auth based on a token in local storage
 // TODO: A Util to check if the token is expired
