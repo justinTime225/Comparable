@@ -23,9 +23,9 @@ const renderCircles = (props) => {
     }
 
     // console.log(circleProps);
-    return <circle {...circleProps} onClick={() => {
+    return <svg><circle {...circleProps} onClick={() => {
       props.update(coords);
-    }}/>;
+    }}/></svg>;
 
   };
 };
