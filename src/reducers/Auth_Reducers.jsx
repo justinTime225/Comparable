@@ -1,7 +1,7 @@
 import { LOCK_SUCCESS, LOGOUT_SUCCESS } from '../actions/Auth_Actions';
 
 // Auth reducer, starting state sets auth based on a token in local storage
-export default function(state = {
+export default function (state = {
   isFetching: false,
   isAuthenticated: localStorage.getItem('id_token') ? true : false,
 }, action) {

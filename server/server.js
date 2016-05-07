@@ -1,36 +1,8 @@
-const path = require('path');
 const express = require('express');
-const angelListController = require('./angelList/angel_list_controller');
+const app = express();
 
-// handle errors and send response
-const sendResponse = function (res, err, data, status) {
-  if (err) {
-    res.status(400).send('Error');
-  } else {
-    res.status(status).send(data);
-  }
-};
+require('./utils/middleware')(app, express);
+require('./routes')(app, express);
 
-module.exports = {
-  app: function () {
-    const app = express();
-    const indexPath = path.join(__dirname, '/../index.html');
-    const publicPath = express.static(path.join(__dirname, '../public'));
-
-    app.use('/public', publicPath);
-    app.get('/', function (_, res) {
-      res.sendFile(indexPath);
-    });
-
-    // routes TODO: move to routes.js
-    app.route('/api/jobs')
-      .get((req, res) => {
-        // route for getting jobs from angelList data
-        angelListController.filterAngelListData(req.query.title, (err, data) => {
-          sendResponse(res, err, data, 200);
-        });
-      });
-
-    return app;
-  },
-};
+console.log('server file');
+module.exports = app;

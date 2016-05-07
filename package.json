@@ -4,8 +4,8 @@
   "description": "Compare you job offer with you current market, and see how it stacks up.",
   "main": "./src/index.jsx",
   "scripts": {
-    "start": "node ./server/app.js",
-    "test": "mocha --compilers js:babel-core/register --require ./test/test_helper.js --recursive ./test",
+    "start": "node ./server/index.js",
+    "test": "mocha --compilers js:babel-core/register \"test/**/*@(.js|.jsx)\"",
     "test:watch": "npm run test -- --watch",
     "webpack:deploy": "NODE_ENV=production webpack --config webpack.prod.config.js --progress --colors",
     "heroku-postbuild": "npm run webpack:deploy",
@@ -39,6 +39,7 @@
     "jsdom": "^8.1.0",
     "mocha": "^2.4.5",
     "react-addons-test-utils": "^0.14.7",
+    "supertest": "^1.2.0",
     "url-loader": "^0.5.6",
     "webpack-dev-middleware": "^1.6.1",
     "webpack-hot-middleware": "^2.10.0"
