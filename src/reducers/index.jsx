@@ -11,7 +11,6 @@ const rootReducer = combineReducers({
   form: formReducer,
   job: Jobs,
   offer: OfferReducers,
-  display: DisplayedJob,
 });
 
 export default rootReducer;

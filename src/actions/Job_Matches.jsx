@@ -8,8 +8,7 @@ export function sendJob(title, userData) {
       title: title,
     },
   });
-  console.log('inside action');
-  console.log(request);
+
   return {
     type: JOB_MATCH,
     payload: request,
