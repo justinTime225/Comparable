@@ -20,4 +20,19 @@ describe('routes', () => {
         .end(done);
     });
   });
+
+
+  describe('/api/offer-filters', () => {
+    it('returns an object with keys for jobTitles and tags', (done) => {
+
+      request(app)
+        .get('/api/offer-filters')
+        .expect(200)
+        .expect(res => {
+          expect(res.body.jobTitles).to.exist;
+          expect(res.body.tags).to.exist;
+        })
+        .end(done);
+    });
+  });
 });
