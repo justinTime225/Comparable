@@ -1,6 +1,5 @@
-const Server = require('./server');
+const app = require('./server');
 const port = (process.env.PORT || 8080);
-const app = Server.app();
 
 if (process.env.NODE_ENV !== 'production') {
   const webpack = require('webpack');
