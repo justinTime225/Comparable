@@ -1,9 +1,8 @@
 const https = require('https');
 const fs = require('fs');
-const angelListConfig = require('../config/.secrets.json');
 
 // set angelList API key
-const angelListToken = process.env.AngelList || angelListConfig.angelList.access_token;
+const angelListToken = process.env.AngelList || require('../config/.secrets.json').angelList.access_token;
 
 // temp storage for all pages of data from angellist API
 const dataAll = { jobs: [] };

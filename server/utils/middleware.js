@@ -2,7 +2,7 @@ const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
 const indexPath = path.join(__dirname, '../../index.html');
-const publicPath = express.static(path.join(__dirname, '../public'));
+const publicPath = express.static(path.join(__dirname, '../../public'));
 
 
 module.exports = (app) => {
