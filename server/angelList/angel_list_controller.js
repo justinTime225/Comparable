@@ -1,5 +1,6 @@
 const angelListFile = require('../../angelList.json');
 const _ = require('underscore');
+const rp = require('request-promise');
 
 module.exports = {
   filterAngelListData: (title, callback) => {
@@ -9,5 +10,10 @@ module.exports = {
     });
 
     callback(null, filteredData);
+  },
+
+  getJobDetails: (id, callback) => {
+    console.log(id);
+    callback(null, id);
   },
 };
