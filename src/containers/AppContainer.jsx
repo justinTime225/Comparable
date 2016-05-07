@@ -30,7 +30,7 @@ function mapStateToProps(state) {
     isAuthenticated,
     errorMessage,
   };
-};
+}
 
 // Connect this component to our state
 export default connect(mapStateToProps)(App);

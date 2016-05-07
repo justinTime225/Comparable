@@ -1,8 +1,7 @@
-const angelListController = require('./angelList/angel_list_controller');
+const angelListController = require('./controllers/angelListController');
 
 // handle errors and send response
 const sendResponse = (res, err, data, status) => {
-  console.log('server');
   if (err) {
     res.status(400).send('Error');
   } else {

@@ -1,8 +1,9 @@
 const https = require('https');
 const fs = require('fs');
+const angelListConfig = require('../config/.secrets.json');
 
 // set angelList API key
-const angelListToken = process.env.AngelList || require('../config/.secrets.json').angelList.access_token;
+const angelListToken = process.env.AngelList || angelListConfig.angelList.access_token;
 
 // temp storage for all pages of data from angellist API
 const dataAll = { jobs: [] };
@@ -10,7 +11,10 @@ const dataAll = { jobs: [] };
 // GET request for angellist API
 const getAngelListData = pageNum => {
   pageNum = pageNum || 1;
-  https.get('https://api.angel.co/1/tags/1692/jobs?access_token=' + angelListToken + '&page=' + pageNum, (res) => {
+
+  const angelListUrl = `https://api.angel.co/1/tags/1692/jobs?access_token=${angelListToken}&page=${pageNum}`;
+
+  https.get(angelListUrl, (res) => {
     // temp storage for data chunks
     var currData = '';
 
