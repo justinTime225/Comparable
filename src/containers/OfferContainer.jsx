@@ -49,7 +49,6 @@ class Offer extends Component {
   };
 
   render() {
-    console.log(this.props);
     const { offer, onJobClick, onJobClose } = this.props;
     const { display, userOffer } = offer;
 
@@ -59,8 +58,35 @@ class Offer extends Component {
           isOpen={display}
           onRequestClose={onJobClose}
           style={customStyles}>
-          <h1>Hello, world!</h1>
+          <h1>Offer Information</h1>
           <div className="text-center">
+            <table className="table">
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>Title</th>
+                  <th>Salary (Avg.)</th>
+                  <th>Equity (Avg.)</th>
+                  <th>Location</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr className="success">
+                  <td>OFFER:</td>
+                  <td>{userOffer.title}</td>
+                  <td>{userOffer.salary}</td>
+                  <td>{userOffer.equity}</td>
+                  <td>{userOffer.location}</td>
+                </tr>
+                <tr className="danger">
+                  <td>LISTING:</td>
+                  <td>{display.title}</td>
+                  <td>{Math.floor((display.salary_max + display.salary_min)/2)}</td>
+                  <td>{Math.floor((+display.equity_max + +display.equity_min)/2)}</td>
+                  <td>San Francisco</td>
+                </tr>
+              </tbody>
+            </table>
             <button className="btn btn-success text-center" onClick={onJobClose}>Close me!</button>
           </div>
         </Modal>
@@ -86,7 +112,8 @@ class Offer extends Component {
 };
 
 function mapStateToProps(state) {
-  const { data, offer, job, display } = state;
+  console.log(state);
+  const { data, offer, job } = state;
   return {
     data,
     offer,

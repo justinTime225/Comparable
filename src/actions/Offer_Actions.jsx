@@ -13,13 +13,6 @@ export function changeOffer(data) {
 }
 
 export function clickJob(data) {
-  console.log(data);
-  axios.get('/api/job', {
-    params: {
-      jobID: String(data.id),
-    },
-  });
-
   return {
     type: CLICK_JOB,
     job: data,
