@@ -11,7 +11,7 @@ export default function(state = {
       });
     case CLICK_JOB:
       return Object.assign({}, state, {
-        display: true,
+        display: action.job,
       });
     case CLOSE_JOB:
       return Object.assign({}, state, {
