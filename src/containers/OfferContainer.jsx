@@ -122,7 +122,7 @@ class Offer extends Component {
             <button className="btn btn-success text-center" onClick={onJobClose}>Close me!</button>
           </div>
         </Modal>
-        <OfferForm onSubmit={this.handleSubmit} />
+        <OfferForm onSubmit={this.handleSubmit.bind(this)} />
         <OfferDisplay data={displayData} />
         <div className="row">
           <div className="col-md-12">
