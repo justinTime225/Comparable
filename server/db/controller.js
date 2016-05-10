@@ -12,6 +12,7 @@ module.exports = {
     });
   },
   createOffer: function(req, res) {
+    console.log(req.body);
     var offer = new Offer(req.body);
     offer.save().then(function(data) {
       if (data) {
