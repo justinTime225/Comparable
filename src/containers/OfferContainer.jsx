@@ -35,8 +35,6 @@ const customStyles = {
 
 class Offer extends Component {
   updateCircle = (circle, dispatch) => {
-    console.log(this.props);
-    // console.log(dispatch);
   }
 
   saveOffer(data) {
@@ -50,10 +48,10 @@ class Offer extends Component {
     };
     axios.post('/api/offers', offerObj)
     .then(function (response) {
-      console.log(response);
+      // Do something?
     })
     .catch(function (response) {
-      console.log(response);
+      // Do something?
     });
 
   }
@@ -71,7 +69,6 @@ class Offer extends Component {
   };
 
   render() {
-    console.log(this.props);
     const { offer, job, onJobClick, onJobClose } = this.props;
     const { display, userOffer } = offer;
 

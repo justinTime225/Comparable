@@ -4,7 +4,6 @@ export default class OfferDisplay extends Component {
   render() {
     // Grab the offer property from the props
     const { userOffer, jobs } = this.props.data;
-    console.log(jobs);
 
     // Calculate average salary / equity
     let salarySum = 0;
@@ -38,9 +37,6 @@ export default class OfferDisplay extends Component {
       circleClass = 'responsive-circle green-circle';
       arrowClass = 'arr-up';
     }
-
-    console.log(salaryAvg, equityAvg);
-    console.log(salaryDiff, circleClass);
 
     // Render the job offer information on the page
     return (
