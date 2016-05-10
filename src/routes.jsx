@@ -3,6 +3,7 @@ import { Route, IndexRoute } from 'react-router';
 import App from './containers/AppContainer';
 import Offer from './containers/OfferContainer';
 import Home from './components/Home';
+import Profile from './containers/Profile'
 
 function requireAuth(nextState, replace) {
   // Checks to see if the user is authenticated
@@ -25,5 +26,6 @@ export default (
   <Route path="/" component={App}>
     <IndexRoute component={Home}/>
     <Route path="offers" component={Offer} onEnter={requireAuth} />
+    <Route path="profile" component={Profile} onEnter={requireAuth} />
   </Route>
 );
