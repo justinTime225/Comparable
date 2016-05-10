@@ -12,4 +12,17 @@ describe('AngelList Controller', () => {
       });
     });
   });
+
+  describe('getSkills', () => {
+    it('returns a list of objects, containing skills, and their count', () => {
+      const sample = angelList.getSkills('', (err, data) => {
+        return data;
+      });
+
+      expect(Array.isArray(sample)).to.eq(true);
+      expect(typeof sample[0]).to.eq('object');
+      expect(sample[0].skill).to.exist;
+      expect(sample[0].count).to.exist;
+    });
+  });
 });

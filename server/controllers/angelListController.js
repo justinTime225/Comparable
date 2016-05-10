@@ -2,6 +2,44 @@ const angelListFile = require('../../angelList.json');
 const _ = require('underscore');
 
 module.exports = {
+  getSkills: (title, callback) => {
+    const skillCount = {};
+    const skills = [];
+    var sample;
+
+    // filter collection based on title
+    // if title was provided
+    if (title) {
+      // returns array of objects containing just jobs and tags
+      sample = _.flatten(
+        _.pluck(_.filter(angelListFile.jobs, (job) => {
+          return job.title === title;
+        }), 'tags')
+      );
+    } else {
+      // returns array of objects containing skills only
+      sample = _.flatten(
+        _.pluck(angelListFile.jobs, 'tags')
+      );
+    }
+
+    // caculate count of all skill tags
+    _.each(sample, (skill) => {
+      if (skillCount[skill.display_name]) {
+        skillCount[skill.display_name]++;
+      } else {
+        skillCount[skill.display_name] = 1;
+      }
+    });
+
+    // maps skill tags count into an array of objects
+    _.mapObject(skillCount, (val, key) => {
+      skills.push({ skill: key, count: val });
+    });
+
+    return callback(null, skills);
+  },
+
   filterAngelListData: (title, callback) => {
     // filter data in data file by job title and return to GET request as response
     const filteredData = _.filter(angelListFile.jobs, (job) => {
@@ -31,7 +69,6 @@ module.exports = {
   },
 
   getJobDetails: (id, callback) => {
-    console.log(id);
     callback(null, id);
   },
 };

@@ -35,4 +35,16 @@ describe('routes', () => {
         .end(done);
     });
   });
+
+  describe('/api/skills', () => {
+    it('returns 200 success code', (done) => {
+      request(app)
+        .get('/api/skills')
+        .expect(200)
+        .expect(res => {
+          expect(res.body[0].skill).to.exist;
+        })
+        .end(done);
+    });
+  });
 });
