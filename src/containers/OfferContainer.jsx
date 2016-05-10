@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import OfferForm from '../components/OfferForm';
 import { displayJob } from '../actions/Job_Display';
 import { sendJob } from '../actions/Job_Matches';
+import { getSkills } from '../actions/Skills_Actions'; 
 import { reset } from 'redux-form';
 import { changeOffer, clickJob, closeJob } from '../actions/Offer_Actions';
 import ScatterPlot from '../components/scatter-plot';
@@ -56,7 +57,11 @@ class Offer extends Component {
 
   }
 
-
+  skillAction(data) {
+    console.log(this.props);
+    console.log(data);
+    this.props.getSkills(data);
+  }
 
   handleSubmit(data, dispatch) {
 
@@ -64,6 +69,7 @@ class Offer extends Component {
 
     dispatch(sendJob(data.title, data));
     this.saveOffer(data);
+    this.skillAction.call(this, data);
     // Resets form fields after submission
     dispatch(reset('offer'));
   };
@@ -156,6 +162,9 @@ const mapDispatchToProps = (dispatch) => {
     onJobClose: () => {
       dispatch(closeJob());
     },
+    getSkills: (data) => {
+      dispatch(getSkills(data));
+    }
   }
 }
 

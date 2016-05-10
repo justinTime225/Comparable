@@ -8,10 +8,18 @@ export default class Profile extends Component {
   }
   render() {
     const offerItems = this.props.profile.data.map((offer) => {
-      return <div key={offer.title}>{offer.title}</div>
+      console.log(offer._id);
+      return (
+        <li key={offer._id}>
+          <h2>{offer.title}</h2>
+          <p>{offer.location}</p>
+          <p>{offer.salary}</p>
+          <p>{offer.equity}</p>
+        </li>
+      )
     })
     return (
-      <div>{offerItems}</div>
+      <ul>{offerItems}</ul>
     );
   }
 
