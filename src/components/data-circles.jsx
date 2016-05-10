@@ -20,7 +20,10 @@ const renderCircles = (props) => {
     }
 
     // plot each job on the scatterplot
-    return (<svg><circle {...circleProps} onClick={() => { props.update(coords); }}><title>Click for more details!</title></circle></svg>);
+    return (<circle {...circleProps} 
+      onClick={() => { props.update(coords); }}>
+      <title>Click for more details!</title>
+      </circle>);
   };
 };
 
