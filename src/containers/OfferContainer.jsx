@@ -55,7 +55,7 @@ class Offer extends Component {
     .catch(function (response) {
       console.log(response);
     });
-    
+
   }
 
 
@@ -71,8 +71,15 @@ class Offer extends Component {
   };
 
   render() {
-    const { offer, onJobClick, onJobClose } = this.props;
+    console.log(this.props);
+    const { offer, job, onJobClick, onJobClose } = this.props;
     const { display, userOffer } = offer;
+
+    // Compile data to send to the display component
+    const displayData = {
+      userOffer: userOffer,
+      jobs: job
+    };
 
     return (
       <div className="container">
@@ -112,8 +119,8 @@ class Offer extends Component {
             <button className="btn btn-success text-center" onClick={onJobClose}>Close me!</button>
           </div>
         </Modal>
-        <OfferForm onSubmit={this.handleSubmit.bind(this)} />
-        <OfferDisplay data={offer} />
+        <OfferForm onSubmit={this.handleSubmit} />
+        <OfferDisplay data={displayData} />
         <div className="row">
           <div className="col-md-12">
             <div className="panel-heading">
@@ -134,7 +141,7 @@ class Offer extends Component {
 };
 
 function mapStateToProps(state) {
-  
+
   const { data, offer, job } = state;
   return {
     data,
