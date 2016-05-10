@@ -163,3 +163,49 @@ p {
   background-color: #4caf50;
   color: #FFFFFF;
 }
+
+// Badge Circles
+.responsive-circle {
+    font-size: 16px;
+    font-weight: 700;
+    margin: 0 20px 20px;
+    width: 115%;
+}
+
+.responsive-circle::after {
+    border-radius: 50%;
+    content: "";
+    display: block;
+    height: 0;
+    margin-bottom: 20px;
+    padding-bottom: 100%;
+    width: 100%;
+}
+
+.responsive-circle div {
+    color: white;
+    float: left;
+    line-height: 1em;
+    margin-top: -0.5em;
+    padding-top: 40%;
+    text-align: center;
+    width: 100%;
+}
+
+.red-circle::after {
+  background: #ff4d4d;
+}
+
+.green-circle::after {
+  background: #5cd65c;
+}
+
+[class^=arr-]{
+  border:       solid currentColor;
+  border-width: 0 .2em .2em 0;
+  display:      inline-block;
+  padding:      .20em;
+}
+
+.arr-up    {transform:rotate(-135deg); -webkit-transform:rotate(-135deg);}
+.arr-down  {transform:rotate(45deg);   -webkit-transform:rotate(45deg);}

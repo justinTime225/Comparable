@@ -24,12 +24,33 @@ export default class OfferDisplay extends Component {
 
     let salaryAvg = Math.round(salarySum / (count * 2));
     let equityAvg = Math.round(equitySum / (count * 2));
+    let salaryDiff = Math.round(((userOffer.salary - salaryAvg) / salaryAvg) * 100);
+    let equityDiff = Math.round(((userOffer.equity - equityAvg) / equityAvg) * 100);
+    let totalDiff = salaryDiff + equityDiff;
+
+    let circleClass = '';
+    let arrowClass = '';
+
+    if (salaryDiff < 0) {
+      circleClass = 'responsive-circle red-circle';
+      arrowClass = 'arr-down';
+    } else {
+      circleClass = 'responsive-circle green-circle';
+      arrowClass = 'arr-up';
+    }
+
     console.log(salaryAvg, equityAvg);
+    console.log(salaryDiff, circleClass);
 
     // Render the job offer information on the page
     return (
       <div className="row offer-form">
-        <div className="col-md-10 col-md-offset-1">
+        <div className="col-md-1 col-md-offset-2">
+          <div className={circleClass}>
+            <div className="circle-inner">{salaryDiff}%<br></br><i className={arrowClass}></i></div>
+          </div>
+        </div>
+        <div className="col-md-5">
           {userOffer &&
             <ul className="displayList">
               <li className="text-center offerTitle">{userOffer.title}</li>
