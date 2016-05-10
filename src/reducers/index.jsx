@@ -4,13 +4,14 @@ import Auth from './Auth_Reducers';
 import Jobs from './Jobs_Reducer';
 import OfferReducers from './OfferReducers.jsx';
 import DisplayedJob from './Display_Reducer';
-
+import ProfileOffer from './ProfileOffer_Reducer';
 // Combine our reducers into one root reducer
 const rootReducer = combineReducers({
   auth: Auth,
   form: formReducer,
   job: Jobs,
   offer: OfferReducers,
+  profile: ProfileOffer
 });
 
 export default rootReducer;
