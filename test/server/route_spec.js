@@ -20,4 +20,31 @@ describe('routes', () => {
         .end(done);
     });
   });
+
+
+  describe('/api/offer-filters', () => {
+    it('returns an object with keys for jobTitles and tags', (done) => {
+
+      request(app)
+        .get('/api/offer-filters')
+        .expect(200)
+        .expect(res => {
+          expect(res.body.jobTitles).to.exist;
+          expect(res.body.tags).to.exist;
+        })
+        .end(done);
+    });
+  });
+
+  describe('/api/skills', () => {
+    it('returns 200 success code', (done) => {
+      request(app)
+        .get('/api/skills')
+        .expect(200)
+        .expect(res => {
+          expect(res.body[0].skill).to.exist;
+        })
+        .end(done);
+    });
+  });
 });

@@ -17,4 +17,19 @@ module.exports = (app) => {
         sendResponse(res, err, data, 200);
       });
     });
+
+  app.route('/api/offer-filters')
+    .get((req, res) => {
+      angelListController.getOfferFilters((err, data) => {
+        sendResponse(res, err, data, 200);
+      });
+    });
+
+  app.route('/api/skills')
+    .get((req, res) => {
+      const title = req.query.title || '';
+      angelListController.getSkills(title, (err, data) => {
+        sendResponse(res, err, data, 200);
+      });
+    });
 };
