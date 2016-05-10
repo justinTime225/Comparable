@@ -55,7 +55,7 @@ class Offer extends Component {
     .catch(function (response) {
       console.log(response);
     });
-    // "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2NvbXBhcmFibGUuYXV0aDAuY29tLyIsInN1YiI6Imdvb2dsZS1vYXV0aDJ8MTA4MDkzNDg5OTY4ODUxMTQyMjI3IiwiYXVkIjoiN2tuTExFaWRFUWlVQmloR3JkYjhHS1Z0Tm5mUEYxQTUiLCJleHAiOjE0NjI2MjM3MjUsImlhdCI6MTQ2MjU4NzcyNX0.mH42faYkK4R_HfLxQCUK5R3xWOaa7nEghRVqYBshFGM"
+    
   }
 
 
