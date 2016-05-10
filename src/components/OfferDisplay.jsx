@@ -46,9 +46,10 @@ export default class OfferDisplay extends Component {
     return (
       <div className="row offer-form">
         <div className="col-md-1 col-md-offset-2">
+          {userOffer &&
           <div className={circleClass}>
             <div className="circle-inner">{salaryDiff}%<br></br><i className={arrowClass}></i></div>
-          </div>
+          </div>}
         </div>
         <div className="col-md-5">
           {userOffer &&
