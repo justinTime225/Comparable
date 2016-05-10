@@ -1,5 +1,5 @@
 const angelListController = require('./controllers/angelListController');
-
+const OfferController = require('./db/controller');
 // handle errors and send response
 const sendResponse = (res, err, data, status) => {
   if (err) {
@@ -32,4 +32,7 @@ module.exports = (app) => {
         sendResponse(res, err, data, 200);
       });
     });
+  app.route('/api/offers')
+    .get(OfferController.getOffers)
+    .post(OfferController.createOffer);
 };
