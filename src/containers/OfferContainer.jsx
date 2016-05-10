@@ -8,7 +8,7 @@ import { changeOffer, clickJob, closeJob } from '../actions/Offer_Actions';
 import ScatterPlot from '../components/scatter-plot';
 import OfferDisplay from '../components/OfferDisplay';
 import Modal from 'react-modal';
-
+import axios from 'axios';
 
 // Deafult styles for graph
 const styles = {
@@ -39,11 +39,33 @@ class Offer extends Component {
     // console.log(dispatch);
   }
 
+  saveOffer(data) {
+    var email = JSON.parse(localStorage.profile).email;
+    var offerObj = {
+      title: data.title,
+      location: data.location,
+      salary: data.salary,
+      equity: data.equity,
+      userEmail: email
+    };
+    axios.post('/api/offers', offerObj)
+    .then(function (response) {
+      console.log(response);
+    })
+    .catch(function (response) {
+      console.log(response);
+    });
+    // "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2NvbXBhcmFibGUuYXV0aDAuY29tLyIsInN1YiI6Imdvb2dsZS1vYXV0aDJ8MTA4MDkzNDg5OTY4ODUxMTQyMjI3IiwiYXVkIjoiN2tuTExFaWRFUWlVQmloR3JkYjhHS1Z0Tm5mUEYxQTUiLCJleHAiOjE0NjI2MjM3MjUsImlhdCI6MTQ2MjU4NzcyNX0.mH42faYkK4R_HfLxQCUK5R3xWOaa7nEghRVqYBshFGM"
+  }
+
+
+
   handleSubmit(data, dispatch) {
+
     dispatch(changeOffer(data));
 
     dispatch(sendJob(data.title, data));
-
+    this.saveOffer(data);
     // Resets form fields after submission
     dispatch(reset('offer'));
   };
@@ -90,7 +112,7 @@ class Offer extends Component {
             <button className="btn btn-success text-center" onClick={onJobClose}>Close me!</button>
           </div>
         </Modal>
-        <OfferForm onSubmit={this.handleSubmit} />
+        <OfferForm onSubmit={this.handleSubmit.bind(this)} />
         <OfferDisplay data={offer} />
         <div className="row">
           <div className="col-md-12">
@@ -112,7 +134,7 @@ class Offer extends Component {
 };
 
 function mapStateToProps(state) {
-  console.log(state);
+  
   const { data, offer, job } = state;
   return {
     data,
