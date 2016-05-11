@@ -10,6 +10,7 @@ import ScatterPlot from '../components/scatter-plot';
 import OfferDisplay from '../components/OfferDisplay';
 import Modal from 'react-modal';
 import axios from 'axios';
+import BubbleChart from '../components/BubbleChart';
 
 // Deafult styles for graph
 const styles = {
@@ -35,8 +36,8 @@ const customStyles = {
 // the clicked circles data
 
 class Offer extends Component {
-  updateCircle = (circle, dispatch) => {
-  }
+  // updateCircle = (circle, dispatch) => {
+  // }
 
   saveOffer(data) {
     var email = JSON.parse(localStorage.profile).email;
@@ -127,7 +128,6 @@ class Offer extends Component {
         <div className="row">
           <div className="col-md-12">
             <div className="panel-heading">
-
             </div>
             <div className="panel panel-default">
               <div className="panel-body" >
@@ -135,9 +135,11 @@ class Offer extends Component {
                 <h4 id="equity">Equity</h4>
                 <h4 id="salary">Salary</h4>
               </div>
+
             </div>
           </div>
         </div>
+        <BubbleChart skill={this.props.skill}/>
       </div>
     );
   }
@@ -145,9 +147,9 @@ class Offer extends Component {
 
 function mapStateToProps(state) {
 
-  const { data, offer, job } = state;
+  const { skill, offer, job } = state;
   return {
-    data,
+    skill,
     offer,
     job,
   };
