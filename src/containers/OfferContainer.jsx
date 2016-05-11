@@ -11,7 +11,7 @@ import ScatterPlot from '../components/scatter-plot';
 import OfferDisplay from '../components/OfferDisplay';
 import Modal from 'react-modal';
 import axios from 'axios';
-import BubbleChart from '../components/BubbleChart';
+import BubbleChart from '../components/bubbleChart';
 
 // Deafult styles for graph
 const styles = {
@@ -56,8 +56,6 @@ class Offer extends Component {
   }
 
   skillAction(data) {
-    console.log(this.props);
-    console.log(data);
     this.props.getSkills(data);
   }
 
