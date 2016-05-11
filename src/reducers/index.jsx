@@ -5,13 +5,15 @@ import Jobs from './Jobs_Reducer';
 import OfferReducers from './OfferReducers.jsx';
 import DisplayedJob from './Display_Reducer';
 import ProfileOffer from './ProfileOffer_Reducer';
+import Skills from './Skills_Reducers';
 // Combine our reducers into one root reducer
 const rootReducer = combineReducers({
   auth: Auth,
   form: formReducer,
   job: Jobs,
   offer: OfferReducers,
-  profile: ProfileOffer
+  profile: ProfileOffer,
+  skill: Skills
 });
 
 export default rootReducer;
