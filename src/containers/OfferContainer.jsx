@@ -3,9 +3,10 @@ import {connect} from 'react-redux';
 import OfferForm from '../components/OfferForm';
 import { displayJob } from '../actions/Job_Display';
 import { sendJob } from '../actions/Job_Matches';
-import { getSkills } from '../actions/Skills_Actions'; 
+import { getSkills } from '../actions/Skills_Actions';
 import { reset } from 'redux-form';
 import { changeOffer, clickJob, closeJob } from '../actions/Offer_Actions';
+import BarGraph from '../components/Barchart'
 import ScatterPlot from '../components/scatter-plot';
 import OfferDisplay from '../components/OfferDisplay';
 import Modal from 'react-modal';
@@ -21,24 +22,20 @@ const styles = {
 
 // Styles for Modal
 const customStyles = {
-  content : {
-    top                   : '50%',
-    left                  : '50%',
-    right                 : 'auto',
-    bottom                : 'auto',
-    marginRight           : '-50%',
-    transform             : 'translate(-50%, -50%)'
-  }
+  content: {
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    marginRight: '-50%',
+    transform: 'translate(-50%, -50%)',
+  },
 };
-
 
 // When a circle/plot is clicked, modify
 // the clicked circles data
 
 class Offer extends Component {
-  // updateCircle = (circle, dispatch) => {
-  // }
-
   saveOffer(data) {
     var email = JSON.parse(localStorage.profile).email;
     var offerObj = {
@@ -131,9 +128,7 @@ class Offer extends Component {
             </div>
             <div className="panel panel-default">
               <div className="panel-body" >
-                <ScatterPlot {...this.props} {...styles} update={onJobClick} />
-                <h4 id="equity">Equity</h4>
-                <h4 id="salary">Salary</h4>
+                <BarGraph { ...this.props } />
               </div>
 
             </div>
@@ -145,8 +140,11 @@ class Offer extends Component {
   }
 };
 
-function mapStateToProps(state) {
+// <ScatterPlot {...this.props} {...styles} update={onJobClick} />
+// <h4 id="equity">Equity</h4>
+// <h4 id="salary">Salary</h4>
 
+function mapStateToProps(state) {
   const { skill, offer, job } = state;
   return {
     skill,
