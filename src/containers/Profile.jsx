@@ -15,9 +15,10 @@ class Profile extends Component {
     let profileData = this.props.profile.data;
 
     return (
-      <div>
+      <div className="container">
+        <h1 className="offersHeading">My Offers</h1>
       {profileData &&
-          <OfferSlider profileData={profileData}></OfferSlider> ||
+          <OfferSlider profileData={profileData}></OfferSlider>
       }
       </div>
     );
