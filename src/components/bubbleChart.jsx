@@ -8,7 +8,7 @@ var colorLegend = [
   //neutral grey
   {color: "#f0f0f0", text: 'Neutral'},
   // blues from light to dark
-  "#fff", "#c6dbef", "#9ecae1", "#6baed6", "#4292c6", "#2171b5", "#08519c", {color: "#08306b", text: 'Positive', textColor: "#ffffff"}
+  "#FFAB6E", "#E8718A", "#E8718A", "#6492E8", "#65FFDB", "#90FF75", "#FFE26E", {color: "#1060D6", text: 'Positive', textColor: "#ffffff"}
 ];
 var tooltipProps = [{
   css: 'symbol',
@@ -28,15 +28,14 @@ export default class BubbleChart extends Component {
     const skills = this.props.skill.map((obj) =>{
       var myObj = {
         _id: Math.floor(Math.random() * Math.random() * Math.random() * 100000000),
-        value: (obj.count),
+        value: (obj.count + 5),
         displayText: obj.skill,
         colorValue: Math.random(),
-        // selected: false
       }
       console.log(myObj)
       return myObj;
     }).filter((obj) => {
-      if (obj.displayText !== 'San Francisco') {
+      if (obj.displayText !== 'San Francisco' && obj.value > 6) {
         return obj;
       }
     });
@@ -49,12 +48,8 @@ export default class BubbleChart extends Component {
           selectedColor="#737373"
           selectedTextColor="#d9d9d9"
           fixedDomain={{min: -1, max: 1}}
-          // onClick={Actions.doStuff.bind(Actions)}
           legend={true}
           legendSpacing={0}
-          tooltip={true}
-          tooltipProps={tooltipProps}
-          // tooltipFunc={tooltipFunc}
         />
       </div>
     );
