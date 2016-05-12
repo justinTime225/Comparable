@@ -2,6 +2,12 @@ import React, { Component } from 'react';
 import Slider from 'react-slick';
 
 export default class OfferSlider extends Component {
+  fetchSkills(profileOffer) {
+    console.log(profileOffer)
+    console.log('---')
+    this.props.getSkills(profileOffer)
+    this.props.sendJob(profileOffer.title, profileOffer);
+  }
   render() {
     const { profileData } = this.props;
 
@@ -23,7 +29,7 @@ export default class OfferSlider extends Component {
               </tr>
             </tbody>
           </table>
-          <btn id="offer-btn">View</btn>
+          <btn onClick={this.fetchSkills.bind(this, offer)} id="offer-btn">View</btn>
         </div>
       );
     });

@@ -7,11 +7,9 @@ import { getSkills } from '../actions/Skills_Actions';
 import { reset } from 'redux-form';
 import { changeOffer, clickJob, closeJob, toggleChart } from '../actions/Offer_Actions';
 import BarGraph from '../components/Barchart'
-import ScatterPlot from '../components/scatter-plot';
 import OfferDisplay from '../components/OfferDisplay';
 import Modal from 'react-modal';
 import axios from 'axios';
-import BubbleChart from '../components/bubbleChart';
 
 // Deafult styles for graph
 const styles = {
@@ -65,7 +63,7 @@ class Offer extends Component {
 
     dispatch(sendJob(data.title, data));
     this.saveOffer(data);
-    this.skillAction.call(this, data);
+    // this.skillAction.call(this, data);
     // Resets form fields after submission
     dispatch(reset('offer'));
   };
@@ -131,7 +129,7 @@ class Offer extends Component {
             </div>
           </div>
         </div>
-        <BubbleChart skill={this.props.skill}/>
+        
       </div>
     );
   }
@@ -142,9 +140,9 @@ class Offer extends Component {
 // <h4 id="salary">Salary</h4>
 
 function mapStateToProps(state) {
-  const { skill, offer, job } = state;
+  const { offer, job } = state;
   return {
-    skill,
+    // skill,
     offer,
     job,
   };
@@ -158,9 +156,6 @@ const mapDispatchToProps = (dispatch) => {
 
     onJobClose: () => {
       dispatch(closeJob());
-    },
-    getSkills: (data) => {
-      dispatch(getSkills(data));
     },
     toggleChart: (dataType) => {
       dispatch(toggleChart(dataType));

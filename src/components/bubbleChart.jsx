@@ -32,7 +32,6 @@ export default class BubbleChart extends Component {
         displayText: obj.skill,
         colorValue: Math.random(),
       }
-      console.log(myObj)
       return myObj;
     }).filter((obj) => {
       if (obj.displayText !== 'San Francisco' && obj.value > 6) {
