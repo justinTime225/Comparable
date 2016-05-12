@@ -1,8 +1,9 @@
-import { CHANGE_OFFER, CLICK_JOB, CLOSE_JOB } from '../actions/Offer_Actions';
+import { CHANGE_OFFER, CLICK_JOB, CLOSE_JOB, TOGGLE_CHART } from '../actions/Offer_Actions';
 
 export default function(state = {
   userOffer: false,
   display: false,
+  dataType: 'salary',
 }, action) {
   switch (action.type) {
     case CHANGE_OFFER:
@@ -16,6 +17,10 @@ export default function(state = {
     case CLOSE_JOB:
       return Object.assign({}, state, {
         display: false,
+      });
+    case TOGGLE_CHART:
+      return Object.assign({}, state, {
+        dataType: action.dataType,
       });
     default:
       return state;

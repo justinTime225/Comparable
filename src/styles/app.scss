@@ -5,12 +5,18 @@ svg {
 }
 
 body {
-  font-family: "Montserrat", sans-serif, 'HelveticaNeue-Light', sans-serif !important;
-  background-color: #d7e9e4;
+  font-family: "Montserrat", 'HelveticaNeue-Light', sans-serif !important;
+  background-image: url("https://s3.amazonaws.com/comparable/DeathtoStock_Creative+Community3.jpg");
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+#app {
+  background-color: rgba(248, 248, 248, 0.7);
 }
 
 p {
-  font-family: "Montserrat", sans-serif, 'HelveticaNeue-Light', sans-serif !important;
+  font-family: "Montserrat", 'HelveticaNeue-Light', sans-serif !important;
 }
 // <----- END: Default styles ----->
 
@@ -162,6 +168,29 @@ p {
   // background-color: #ff8a37;
   background-color: #4caf50;
   color: #FFFFFF;
+}
+
+.toggle-btn {
+  float: right;
+  // border: 2px solid #2092e1;
+  // border-radius: 35px;
+  // background-color: #f8f8f8;
+  // padding: 4px 8px !important;
+  // color: #2092e1 !important;
+}
+
+.toggle-btn > button {
+  border: 1px solid #2092e1;
+  border-radius: 35px;
+  background-color: #f8f8f8;
+  padding: 4px 8px !important;
+  color: #2092e1;
+}
+
+.toggle-btn > .btn:focus {
+  border: 1px solid #ff8a37;
+  background: #ff8a37;
+  color: #fff;
 }
 
 // Badge Circles

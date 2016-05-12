@@ -27,8 +27,8 @@ export default class Navbar extends Component {
                   <span className="sr-only">(current)</span>
                 </Link>
               </li>
-              <li className="active">
-                <Link to="/profile" id="offer-btn">Profile
+              <li>
+                <Link to="/profile" id="login-btn">Profile
                   <span className="sr-only">(current)</span>
                 </Link>
               </li>

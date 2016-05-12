@@ -54,7 +54,8 @@ export default class OfferDisplay extends Component {
               <li className="text-center">
                 Location: {userOffer.location} | Salary: {userOffer.salary} | Equity: {userOffer.equity}
               </li>
-            </ul>}
+            </ul>
+          }
         </div>
       </div>
     );

@@ -5,9 +5,12 @@ import _ from 'underscore';
 export default class BarGraph extends Component {
   render() {
 
+    let data = '';
+
     // data storage for barchart based on Job_Matches
     // from OfferForm
-    const data = { label: 'Salary', values: [] };
+    const salary = { label: 'Salary', values: [] };
+    const equity = { label: 'Equity', values: [] };
 
     // populate the data array with jobs only when
     // jobs exists
@@ -16,13 +19,26 @@ export default class BarGraph extends Component {
 
         // case for empty jobs and 'remote_ok' in API results
         if (job.id) {
-          data.values.push({
+          salary.values.push({
             x: `${job.title},${((job.salary_min + job.salary_max) / 2)},${((Number(job.equity_min) + Number(job.equity_max)) / 2).toFixed(2)}`,
             y: (job.salary_min + job.salary_max) / 2,
+          });
+
+          equity.values.push({
+            x: `${job.title},${((job.salary_min + job.salary_max) / 2)},${((Number(job.equity_min) + Number(job.equity_max)) / 2).toFixed(2)}`,
+            y: (Number(job.equity_min) + Number(job.equity_max)) / 2,
           });
         }
       });
     }
+
+    if (this.props.dataType === 'salary') {
+      data = salary;
+    } else {
+      data = equity;
+    }
+
+    console.log(this.props)
 
     // hover tooltip on barchart
     // displays user offer data in comparison to
@@ -71,6 +87,10 @@ export default class BarGraph extends Component {
     if (this.props.job.length > 0) {
       return (
         <div>
+          <div className="btn-group toggle-btn active" role="group" aria-label="...">
+            <button onClick={() => { this.props.toggleChart('salary') }} type="button" className="btn btn-default">Salary</button>
+            <button onClick={() => { this.props.toggleChart('equity') }} type="button" className="btn btn-default">Equity</button>
+          </div>
           <BarChart
             data={data}
             width={1000}

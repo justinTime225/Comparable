@@ -5,7 +5,7 @@ import { displayJob } from '../actions/Job_Display';
 import { sendJob } from '../actions/Job_Matches';
 import { getSkills } from '../actions/Skills_Actions';
 import { reset } from 'redux-form';
-import { changeOffer, clickJob, closeJob } from '../actions/Offer_Actions';
+import { changeOffer, clickJob, closeJob, toggleChart } from '../actions/Offer_Actions';
 import BarGraph from '../components/Barchart'
 import ScatterPlot from '../components/scatter-plot';
 import OfferDisplay from '../components/OfferDisplay';
@@ -71,8 +71,8 @@ class Offer extends Component {
   };
 
   render() {
-    const { offer, job, onJobClick, onJobClose } = this.props;
-    const { display, userOffer } = offer;
+    const { offer, job, onJobClick, onJobClose, toggleChart } = this.props;
+    const { display, userOffer, dataType } = offer;
 
     // Compile data to send to the display component
     const displayData = {
@@ -126,9 +126,8 @@ class Offer extends Component {
             </div>
             <div className="panel panel-default">
               <div className="panel-body" >
-                <BarGraph { ...this.props } />
+                <BarGraph { ...this.props } toggle={toggleChart} dataType={dataType} />
               </div>
-
             </div>
           </div>
         </div>
@@ -162,8 +161,11 @@ const mapDispatchToProps = (dispatch) => {
     },
     getSkills: (data) => {
       dispatch(getSkills(data));
-    }
-  }
-}
+    },
+    toggleChart: (dataType) => {
+      dispatch(toggleChart(dataType));
+    },
+  };
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Offer);
