@@ -8,7 +8,6 @@ export function sendJob(title, userData) {
       title: title,
     },
   });
-
   return {
     type: JOB_MATCH,
     payload: request,

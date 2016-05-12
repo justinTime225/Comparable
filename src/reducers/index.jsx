@@ -12,7 +12,7 @@ const rootReducer = combineReducers({
   form: formReducer,
   job: Jobs,
   offer: OfferReducers,
-  profile: ProfileOffer,
+  profileOffer: ProfileOffer,
   skill: Skills
 });
 
