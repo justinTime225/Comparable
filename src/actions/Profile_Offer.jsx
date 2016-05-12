@@ -1,10 +1,13 @@
 import axios from 'axios';
 export const PROFILE_OFFER = "PROFILE_OFFER";
 
-export function getOffer() {
-  const request = axios.get('/api/offers');
-  console.log('inside getOffer')
-  console.log(request);
+export function getOffer(email) {
+  const request = axios.get('/api/offers', {
+    params: {
+      userEmail: email,
+    },
+  });
+
   return {
     type: PROFILE_OFFER,
     payload: request,

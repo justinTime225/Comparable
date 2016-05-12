@@ -28,7 +28,9 @@ const customStyles = {
 class Profile extends Component {
   componentWillMount() {
     const { getOffers } = this.props;
-    getOffers();
+    const email = JSON.parse(localStorage.getItem('profile')).email;
+    getOffers(email);
+
   }
 
   render() {
@@ -66,8 +68,8 @@ function mapStateToProps(state) {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getOffers: () => {
-      dispatch(getOffer());
+    getOffers: (email) => {
+      dispatch(getOffer(email));
     },
     getSkills: (data) => {
       dispatch(getSkills(data));
