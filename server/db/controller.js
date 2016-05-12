@@ -3,7 +3,9 @@ var Offer = require('./mongo');
 module.exports = {
   getOffers: function(req, res) {
     console.log('in getOffer');
-    Offer.find().then(function(data) {
+    console.log(req.params);
+    console.log(req.query.userEmail);
+    Offer.find({userEmail: req.query.userEmail}).then(function(data) {
       if (data)  {
         res.status(200).send(data);
       } else {
