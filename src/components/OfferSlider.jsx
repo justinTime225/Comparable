@@ -35,7 +35,7 @@ export default class OfferSlider extends Component {
     });
 
     let sliderOptions = {
-      dots: false,
+      dots: true,
       infinite: true,
       speed: 500,
       slidesToShow: 3,
