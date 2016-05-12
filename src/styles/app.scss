@@ -6,13 +6,13 @@ svg {
 
 body {
   font-family: "Montserrat", 'HelveticaNeue-Light', sans-serif !important;
-  background-image: url("https://s3.amazonaws.com/comparable/DeathtoStock_Creative+Community3.jpg");
+  background: linear-gradient(
+      rgba(248, 248, 248, 0.7),
+      rgba(248, 248, 248, 0.7)
+    ),
+     url("https://s3.amazonaws.com/comparable/DeathtoStock_Creative+Community3.jpg");
   background-size: cover;
   background-attachment: fixed;
-}
-
-#app {
-  background-color: rgba(248, 248, 248, 0.7);
 }
 
 p {
