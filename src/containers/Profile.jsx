@@ -46,7 +46,18 @@ class Profile extends Component {
           getSkills={this.props.getSkills}>
           </OfferSlider>
       }
-        <BubbleChart skill={this.props.skill}/>
+        <div className="row">
+          <div className="col-md-12">
+            <div className="panel-heading">
+            </div>
+            <div className="panel panel-default">
+              <div className="panel-body" >
+                <h1>Related Skills</h1>
+                <BubbleChart skill={this.props.skill}/>
+              </div>
+            </div>
+          </div>
+        </div>
         <ScatterPlot {...this.props} {...styles}  />
         <h4 id="equity">Equity</h4>
         <h4 id="salary">Salary</h4>
