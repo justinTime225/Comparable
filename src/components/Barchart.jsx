@@ -38,8 +38,6 @@ export default class BarGraph extends Component {
       data = equity;
     }
 
-    console.log(this.props)
-
     // hover tooltip on barchart
     // displays user offer data in comparison to
     // data for current bar/job
