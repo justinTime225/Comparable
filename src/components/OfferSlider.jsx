@@ -3,11 +3,10 @@ import Slider from 'react-slick';
 
 export default class OfferSlider extends Component {
   fetchSkills(profileOffer) {
-    console.log(profileOffer)
-    console.log('---')
     this.props.getSkills(profileOffer)
     this.props.sendJob(profileOffer.title, profileOffer);
   }
+
   render() {
     const { profileData } = this.props;
 
@@ -40,7 +39,7 @@ export default class OfferSlider extends Component {
       speed: 500,
       slidesToShow: 3,
       slidesToScroll: 1,
-      autoplay: true,
+      autoplay: false,
       autoplaySpeed: 3000,
     };
 

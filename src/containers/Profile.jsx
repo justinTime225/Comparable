@@ -4,9 +4,12 @@ import { connect } from 'react-redux';
 import { getOffer } from '../actions/Profile_Offer';
 import { getSkills } from '../actions/Skills_Actions';
 import { sendJob } from '../actions/Job_Matches';
+import { togglePie, toggleBubble } from '../actions/Profile_Actions';
 import OfferSlider from '../components/OfferSlider';
 import BubbleChart from '../components/bubbleChart';
 import ScatterPlot from '../components/scatter-plot';
+import PieGraph from '../components/PieChart';
+
 const styles = {
   width: 1000,
   height: 900,
@@ -26,15 +29,25 @@ const customStyles = {
 };
 
 class Profile extends Component {
+  skills: false
+
   componentWillMount() {
     const { getOffers } = this.props;
     const email = JSON.parse(localStorage.getItem('profile')).email;
     getOffers(email);
-
   }
 
   render() {
+    const { getSkills, pieChart, bubbleChart } = this.props;
+    // Grab the current displayed chart type
+    const { profileChart } = this.props.profileInfo;
+
     let profileData = this.props.profileOffer.data;
+
+    if (profileData && !this.skills) {
+      this.skills = true;
+      getSkills(profileData[0]);
+    }
 
     return (
       <div className="container">
@@ -53,7 +66,16 @@ class Profile extends Component {
             <div className="panel panel-default">
               <div className="panel-body" >
                 <h1 className="offersHeading">Related Skills</h1>
-                <BubbleChart skill={this.props.skill}/>
+                  <div className="btn-group toggle-btn active" role="group" aria-label="...">
+                    <button onClick={bubbleChart} type="button" className="btn btn-default">Bubbles</button>
+                    <button onClick={pieChart} type="button" className="btn btn-default">Pie</button>
+                  </div>
+                {profileChart === 'bubble' &&
+                  <BubbleChart skill={this.props.skill}/>
+                }
+                {profileChart === 'pie' &&
+                  <PieGraph skill={this.props.skill}></PieGraph>
+                }
               </div>
             </div>
           </div>
@@ -68,12 +90,12 @@ class Profile extends Component {
 }
 
 function mapStateToProps(state) {
-
-  const { skill, profileOffer, job } = state;
+  const { skill, profileOffer, job, profileInfo } = state;
   return {
     skill,
     profileOffer,
-    job
+    job,
+    profileInfo
   };
 }
 
@@ -87,7 +109,13 @@ const mapDispatchToProps = (dispatch) => {
     },
     sendJob: (title, data) => {
       dispatch(sendJob(title, data));
-    }
+    },
+    pieChart: () => {
+      dispatch(togglePie());
+    },
+    bubbleChart: () => {
+      dispatch(toggleBubble());
+    },
   }
 }
 

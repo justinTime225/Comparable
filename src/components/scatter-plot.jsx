@@ -37,8 +37,6 @@ const marshalProps = (props) => {
 };
 
 export default (props) => {
-  console.log('inside scatterplot');
-  console.log(props);
   // add xScale and yScale to props before passing it further
   const d3Props = marshalProps(props);
   return <svg width={d3Props.width} height={d3Props.height}>
