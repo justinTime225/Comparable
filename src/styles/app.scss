@@ -4,6 +4,10 @@ svg {
   margin: auto;
 }
 
+html, body {
+  height: 100%;
+}
+
 body {
   font-family: "Montserrat", 'HelveticaNeue-Light', sans-serif !important;
   background: linear-gradient(
@@ -150,6 +154,24 @@ p {
   cursor: pointer;
 }
 // <----- END: Navbar styles ----->
+
+// <----- END: Footer styles ----->
+
+footer {
+  text-align: center;
+  position: relative;
+  // margin-top: -150px; /* negative value of footer height */
+  // height: 150px;
+  clear:both;
+  padding-top:20px;
+}
+footer p {
+  color: #5c5c5c;
+}
+
+footer a, i {
+  color: #2092e1
+}
 
 .axis path,
 .axis line {
@@ -349,8 +371,8 @@ p {
 // <--- Loader --->
 
 .loader-container {
-  width: 1080px;
-  height: 900px;
+  width: 1108px;
+  height: 977px;
   padding: 30px;
   text-align: -webkit-center;
   text-align: center;

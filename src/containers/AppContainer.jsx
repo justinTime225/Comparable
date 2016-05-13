@@ -16,6 +16,15 @@ class App extends Component {
           dispatch={dispatch}
         />
         {this.props.children}
+        <footer className="footer">
+          <div className="container">
+            <p>Made with <i className="fa fa-bicycle" ></i> &amp; <i className="fa fa-beer" aria-hidden="true"></i> by
+              <a href="https://github.com/justinTime225" target="_blank"> Justin</a> &amp;
+              <a href="https://github.com/ryandhaase" target="_blank"> Ryan</a> &amp;
+              <a href="https://github.com/tmpace" target="_blank"> Trevor</a>
+            </p>
+          </div>
+        </footer>
       </div>
     );
   }
