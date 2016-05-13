@@ -7,7 +7,6 @@ class Home extends Component {
   render() {
     const { login } = this.props;
 
-    console.log(this.props);
     return (
       <div className="container-fluid" id="home">
         <div className="row hero-section vertical-center">
