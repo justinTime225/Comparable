@@ -40,8 +40,8 @@ class Profile extends Component {
       <div className="container">
         <h1 className="offersHeading">My Offers</h1>
       {profileData &&
-          <OfferSlider 
-          profileData={profileData} 
+          <OfferSlider
+          profileData={profileData}
           sendJob={this.props.sendJob}
           getSkills={this.props.getSkills}>
           </OfferSlider>
@@ -52,7 +52,7 @@ class Profile extends Component {
             </div>
             <div className="panel panel-default">
               <div className="panel-body" >
-                <h1>Related Skills</h1>
+                <h1 className="offersHeading">Related Skills</h1>
                 <BubbleChart skill={this.props.skill}/>
               </div>
             </div>

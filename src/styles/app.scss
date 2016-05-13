@@ -18,6 +18,10 @@ body {
 p {
   font-family: "Montserrat", 'HelveticaNeue-Light', sans-serif !important;
 }
+
+.panel {
+  background-color: rgba(255, 255, 255, 0.7);
+}
 // <----- END: Default styles ----->
 
 #home h1 {
@@ -54,16 +58,31 @@ p {
 .mid-section {
   background-color: rgb(255, 255, 255);
   text-align: center;
-  min-height: 500px !important;
+  min-height: 400px !important;
+}
+
+.mid-section h4 {
+  margin: 25px 0px;
 }
 
 .mid-section img {
-  // max-width: 450px;
+  max-width: 75%;
+  // max-width: 200px;
+  transition: all .2s ease-in-out;
+  margin-bottom: 25px;
+}
+
+.mid-section img:hover {
+  transform: scale(1.1);
+}
+
+.lower-section {
+  text-align: center;
 }
 
 .vertical-center {
-  min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
-  min-height: 65vh; /* These two lines are counted as one :-)       */
+  min-height: 50%;  /* Fallback for browsers do NOT support vh unit */
+  min-height: 50vh; /* These two lines are counted as one :-)       */
 
   display: flex;
   align-items: center;
