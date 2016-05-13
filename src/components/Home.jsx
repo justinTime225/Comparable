@@ -1,18 +1,23 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { login } from '../actions/Auth_Actions';
 
-export default class Home extends Component {
+class Home extends Component {
+
   render() {
+    const { login } = this.props;
 
+    console.log(this.props);
     return (
       <div className="container-fluid" id="home">
         <div className="row hero-section vertical-center">
           <div className="col-md-6 col-md-offset-3">
             <h1>Comparable</h1>
-            <br/>
+            <br></br>
             <h4>See how your job offer stacks up...</h4>
             <h4>With the most powerful job comparison tool on the market!</h4>
-            <br/>
-            <p><a className="btn btn-primary btn-lg"><span>Get Started</span></a></p>
+            <br></br>
+            <div className="btn btn-primary btn-lg" onClick={this.props.isAuthenticated ? () => { window.location.hash = '#/offers'; } : () => { login(); }}><span>Get Started</span></div>
           </div>
         </div>
         <div className="row mid-section vertical-center">
@@ -35,14 +40,30 @@ export default class Home extends Component {
         <div className="row lower-section vertical-center">
           <div className="col-md-4 col-md-offset-4">
             <h4>Built for techies by techies, Comparable's mission it to provide all prospective job seekers with the data needed to assess and leverage their current offers against similar in the market.</h4>
-            <br/>
-            <div><a className="btn btn-primary btn-lg">Learn More</a></div>
+            <br></br>
+            <div className="btn btn-primary btn-lg" onClick={this.props.isAuthenticated ? () => { window.location.hash = '#/offers'; } : () => { login(); }}>Learn More</div>
           </div>
         </div>
       </div>
     );
   }
+}
+
+const mapStateToProps = (state) => {
+  const { auth } = state;
+  const { isAuthenticated } = auth;
+
+  return {
+    isAuthenticated,
+  };
 };
 
-// TODO: Remove verticle-align from CSS
-//
+const mapDispatchToProps = (dispatch) => {
+  return {
+    login: () => {
+      dispatch(login());
+    },
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

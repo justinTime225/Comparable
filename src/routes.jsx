@@ -24,7 +24,7 @@ function requireAuth(nextState, replace) {
 // Export router so that we can use it within index
 export default (
   <Route path="/" component={App}>
-    <IndexRoute component={Home}/>
+    <IndexRoute component={Home} />
     <Route path="offers" component={Offer} onEnter={requireAuth} />
     <Route path="profile" component={Profile} onEnter={requireAuth} />
   </Route>
