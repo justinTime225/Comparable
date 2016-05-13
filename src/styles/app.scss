@@ -10,13 +10,17 @@ body {
       rgba(248, 248, 248, 0.7),
       rgba(248, 248, 248, 0.7)
     ),
-     url("https://s3.amazonaws.com/comparable/DeathtoStock_Creative+Community3.jpg");
+     url("https://s3.amazonaws.com/comparable/DeathtoStock_Creative+Community3HalfSize.jpg");
   background-size: cover;
   background-attachment: fixed;
 }
 
 p {
   font-family: "Montserrat", 'HelveticaNeue-Light', sans-serif !important;
+}
+
+.panel {
+  background-color: rgba(255, 255, 255, 0.7);
 }
 // <----- END: Default styles ----->
 
@@ -27,18 +31,58 @@ p {
 #home .btn.btn-lg {
   color: #2092e1;
   border-radius: 35px;
+  border: 2px solid #2092e1;
 }
 
 #home .btn.btn-lg:hover {
-  color: #fff;
+  border: none;
+  color: #ffffff;
   background-color: #ff8a37;
   border-radius: 35px;
+  border: 2px solid #ff8a37;
 }
 
+#home > .hero-section .btn.btn-lg:hover span {
+  display: none;
+}
+
+#home > .hero-section .btn.btn-lg:hover:before {
+  content: 'Sign Up!';
+}
+
+.hero-section {
+  text-align: center;
+  min-height: 500px;
+}
+
+.mid-section {
+  background-color: rgb(255, 255, 255);
+  text-align: center;
+  min-height: 400px !important;
+}
+
+.mid-section h4 {
+  margin: 25px 0px;
+}
+
+.mid-section img {
+  max-width: 75%;
+  // max-width: 200px;
+  transition: all .2s ease-in-out;
+  margin-bottom: 25px;
+}
+
+.mid-section img:hover {
+  transform: scale(1.1);
+}
+
+.lower-section {
+  text-align: center;
+}
 
 .vertical-center {
-  min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
-  min-height: 100vh; /* These two lines are counted as one :-)       */
+  min-height: 50%;  /* Fallback for browsers do NOT support vh unit */
+  min-height: 50vh; /* These two lines are counted as one :-)       */
 
   display: flex;
   align-items: center;
