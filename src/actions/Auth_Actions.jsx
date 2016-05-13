@@ -44,6 +44,7 @@ export function login() {
       localStorage.setItem('profile', JSON.stringify(profile));
       localStorage.setItem('id_token', token);
       dispatch(lockSuccess(profile, token));
+      window.location.hash = '#/offers';
     });
   };
 }
