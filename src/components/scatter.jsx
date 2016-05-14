@@ -16,8 +16,8 @@ const ScatterPlotChart = {
       let chartHeight = (() => {
         return Math.round(450/600 * chartWidth);
       })();*/
-      let chartWidth = 530;
-      let chartHeight= 350;
+      let chartWidth = 1060;
+      let chartHeight= 700;
       this.dataset = dataset;
       this.margin = {top: 40, right: 40, bottom: 60, left: 80};
       this.width = chartWidth- this.margin.left - this.margin.right;
@@ -51,7 +51,8 @@ const ScatterPlotChart = {
         .range([0, this.width ]);
     },
     getXAxis() {
-      let labels = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+      let labels = ["Jan", "Feb", "Mar", "Apr", "May"]
+      // let labels = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
       return d3.svg.axis()
         .scale(this.xScale)
         .orient('bottom')
@@ -165,7 +166,8 @@ let Chart = React.createClass({
     renderChart(dataset) {
       ScatterPlotChart.init({
         el: '#chart',
-        dataset: dataset
+        dataset: dataset,
+        // pass in another prop to determines the x and y axis to replace label
       });
     },
     componentDidMount() {
@@ -185,13 +187,13 @@ let Chart = React.createClass({
     }
 });
 
-let ScatterPlot = React.createClass({
+const ScatterPlot = React.createClass({
   generateRandomData() {
-      return _.map(_.range(12), (item,i) => {
+      return _.map(_.range(152), (item,i) => {
         return {
           x: i,
           y: Math.random() * 100,
-          r: Math.random() * 30
+          r: 15
         };
       });
     },
@@ -201,6 +203,7 @@ let ScatterPlot = React.createClass({
       };
     },
     render() {
+      console.log(this.props.job);
       var change = (e) => {
         e.preventDefault();
         this.setState({
@@ -226,4 +229,4 @@ let ScatterPlot = React.createClass({
     }
 });
 
-module.exports = ScatterPlot;
+export default ScatterPlot;

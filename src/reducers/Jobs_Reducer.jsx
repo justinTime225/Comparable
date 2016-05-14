@@ -9,7 +9,19 @@ export default function (state = [], action) {
       // map over the object and create a mean array
       const array = current.map(job => {
         const mean = [Number((job.salary_min + job.salary_max) / 2), (Number(job.equity_min) + Number(job.equity_max)) / 2];
+        var lowerRange = {
+          x: job.salary_min,
+          y: Number(job.equity_min),
+          r: 3
+        }
+        var upperRange = {
+          x: job.salary_max,
+          y: Number(job.equity_max),
+          r: 5
+        }
         job.mean = mean;
+        job.lowerRange = lowerRange;
+        job.upperRange = upperRange;
         return job;
       });
 

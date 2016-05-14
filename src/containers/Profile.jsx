@@ -81,7 +81,7 @@ class Profile extends Component {
             </div>
           </div>
         </div>
-        <Scatter/>
+        <Scatter job={this.props.job}/>
         
       </div>
     );
