@@ -48,4 +48,21 @@ describe('routes', () => {
         .end(done);
     });
   });
+
+  describe('/api/users/offers', () => {
+    const params = {
+      title: 'Software Engineer',
+    };
+
+    it('returns 200 success code', (done) => {
+      request(app)
+        .get('/api/users/offers')
+        .query(params)
+        .expect(200)
+        .expect(res => {
+          expect(res.body[0].title).to.equal(params.title);
+        })
+        .end(done);
+    });
+  });
 });

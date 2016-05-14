@@ -35,4 +35,11 @@ module.exports = (app) => {
   app.route('/api/offers')
     .get(OfferController.getOffers)
     .post(OfferController.createOffer);
+
+  app.route('/api/users/offers')
+    .get((req, res) => {
+      OfferController.getUsersOffers(req.query, (err, data) => {
+        sendResponse(res, err, data, 200);
+      });
+    });
 };

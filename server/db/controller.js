@@ -23,5 +23,17 @@ module.exports = {
         res.status(302).send('error occured')
       }
     });
-  }
-}
+  },
+
+  getUsersOffers: (params, callback) => {
+    Offer.find({ title: params.title }).then(
+      (data) => {
+        if (data) {
+          callback(null, data);
+        } else {
+          callback('error', data);
+        }
+      }
+    );
+  },
+};
