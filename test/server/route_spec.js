@@ -8,6 +8,7 @@ describe('routes', () => {
       const jobTitle = 'Software Engineer';
       const params = {
         title: jobTitle,
+        location: 'San Francisco',
       };
 
       request(app)

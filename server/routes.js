@@ -13,7 +13,7 @@ module.exports = (app) => {
   app.route('/api/jobs')
     .get((req, res) => {
       // route for getting jobs from angelList data
-      angelListController.filterAngelListData(req.query.title, (err, data) => {
+      angelListController.filterAngelListData(req.query, (err, data) => {
         sendResponse(res, err, data, 200);
       });
     });

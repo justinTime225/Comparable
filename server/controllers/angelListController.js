@@ -13,7 +13,9 @@ module.exports = {
       // returns array of objects containing just jobs and tags
       sample = _.flatten(
         _.pluck(_.filter(angelListFile.jobs, (job) => {
-          return job.title === title;
+          if (job.title) {
+            return job.title === title;
+          }
         }), 'tags')
       );
     } else {
@@ -40,10 +42,12 @@ module.exports = {
     return callback(null, skills);
   },
 
-  filterAngelListData: (title, callback) => {
+  filterAngelListData: (params, callback) => {
     // filter data in data file by job title and return to GET request as response
     const filteredData = _.filter(angelListFile.jobs, (job) => {
-      return job.title === title;
+      if (job.title) {
+        return job.title === params.title && job.location === params.location;
+      }
     });
 
     callback(null, filteredData);
