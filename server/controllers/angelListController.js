@@ -1,5 +1,6 @@
 const angelListFile = require('../../angelList.json');
 const _ = require('underscore');
+const toTitleCase = require('../utils/helpers');
 
 module.exports = {
   getSkills: (title, callback) => {
@@ -43,10 +44,14 @@ module.exports = {
   },
 
   filterAngelListData: (params, callback) => {
+    const title = toTitleCase(params.title);
+    const location = toTitleCase(params.location);
+    console.log('title', title);
+    console.log('location', location);
     // filter data in data file by job title and return to GET request as response
     const filteredData = _.filter(angelListFile.jobs, (job) => {
       if (job.title) {
-        return job.title === params.title && job.location === params.location;
+        return job.title === title && job.location === location;
       }
     });
 

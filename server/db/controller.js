@@ -1,4 +1,5 @@
 var Offer = require('./mongo');
+const toTitleCase = require('../utils/helpers');
 
 module.exports = {
   getOffers: function(req, res) {
@@ -11,6 +12,9 @@ module.exports = {
     });
   },
   createOffer: function(req, res) {
+    req.body.title = toTitleCase(req.body.title);
+    req.body.location = toTitleCase(req.body.location);
+
     var offer = new Offer(req.body);
     offer.save().then(function(data) {
       if (data) {
