@@ -14,6 +14,14 @@ const validate = values => {
     errors.location = 'Required';
   }
 
+  if (!values.salary) {
+    errors.salary = 'Required';
+  }
+
+  if (!values.equity) {
+    errors.equity = 'Required';
+  }
+
   return errors;
 };
 
@@ -56,10 +64,12 @@ class OfferForm extends Component {
                 <div className="form-group has-warning">
                   <label className="sr-only" htmlFor="salary">Salary</label>
                   <input type="number" className="form-control" placeholder="Salary" autoComplete="off" { ...salary } />
+                  {salary.touched && salary.error && <div style={{ color: 'red' }}>{salary.error}</div>}
                 </div>
                 <div className="form-group has-warning">
                   <label className="sr-only" htmlFor="equity">Equity</label>
                   <input type="number" step="0.01" className="form-control" placeholder="Equity" autoComplete="off" { ...equity } />
+                  {equity.touched && equity.error && <div style={{ color: 'red' }}>{equity.error}</div>}
                 </div>
                 <div className="form-group has-warning">
                   <button className="btn btn-success" type="submit">Submit</button>
