@@ -33,9 +33,20 @@ class Profile extends Component {
   skills: false
 
   componentWillMount() {
-    const { getOffers } = this.props;
+    const { getOffers, sendJob } = this.props;
     const email = JSON.parse(localStorage.getItem('profile')).email;
     getOffers(email);
+    // invoke with fake data
+    // var title = 'Backend Engineer'
+    // var obj = {
+    //   _id: "5734c6a8f79b39ad02398102",
+    //   equity: '1',
+    //   location: 'LA',
+    //   salary: 95000,
+    //   title: 'Backend Engineer',
+    //   userEmail: 'justinminh225@gmail.com'
+    // };
+    // sendJob(title, obj);
   }
 
   render() {

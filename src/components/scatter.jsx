@@ -1,21 +1,19 @@
-// let React = require('react');
-// let d3 = require('d3');
-// let _ = require('lodash');
 import React, { Component } from 'react';
 import d3 from 'd3';
 import _ from 'lodash';
 
+var globalXScale;
+var globalYScale;
+var globalColorFill;
 
 const ScatterPlotChart = {
 
   init(options) {
-      // chart settings
-      let {el, dataset} = options;
-    //todo: responsive chart height & width
-    /*  let chartWidth = Math.round((document.body.clientWidth/10)*8);
-      let chartHeight = (() => {
-        return Math.round(450/600 * chartWidth);
-      })();*/
+
+      let {el, dataset } = options;
+ 
+      
+   
       let chartWidth = 1060;
       let chartHeight= 700;
       this.dataset = dataset;
@@ -32,35 +30,41 @@ const ScatterPlotChart = {
 
       // X Scale
       this.xScale = this.getXScale();
-
+      globalYScale = this.yScale;
+      globalXScale = this.xScale;
+      globalColorFill = this.getLinearColorFill;
       this.xAxis = this.getXAxis();
       this.yAxis = this.getYAxis();
 
       // render
       this.renderChart(el);
     },
-    // swap out the x and y scale 
     getYScale() {
+      console.log('height');
+      console.log(this.height);
       return d3.scale.linear()
-        .domain([0,100])
+        .domain([0,5])
+        // .range([960, 60])
         .range([this.height,0]);
     },
     getXScale() {
+      console.log('width');
+      console.log(this.width);
       return d3.scale.linear()
-        .domain([0, 11])
+        .domain([0, 240000])
+        // .range([60, 580]);
         .range([0, this.width ]);
     },
     getXAxis() {
-      let labels = ["Jan", "Feb", "Mar", "Apr", "May"]
-      // let labels = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
       return d3.svg.axis()
         .scale(this.xScale)
         .orient('bottom')
-        .ticks(11)
-        .tickFormat((d, i) => labels[i])
-        .innerTickSize(5)
-        .outerTickSize(8)
-        .tickPadding(5);
+        // .ticks(4)
+        // .tickFormat((d, i) => 20000*i)
+        // .innerTickSize(5)
+        // .outerTickSize(8)
+        // .tickPadding(5);
     },
     renderXAxis() {
       this.rootNode.append('g')
@@ -72,11 +76,11 @@ const ScatterPlotChart = {
       return d3.svg.axis()
         .scale(this.yScale)
         .orient('left')
-        .ticks(10)
-        .tickFormat((d,i) => this.yScale.ticks().map((item) => item + "%")[i])
-        .innerTickSize(5)
-        .outerTickSize(8)
-        .tickPadding(5);
+        // .ticks(10)
+        // .tickFormat((d,i) => this.yScale.ticks().map((item) => item + "%")[i])
+        // .innerTickSize(5)
+        // .outerTickSize(8)
+        // .tickPadding(5);
     },
     renderYAxis() {
       this.rootNode.append('g')
@@ -86,7 +90,7 @@ const ScatterPlotChart = {
     },
     getLinearColorScale() {
       return d3.scale.linear()
-        .domain([0, this.max]) // based on data
+        .domain([0, 5]) // based on data
         //.domain([0, this.dataaset.length]) // based on position
         .range([0, 100]);
     },
@@ -119,6 +123,8 @@ const ScatterPlotChart = {
     },
     renderDataNodes(options) {
       let {selector, className} = options;
+      // console.log('111111')
+      // console.log(this.dataset);
       return this.rootNode.selectAll(selector)
         .data(this.dataset)
         .enter()
@@ -160,13 +166,14 @@ const ScatterPlotChart = {
 let Chart = React.createClass({
   getInitialProps() {
       return {
-        dataset: []
+        dataset: [],
       };
     },
     renderChart(dataset) {
       ScatterPlotChart.init({
         el: '#chart',
-        dataset: dataset,
+        dataset: dataset
+        
         // pass in another prop to determines the x and y axis to replace label
       });
     },
@@ -187,42 +194,85 @@ let Chart = React.createClass({
     }
 });
 
-const ScatterPlot = React.createClass({
-  generateRandomData() {
-      return _.map(_.range(152), (item,i) => {
-        return {
-          x: i,
-          y: Math.random() * 100,
-          r: 15
-        };
+const ScatterPlot = React.createClass({    
+    update(dataset) {
+      let self = this;
+      self.dataset = dataset;
+      this.max = d3.max(dataset, (d) => d.y);
+      this.getLinearColorScale = function() {
+        return d3.scale.linear()
+          .domain([0, 5]) // based on data
+          //.domain([0, this.dataaset.length]) // based on position
+          .range([0, 100]);
+      };
+      this.getLinearColorFill = function(d) {
+        this.colorScale = this.getLinearColorScale();
+        var scaleValue = Math.round(this.colorScale(d.y));
+        return 'rgba('+ scaleValue +'%,0%,' + (80 -scaleValue) +'%, 0.9)';
+      };
+      d3.select('#chart').selectAll("circle")
+        .data(self.dataset)
+        .transition()
+        .delay((d, i) => i / dataset.length * 1000)
+        .duration(1000)
+        .ease('bounce')
+        .attr('cx', (d) => globalXScale(d.x))
+        .attr('cy', (d) => globalYScale(d.y))
+        .attr('r', (d) => d.r)
+        .attr('fill', (d) => {
+          return self.getLinearColorFill(d);
+        });
+    },
+    getLower() {
+      var data = this.props.job.map(data =>{
+        return data.lowerRange;
+      }).filter(data => {
+        if (data !== 'undefined') {
+          return data;
+        }
       });
+      return data;
+    },
+    getUpper() {
+      var data = this.props.job.map(data =>{
+        return data.upperRange;
+      }).filter(data => {
+        if (data !== 'undefined') {
+          return data;
+        }
+      });
+      return data;
     },
     getInitialState() {
       return {
-        dataset: this.generateRandomData()
+        dataset: []
       };
     },
     render() {
-      console.log(this.props.job);
-      var change = (e) => {
-        e.preventDefault();
-        this.setState({
-          dataset: this.generateRandomData()
+      d3.select('#chart').selectAll('g').remove();
+      ScatterPlotChart.init({
+          el: '#chart',
+          dataset: this.getLower()
         });
+      var max = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        this.update(this.getUpper());
+      };
+      var min = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        this.update(this.getLower());
+      }
+      var clearData = () => {
+        d3.select('#chart').selectAll('.bubble').remove();
       };
       return (
         <div className="page">
-          <div className="page-wrapper">
-            <h1>Scatter Plot</h1>
-            <p>A scatter plot with random data. </p>
-            <p>
-              <strong>X Axis: </strong> Months (Jan - Dec)<br />
-              <strong>Y Axis: </strong> Percentage (0 - 100%)<br />
-              <strong>Color Scale: </strong> Linear scale based on y value<br />
-              <strong>Animation: </strong> Transition with bounce easing on <a href="#" onClick={change}>data update</a><br />
-            </p>
+          <div className="page-wrapper">   
             <Chart dataset={this.state.dataset} />
-            <button className="pure-button" onClick={change}>Update data <span className="glyphicon glyphicon-menu-right" aria-hidden="true"></span></button>
+            <button className="pure-button" onClick={min}>Get Min <span className="glyphicon glyphicon-menu-right" aria-hidden="true"></span></button>
+            <button className="pure-button" onClick={max}>Get Max <span className="glyphicon glyphicon-menu-right" aria-hidden="true"></span></button>
           </div>
         </div>
       );
