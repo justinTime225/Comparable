@@ -12,7 +12,7 @@ export default function (state = [], action) {
         var lowerRange = {
           x: job.salary_min,
           y: Number(job.equity_min),
-          r: 3
+          r: 5
         }
         var upperRange = {
           x: job.salary_max,
