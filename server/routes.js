@@ -13,7 +13,7 @@ module.exports = (app) => {
   app.route('/api/jobs')
     .get((req, res) => {
       // route for getting jobs from angelList data
-      angelListController.filterAngelListData(req.query.title, (err, data) => {
+      angelListController.filterAngelListData(req.query, (err, data) => {
         sendResponse(res, err, data, 200);
       });
     });
@@ -35,4 +35,11 @@ module.exports = (app) => {
   app.route('/api/offers')
     .get(OfferController.getOffers)
     .post(OfferController.createOffer);
+
+  app.route('/api/users/offers')
+    .get((req, res) => {
+      OfferController.getUsersOffers(req.query, (err, data) => {
+        sendResponse(res, err, data, 200);
+      });
+    });
 };

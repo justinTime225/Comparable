@@ -4,11 +4,14 @@ const angelList = require('../../../server/controllers/angelListController.js');
 describe('AngelList Controller', () => {
   describe('filterAngelListData', () => {
     it('returns list of jobs, filtered by provided title', () => {
-      const jobTitle = 'Software Engineer';
+      const params = {
+        title: 'Software Engineer',
+        location: 'San Francisco',
+      };
 
-      angelList.filterAngelListData(jobTitle, (err, data) => {
+      angelList.filterAngelListData(params, (err, data) => {
         expect(typeof data).to.equal('object');
-        expect(data[0].title).to.equal(jobTitle);
+        expect(data[0].title).to.equal(params.title);
       });
     });
   });
