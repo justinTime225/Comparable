@@ -1,11 +1,12 @@
 import axios from 'axios';
 export const JOB_MATCH = 'JOB_MATCH';
 
-export function sendJob(title, userData) {
+export function sendJob(data, userData) {
 
   const request = axios.get('/api/jobs', {
     params: {
-      title: title,
+      title: data.title,
+      location: data.location,
     },
   });
   return {

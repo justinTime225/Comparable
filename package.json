@@ -9,7 +9,6 @@
     "test:watch": "npm run test -- --watch",
     "webpack:deploy": "NODE_ENV=production webpack --config webpack.prod.config.js --progress --colors",
     "heroku-postbuild": "npm run webpack:deploy",
-    "postinstall": "node ./server/utils/angelList.js",
     "lint": "eslint src server"
   },
   "repository": {
@@ -61,6 +60,7 @@
     "express": "^4.13.4",
     "file-loader": "^0.8.5",
     "json-loader": "^0.5.4",
+    "lodash": "^4.12.0",
     "lodash.assign": "^4.0.8",
     "mongoose": "^4.4.16",
     "node-sass": "^3.4.2",

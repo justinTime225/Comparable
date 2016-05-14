@@ -61,7 +61,7 @@ class Offer extends Component {
 
     dispatch(changeOffer(data));
 
-    dispatch(sendJob(data.title, data));
+    dispatch(sendJob(data, data));
     this.saveOffer(data);
     // this.skillAction.call(this, data);
     // Resets form fields after submission
@@ -129,7 +129,7 @@ class Offer extends Component {
             </div>
           </div>
         </div>
-        
+
       </div>
     );
   }

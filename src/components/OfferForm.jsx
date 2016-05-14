@@ -10,6 +10,10 @@ const validate = values => {
     errors.title = 'Required';
   }
 
+  if (!values.location) {
+    errors.location = 'Required';
+  }
+
   return errors;
 };
 
@@ -28,12 +32,26 @@ class OfferForm extends Component {
               <form onSubmit={handleSubmit} className="form-inline offer-input">
                 <div className="form-group has-warning">
                   <label className="sr-only" htmlFor="title">Title</label>
-                  <input type="text" className="form-control" placeholder="Title" autoComplete="off" { ...title } />
+                  <input list="titles" type="text" className="form-control" placeholder="Title" autoComplete="off" { ...title } />
+                  <datalist id="titles">
+                    <option value="Software Engineer"></option>
+                    <option value="Frontend Engineer"></option>
+                    <option value="Backend Engineer"></option>
+                    <option value="UI Engineer"></option>
+                    <option value="Designer"></option>
+                  </datalist>
                   {title.touched && title.error && <div style={{ color: 'red' }}>{title.error}</div>}
                 </div>
                 <div className="form-group has-warning">
                   <label className="sr-only" htmlFor="location">Location</label>
-                  <input type="text" className="form-control" placeholder="Location" autoComplete="off" { ...location } />
+                  <input list="locations" className="form-control" placeholder="Location" autoComplete="off" { ...location } />
+                  <datalist id="locations">
+                    <option value="Austin"></option>
+                    <option value="Irvine"></option>
+                    <option value="Los Angeles"></option>
+                    <option value="San Francisco"></option>
+                  </datalist>
+                  {location.touched && location.error && <div style={{ color: 'red' }}>{location.error}</div>}
                 </div>
                 <div className="form-group has-warning">
                   <label className="sr-only" htmlFor="salary">Salary</label>
