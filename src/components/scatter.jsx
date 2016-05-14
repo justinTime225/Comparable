@@ -1,10 +1,12 @@
-let React = require('react');
-let d3 = require('d3');
-let _ = require('lodash');
+// let React = require('react');
+// let d3 = require('d3');
+// let _ = require('lodash');
+import React, { Component } from 'react';
+import d3 from 'd3';
+import _ from 'lodash';
 
-// require('./ScatterPlot.scss');
 
-let ScatterPlotChart = {
+const ScatterPlotChart = {
 
   init(options) {
       // chart settings
