@@ -4,7 +4,7 @@ import Slider from 'react-slick';
 export default class OfferSlider extends Component {
   fetchSkills(profileOffer) {
     this.props.getSkills(profileOffer)
-    this.props.sendJob(profileOffer.title, profileOffer);
+    this.props.sendJob(profileOffer, profileOffer);
   }
 
   render() {
