@@ -26,7 +26,7 @@ module.exports = {
   },
 
   getUsersOffers: (params, callback) => {
-    Offer.find({ title: params.title }).then(
+    Offer.find({ title: params.title }, 'title equity salary location').then(
       (data) => {
         if (data) {
           callback(null, data);
