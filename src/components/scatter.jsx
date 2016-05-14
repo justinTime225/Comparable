@@ -9,11 +9,7 @@ var globalColorFill;
 const ScatterPlotChart = {
 
   init(options) {
-
       let {el, dataset } = options;
- 
-      
-   
       let chartWidth = 1060;
       let chartHeight= 700;
       this.dataset = dataset;
@@ -40,16 +36,12 @@ const ScatterPlotChart = {
       this.renderChart(el);
     },
     getYScale() {
-      console.log('height');
-      console.log(this.height);
       return d3.scale.linear()
         .domain([0,5])
         // .range([960, 60])
         .range([this.height,0]);
     },
     getXScale() {
-      console.log('width');
-      console.log(this.width);
       return d3.scale.linear()
         .domain([0, 240000])
         // .range([60, 580]);
