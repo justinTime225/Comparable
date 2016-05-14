@@ -9,6 +9,7 @@ import OfferSlider from '../components/OfferSlider';
 import BubbleChart from '../components/bubbleChart';
 import ScatterPlot from '../components/scatter-plot';
 import PieGraph from '../components/PieChart';
+import Scatter from '../components/scatter';
 
 const styles = {
   width: 1000,
@@ -32,7 +33,7 @@ class Profile extends Component {
   skills: false
 
   componentWillMount() {
-    const { getOffers } = this.props;
+    const { getOffers, sendJob } = this.props;
     const email = JSON.parse(localStorage.getItem('profile')).email;
     getOffers(email);
   }
@@ -80,15 +81,15 @@ class Profile extends Component {
             </div>
           </div>
         </div>
-        <ScatterPlot {...this.props} {...styles}  />
-        <h4 id="equity">Equity</h4>
-        <h4 id="salary">Salary</h4>
+        <Scatter job={this.props.job}/>
+        
       </div>
     );
   }
-
 }
-
+// <ScatterPlot {...this.props} {...styles}  />
+// <h4 id="equity">Equity</h4>
+// <h4 id="salary">Salary</h4>
 function mapStateToProps(state) {
   const { skill, profileOffer, job, profileInfo } = state;
   return {
