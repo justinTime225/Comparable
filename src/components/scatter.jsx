@@ -235,6 +235,16 @@ const ScatterPlot = React.createClass({
       });
       return data;
     },
+    getMid() {
+      var data = this.props.job.map(data => {
+        return data.midRange;
+      }).filter(data => {
+        if (data !== 'undefined') {
+          return data;
+        }
+      });
+      return data;
+    },
     getInitialState() {
       return {
         dataset: []
@@ -246,25 +256,28 @@ const ScatterPlot = React.createClass({
           el: '#chart',
           dataset: this.getLower()
         });
-      var max = (e) => {
+      const max = (e) => {
         e.preventDefault();
         e.stopPropagation();
         this.update(this.getUpper());
       };
-      var min = (e) => {
+      const min = (e) => {
         e.preventDefault();
         e.stopPropagation();
         this.update(this.getLower());
       }
-      var clearData = () => {
-        d3.select('#chart').selectAll('.bubble').remove();
-      };
+      const mid = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        this.update(this.getMid());
+      }
       return (
         <div className="page">
           <div className="page-wrapper">   
             <Chart dataset={this.state.dataset} />
             <button className="pure-button" onClick={min}>Get Min <span className="glyphicon glyphicon-menu-right" aria-hidden="true"></span></button>
             <button className="pure-button" onClick={max}>Get Max <span className="glyphicon glyphicon-menu-right" aria-hidden="true"></span></button>
+            <button className="pure-button" onClick={mid}>Get Mid <span className="glyphicon glyphicon-menu-right" aria-hidden="true"></span></button>
           </div>
         </div>
       );
