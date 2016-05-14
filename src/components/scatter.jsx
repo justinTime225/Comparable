@@ -271,10 +271,12 @@ const ScatterPlot = React.createClass({
         e.stopPropagation();
         this.update(this.getMid());
       }
+      const userJob = _.last(this.props.job);
+      // console.log(userJob);
       return (
         <div className="page">
           <div className="page-wrapper">   
-            <Chart dataset={this.state.dataset} />
+            <Chart dataset={this.state.dataset} user={userJob}/>
             <button className="pure-button" onClick={min}>Get Min <span className="glyphicon glyphicon-menu-right" aria-hidden="true"></span></button>
             <button className="pure-button" onClick={max}>Get Max <span className="glyphicon glyphicon-menu-right" aria-hidden="true"></span></button>
             <button className="pure-button" onClick={mid}>Get Mid <span className="glyphicon glyphicon-menu-right" aria-hidden="true"></span></button>

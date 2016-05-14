@@ -38,6 +38,9 @@ export default function (state = [], action) {
         mean: [action.meta.salary, action.meta.equity],
         title: action.meta.title,
         user: true,
+        x: action.meta.salary,
+        y: action.meta.equity,
+        r: 5
       };
 
       array.push(userData);
