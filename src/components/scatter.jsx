@@ -186,7 +186,7 @@ let Chart = React.createClass({
     }
 });
 
-const ScatterPlot = React.createClass({    
+const ScatterPlot = React.createClass({
     update(dataset) {
       let self = this;
       self.dataset = dataset;
@@ -252,9 +252,10 @@ const ScatterPlot = React.createClass({
     },
     render() {
       d3.select('#chart').selectAll('g').remove();
+      // if data doesn't clear then i can add user dot immediately after
       ScatterPlotChart.init({
           el: '#chart',
-          dataset: this.getLower()
+          dataset: this.getMid()
         });
       const max = (e) => {
         e.preventDefault();
