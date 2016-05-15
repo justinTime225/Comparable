@@ -40,7 +40,7 @@ export default function (state = [], action) {
         user: true,
         x: action.meta.salary,
         y: action.meta.equity,
-        r: 5
+        r: 10
       };
 
       array.push(userData);

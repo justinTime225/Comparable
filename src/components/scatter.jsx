@@ -187,6 +187,7 @@ let Chart = React.createClass({
 });
 
 const ScatterPlot = React.createClass({
+    // create a component will mount type of call for getMid();
     update(dataset) {
       let self = this;
       self.dataset = dataset;
@@ -215,7 +216,7 @@ const ScatterPlot = React.createClass({
           return self.getLinearColorFill(d);
         });
     },
-    getLower() {
+    getLower(user) {
       var data = this.props.job.map(data =>{
         return data.lowerRange;
       }).filter(data => {
@@ -223,9 +224,12 @@ const ScatterPlot = React.createClass({
           return data;
         }
       });
+      if (user) {
+        data.push(user);
+      }
       return data;
     },
-    getUpper() {
+    getUpper(user) {
       var data = this.props.job.map(data =>{
         return data.upperRange;
       }).filter(data => {
@@ -233,9 +237,12 @@ const ScatterPlot = React.createClass({
           return data;
         }
       });
+      if (user) {
+        data.push(user);
+      }
       return data;
     },
-    getMid() {
+    getMid(user) {
       var data = this.props.job.map(data => {
         return data.midRange;
       }).filter(data => {
@@ -243,6 +250,11 @@ const ScatterPlot = React.createClass({
           return data;
         }
       });
+      console.log('00')
+      console.log(user);
+      if (user) {
+        data.push(user);
+      }
       return data;
     },
     getInitialState() {
@@ -253,26 +265,26 @@ const ScatterPlot = React.createClass({
     render() {
       d3.select('#chart').selectAll('g').remove();
       // if data doesn't clear then i can add user dot immediately after
+      const userJob = _.last(this.props.job);
       ScatterPlotChart.init({
           el: '#chart',
-          dataset: this.getMid()
+          dataset: this.getMid(userJob)
         });
       const max = (e) => {
         e.preventDefault();
         e.stopPropagation();
-        this.update(this.getUpper());
+        this.update(this.getUpper(userJob));
       };
       const min = (e) => {
         e.preventDefault();
         e.stopPropagation();
-        this.update(this.getLower());
+        this.update(this.getLower(userJob));
       }
       const mid = (e) => {
         e.preventDefault();
         e.stopPropagation();
-        this.update(this.getMid());
+        this.update(this.getMid(userJob));
       }
-      const userJob = _.last(this.props.job);
       // console.log(userJob);
       return (
         <div className="page">
