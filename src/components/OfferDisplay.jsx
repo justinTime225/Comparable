@@ -11,13 +11,24 @@ export default class OfferDisplay extends Component {
     let count = 0;
 
     jobs.forEach((job) => {
-      if (job.salary_min && job.salary_max && job.equity_min && job.equity_max) {
-        // not all jobs have these things, so to give an accurate Avg
-        // we must mee track of count
+      if (!job.salary) {
+        if (job.salary_min && job.salary_max && job.equity_min && job.equity_max) {
+          // not all jobs have these things, so to give an accurate Avg
+          // we must mee track of count
 
-        count++;
-        salarySum += Math.round((job.salary_min + job.salary_max));
-        equitySum += Math.round((Number(job.equity_min) + Number(job.equity_max)));
+          count++;
+          salarySum += Math.round((job.salary_min + job.salary_max));
+          equitySum += Math.round((Number(job.equity_min) + Number(job.equity_max)));
+        }
+      } else {
+        if (job.salary && job.equity) {
+          // not all jobs have these things, so to give an accurate Avg
+          // we must mee track of count
+
+          count++;
+          salarySum += job.salary;
+          equitySum += job.equity;
+        }
       }
     });
 

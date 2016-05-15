@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import OfferForm from '../components/OfferForm';
 import { displayJob } from '../actions/Job_Display';
-import { sendJob } from '../actions/Job_Matches';
+import { sendJob, getUserOffers } from '../actions/Job_Matches';
 import { getSkills } from '../actions/Skills_Actions';
 import { reset } from 'redux-form';
 import { changeOffer, clickJob, closeJob, toggleChart } from '../actions/Offer_Actions';
@@ -66,12 +66,34 @@ class Offer extends Component {
     // this.skillAction.call(this, data);
     // Resets form fields after submission
     dispatch(reset('offer'));
-  };
+  }
+
+  offerType: 'jobs'
+
+  switchOffers() {
+    const { userOffer } = this.props.offer;
+    const { userOffers, jobOffers } = this.props;
+
+
+    console.log(userOffer);
+
+    if (this.offerType === 'jobs' || this.offerType === undefined) {
+      userOffers(userOffer, userOffer);
+      this.offerType = 'users';
+    } else {
+      jobOffers(userOffer, userOffer);
+      this.offerType = 'jobs';
+    }
+  }
 
   render() {
     const { offer, job, onJobClick, onJobClose, toggleChart } = this.props;
     const { display, userOffer, dataType } = offer;
 
+    let offerDisplayType = 'Users';
+    if (this.offerType === 'users') {
+      offerDisplayType = 'Jobs';
+    }
     // Compile data to send to the display component
     const displayData = {
       userOffer: userOffer,
@@ -80,42 +102,6 @@ class Offer extends Component {
 
     return (
       <div className="container">
-        <Modal
-          isOpen={display}
-          onRequestClose={onJobClose}
-          style={customStyles}>
-          <h1>Offer Information</h1>
-          <div className="text-center">
-            <table className="table">
-              <thead>
-                <tr>
-                  <th></th>
-                  <th>Title</th>
-                  <th>Salary (Avg.)</th>
-                  <th>Equity (Avg.)</th>
-                  <th>Location</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr className="success">
-                  <td>OFFER:</td>
-                  <td>{userOffer.title}</td>
-                  <td>{userOffer.salary}</td>
-                  <td>{userOffer.equity}</td>
-                  <td>{userOffer.location}</td>
-                </tr>
-                <tr className="danger">
-                  <td>LISTING:</td>
-                  <td>{display.title}</td>
-                  <td>{Math.floor((display.salary_max + display.salary_min)/2)}</td>
-                  <td>{Math.floor((+display.equity_max + +display.equity_min)/2)}</td>
-                  <td>San Francisco</td>
-                </tr>
-              </tbody>
-            </table>
-            <button className="btn btn-success text-center" onClick={onJobClose}>Close me!</button>
-          </div>
-        </Modal>
         <OfferForm onSubmit={this.handleSubmit.bind(this)} />
         <OfferDisplay data={displayData} />
         <div className="row">
@@ -124,6 +110,9 @@ class Offer extends Component {
             </div>
             <div className="panel panel-default">
               <div className="panel-body" >
+                  <div className="btn-group toggle-btn active" role="group" aria-label="...">
+                    <button onClick={() => this.switchOffers()} type="button" className="btn btn-default">{offerDisplayType}</button>
+                  </div>
                 <BarGraph { ...this.props } toggle={toggleChart} dataType={dataType} />
               </div>
             </div>
@@ -159,6 +148,12 @@ const mapDispatchToProps = (dispatch) => {
     },
     toggleChart: (dataType) => {
       dispatch(toggleChart(dataType));
+    },
+    userOffers: (data) => {
+      dispatch(getUserOffers(data));
+    },
+    jobOffers: (data) => {
+      dispatch(sendJob(data, data));
     },
   };
 };

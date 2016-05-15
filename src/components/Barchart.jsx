@@ -28,6 +28,16 @@ export default class BarGraph extends Component {
             x: `${job.title},${((job.salary_min + job.salary_max) / 2)},${((Number(job.equity_min) + Number(job.equity_max)) / 2).toFixed(2)}`,
             y: (Number(job.equity_min) + Number(job.equity_max)) / 2,
           });
+        } else if (job.salary) {
+          salary.values.push({
+            x: `${job.title},${job.salary},${job.equity}`,
+            y: job.salary,
+          });
+
+          equity.values.push({
+            x: `${job.title},${job.salary},${job.equity}`,
+            y: job.equity,
+          });
         }
       });
     }
