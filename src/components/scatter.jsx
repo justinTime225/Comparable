@@ -95,26 +95,26 @@ const ScatterPlotChart = {
         .attr('transform', 'translate(-20, 0)')
         .call(this.yAxis);
     },
-    getLinearColorScale() {
-      return d3.scale.linear()
-        .domain([0, 5]) // based on data
-        //.domain([0, this.dataaset.length]) // based on position
-        .range([0, 100]);
-    },
-    getLinearColorFill(d) {
-      this.colorScale = this.getLinearColorScale();
-      var scaleValue = Math.round(this.colorScale(d.y));
-      return 'rgba('+ scaleValue +'%,0%,' + (80 -scaleValue) +'%, 0.9)';
-    },
-    getQuantizeColorScale() {
-      this.colorScale = this.getQuantizeColorScale();
-      return d3.scale.quantize()
-        .domain([0, this.max]) // based on data
-        .range(['#76c902', '#f5cd13', '#f96e4f']);
-    },
-    getQuantizeColorFill(d) {
-      return this.colorScale(d.y);
-    },
+    // getLinearColorScale() {
+    //   return d3.scale.linear()
+    //     .domain([0, 5]) // based on data
+    //     //.domain([0, this.dataaset.length]) // based on position
+    //     .range([0, 100]);
+    // },
+    // getLinearColorFill(d) {
+    //   this.colorScale = this.getLinearColorScale();
+    //   var scaleValue = Math.round(this.colorScale(d.y));
+    //   return 'rgba('+ scaleValue +'%,0%,' + (80 -scaleValue) +'%, 0.9)';
+    // },
+    // getQuantizeColorScale() {
+    //   this.colorScale = this.getQuantizeColorScale();
+    //   return d3.scale.quantize()
+    //     .domain([0, this.max]) // based on data
+    //     .range(['#76c902', '#f5cd13', '#f96e4f']);
+    // },
+    // getQuantizeColorFill(d) {
+    //   return this.colorScale(d.y);
+    // },
     getRootNode(el) {
       return d3.select(el);
     },
@@ -130,8 +130,6 @@ const ScatterPlotChart = {
     },
     renderDataNodes(options) {
       let {selector, className} = options;
-      // console.log('111111')
-      // console.log(this.dataset);
       return this.rootNode.selectAll(selector)
         .data(this.dataset)
         .enter()
@@ -141,7 +139,7 @@ const ScatterPlotChart = {
         .attr('cy', (d) => this.yScale(d.y))
         .attr('r', (d) => d.r)
         .attr('fill', (d) => {
-          return this.getLinearColorFill(d);
+          return d.color;
         });
     },
     renderChart(el) {
@@ -206,17 +204,17 @@ const ScatterPlot = React.createClass({
       let self = this;
       self.dataset = dataset;
       this.max = d3.max(dataset, (d) => d.y);
-      this.getLinearColorScale = function() {
-        return d3.scale.linear()
-          .domain([0, 5]) // based on data
-          //.domain([0, this.dataaset.length]) // based on position
-          .range([0, 100]);
-      };
-      this.getLinearColorFill = function(d) {
-        this.colorScale = this.getLinearColorScale();
-        var scaleValue = Math.round(this.colorScale(d.y));
-        return 'rgba('+ scaleValue +'%,0%,' + (80 -scaleValue) +'%, 0.9)';
-      };
+      // this.getLinearColorScale = function() {
+      //   return d3.scale.linear()
+      //     .domain([0, 5]) // based on data
+      //     //.domain([0, this.dataaset.length]) // based on position
+      //     .range([0, 100]);
+      // };
+      // this.getLinearColorFill = function(d) {
+      //   this.colorScale = this.getLinearColorScale();
+      //   var scaleValue = Math.round(this.colorScale(d.y));
+      //   return 'rgba('+ scaleValue +'%,0%,' + (80 -scaleValue) +'%, 0.9)';
+      // };
       d3.select('#chart').selectAll("circle")
         .data(self.dataset)
         .transition()
@@ -227,7 +225,8 @@ const ScatterPlot = React.createClass({
         .attr('cy', (d) => globalYScale(d.y))
         .attr('r', (d) => d.r)
         .attr('fill', (d) => {
-          return self.getLinearColorFill(d);
+          return d.color;
+          // return self.getLinearColorFill(d);
         });
     },
     getLower(user) {
