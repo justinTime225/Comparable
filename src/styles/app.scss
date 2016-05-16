@@ -311,8 +311,8 @@ footer a, i {
   flex: 1;
   position: relative;
   display: flex;
-  user-select: none;
   justify-content: center;
+  width: 100%;
 }
 
 /* Center text in the circle, and hide any overflow */
@@ -431,4 +431,3 @@ footer a, i {
     shape-rendering: crispEdges;
   }
 }
-
