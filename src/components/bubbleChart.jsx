@@ -11,16 +11,12 @@ var colorLegend = [
   "#FFAB6E", "#E8718A", "#E8718A", "#6492E8", "#65FFDB", "#90FF75", "#FFE26E", {color: "#1060D6", text: 'Positive', textColor: "#ffffff"}
 ];
 var tooltipProps = [{
-  css: 'symbol',
-  prop: '_id'
+  css: 'displayText',
+  prop: 'displayText'
 }, {
   css: 'value',
   prop: 'value',
-  display: 'Last Value'
-}, {
-  css: 'change',
-  prop: 'colorValue',
-  display: 'Change'
+  display: 'Number: '
 }];
 const cities = ['San Francisco', 'Los Angeles', 'Austin', 'Irvine'];
 export default class BubbleChart extends Component {
@@ -48,10 +44,11 @@ export default class BubbleChart extends Component {
           selectedTextColor="#d9d9d9"
           fixedDomain={{min: -1, max: 1}}
           legend={true}
+          tooltip={true}
+          tooltipProps={tooltipProps}
           legendSpacing={0}
         />
       </div>
     );
   }
 }
-
