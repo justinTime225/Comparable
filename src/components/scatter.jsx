@@ -9,7 +9,7 @@ var globalColorFill;
 const ScatterPlotChart = {
 
   init(options) {
-      let {el, dataset } = options;
+      let {el, dataset, maxSet } = options;
       let chartWidth = 1060;
       let chartHeight= 700;
       this.dataset = dataset;
@@ -20,6 +20,20 @@ const ScatterPlotChart = {
       // Min & Max
       this.min = d3.min(dataset, (d) => d.y);
       this.max = d3.max(dataset, (d) => d.y);
+      var maxRangeX = maxSet.map((obj) => {
+        return obj.x;
+      });
+      var maxRangeY = maxSet.map((obj) => {
+        return obj.y;
+      });
+      maxRangeX = _.reduce(maxRangeX, (a, b) => {
+        return a > b ? a:b;
+      });
+      maxRangeY = _.reduce(maxRangeY, (a, b) => {
+        return a > b ? a:b;
+      });
+      this.maxX = maxRangeX || 240000;
+      this.maxY = maxRangeY || 5;
 
       // Y Scale
       this.yScale = this.getYScale();
@@ -34,29 +48,24 @@ const ScatterPlotChart = {
 
       // render
       this.renderChart(el);
+     
     },
     getYScale() {
       return d3.scale.linear()
-        .domain([0,5])
+        .domain([0, this.maxY])
         // .range([960, 60])
         .range([this.height,0]);
     },
     getXScale() {
       return d3.scale.linear()
-        .domain([0, 240000])
+        .domain([0, this.maxX])
         // .range([60, 580]);
         .range([0, this.width ]);
     },
     getXAxis() {
-
       return d3.svg.axis()
         .scale(this.xScale)
         .orient('bottom')
-        // .ticks(4)
-        // .tickFormat((d, i) => 20000*i)
-        // .innerTickSize(5)
-        // .outerTickSize(8)
-        // .tickPadding(5);
     },
     renderXAxis() {
       this.rootNode.append('g')
@@ -68,37 +77,12 @@ const ScatterPlotChart = {
       return d3.svg.axis()
         .scale(this.yScale)
         .orient('left')
-        // .ticks(10)
-        // .tickFormat((d,i) => this.yScale.ticks().map((item) => item + "%")[i])
-        // .innerTickSize(5)
-        // .outerTickSize(8)
-        // .tickPadding(5);
     },
     renderYAxis() {
       this.rootNode.append('g')
         .attr('class', 'y axis')
         .attr('transform', 'translate(-20, 0)')
         .call(this.yAxis);
-    },
-    getLinearColorScale() {
-      return d3.scale.linear()
-        .domain([0, 5]) // based on data
-        //.domain([0, this.dataaset.length]) // based on position
-        .range([0, 100]);
-    },
-    getLinearColorFill(d) {
-      this.colorScale = this.getLinearColorScale();
-      var scaleValue = Math.round(this.colorScale(d.y));
-      return 'rgba('+ scaleValue +'%,0%,' + (80 -scaleValue) +'%, 0.9)';
-    },
-    getQuantizeColorScale() {
-      this.colorScale = this.getQuantizeColorScale();
-      return d3.scale.quantize()
-        .domain([0, this.max]) // based on data
-        .range(['#76c902', '#f5cd13', '#f96e4f']);
-    },
-    getQuantizeColorFill(d) {
-      return this.colorScale(d.y);
     },
     getRootNode(el) {
       return d3.select(el);
@@ -115,8 +99,6 @@ const ScatterPlotChart = {
     },
     renderDataNodes(options) {
       let {selector, className} = options;
-      // console.log('111111')
-      // console.log(this.dataset);
       return this.rootNode.selectAll(selector)
         .data(this.dataset)
         .enter()
@@ -126,7 +108,7 @@ const ScatterPlotChart = {
         .attr('cy', (d) => this.yScale(d.y))
         .attr('r', (d) => d.r)
         .attr('fill', (d) => {
-          return this.getLinearColorFill(d);
+          return d.color;
         });
     },
     renderChart(el) {
@@ -154,23 +136,23 @@ const ScatterPlotChart = {
         });
     }
 };
-
 let Chart = React.createClass({
   getInitialProps() {
       return {
         dataset: [],
+        maxSet: []
       };
     },
-    renderChart(dataset) {
+    renderChart(dataset, maxSet) {
       ScatterPlotChart.init({
         el: '#chart',
-        dataset: dataset
-        
+        dataset: dataset,
+        maxSet: maxSet
         // pass in another prop to determines the x and y axis to replace label
       });
     },
     componentDidMount() {
-      this.renderChart(this.props.dataset);
+      this.renderChart(this.props.dataset, this.props.maxSet);
     },
     componentWillReceiveProps: function(nextProps) {
       if (typeof(nextProps.dataset) !== "undefined") {
@@ -185,23 +167,11 @@ let Chart = React.createClass({
       );
     }
 });
-
-const ScatterPlot = React.createClass({    
+const ScatterPlot = React.createClass({
     update(dataset) {
       let self = this;
       self.dataset = dataset;
       this.max = d3.max(dataset, (d) => d.y);
-      this.getLinearColorScale = function() {
-        return d3.scale.linear()
-          .domain([0, 5]) // based on data
-          //.domain([0, this.dataaset.length]) // based on position
-          .range([0, 100]);
-      };
-      this.getLinearColorFill = function(d) {
-        this.colorScale = this.getLinearColorScale();
-        var scaleValue = Math.round(this.colorScale(d.y));
-        return 'rgba('+ scaleValue +'%,0%,' + (80 -scaleValue) +'%, 0.9)';
-      };
       d3.select('#chart').selectAll("circle")
         .data(self.dataset)
         .transition()
@@ -212,10 +182,10 @@ const ScatterPlot = React.createClass({
         .attr('cy', (d) => globalYScale(d.y))
         .attr('r', (d) => d.r)
         .attr('fill', (d) => {
-          return self.getLinearColorFill(d);
+          return d.color;
         });
     },
-    getLower() {
+    getLower(user) {
       var data = this.props.job.map(data =>{
         return data.lowerRange;
       }).filter(data => {
@@ -223,9 +193,12 @@ const ScatterPlot = React.createClass({
           return data;
         }
       });
+      if (user) {
+        data.push(user);
+      }
       return data;
     },
-    getUpper() {
+    getUpper(user) {
       var data = this.props.job.map(data =>{
         return data.upperRange;
       }).filter(data => {
@@ -233,9 +206,12 @@ const ScatterPlot = React.createClass({
           return data;
         }
       });
+      if (user) {
+        data.push(user);
+      }
       return data;
     },
-    getMid() {
+    getMid(user) {
       var data = this.props.job.map(data => {
         return data.midRange;
       }).filter(data => {
@@ -243,41 +219,45 @@ const ScatterPlot = React.createClass({
           return data;
         }
       });
+      if (user) {
+        data.push(user);
+      }
       return data;
     },
     getInitialState() {
       return {
-        dataset: []
+        dataset: [],
+        maxSet: []
       };
     },
     render() {
       d3.select('#chart').selectAll('g').remove();
+      // clear data upon each render
+      const userJob = _.last(this.props.job);
       ScatterPlotChart.init({
           el: '#chart',
-          dataset: this.getLower()
+          dataset: this.getMid(userJob),
+          maxSet: this.getUpper(userJob)
         });
       const max = (e) => {
         e.preventDefault();
-        e.stopPropagation();
-        this.update(this.getUpper());
+        this.update(this.getUpper(userJob));
       };
       const min = (e) => {
         e.preventDefault();
-        e.stopPropagation();
-        this.update(this.getLower());
+        this.update(this.getLower(userJob));
       }
       const mid = (e) => {
         e.preventDefault();
-        e.stopPropagation();
-        this.update(this.getMid());
+        this.update(this.getMid(userJob));
       }
       return (
         <div className="page">
           <div className="page-wrapper">   
-            <Chart dataset={this.state.dataset} />
-            <button className="pure-button" onClick={min}>Get Min <span className="glyphicon glyphicon-menu-right" aria-hidden="true"></span></button>
-            <button className="pure-button" onClick={max}>Get Max <span className="glyphicon glyphicon-menu-right" aria-hidden="true"></span></button>
-            <button className="pure-button" onClick={mid}>Get Mid <span className="glyphicon glyphicon-menu-right" aria-hidden="true"></span></button>
+            <Chart dataset={this.state.dataset} maxSet={this.state.maxSet}/>
+            <button className="btn btn-danger" onClick={min}>Get Min <span className="glyphicon glyphicon-menu-right" aria-hidden="true"></span></button>
+            <button className="btn btn-primary" onClick={max}>Get Max <span className="glyphicon glyphicon-menu-right" aria-hidden="true"></span></button>
+            <button className="btn btn-warning" onClick={mid}>Get Mid <span className="glyphicon glyphicon-menu-right" aria-hidden="true"></span></button>
           </div>
         </div>
       );
