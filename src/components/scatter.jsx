@@ -33,7 +33,7 @@ const ScatterPlotChart = {
         return a > b ? a:b;
       });
       maxRangeX = maxRangeX + (maxRangeX/3);
-      maxRangeY = maxRangeY + (maxRangeY/3);
+      maxRangeY = maxRangeY + (maxRangeY);
       this.maxX = maxRangeX || 240000;
       this.maxY = maxRangeY || 5;
       console.log(this.maxX, this.maxY);
@@ -56,7 +56,7 @@ const ScatterPlotChart = {
     },
     getYScale() {
       return d3.scale.linear()
-        .domain([0,5])
+        .domain([0, this.maxY])
         // .range([960, 60])
         .range([this.height,0]);
     },
