@@ -6,8 +6,6 @@ export default function (state = [], action) {
     case JOB_MATCH:
       // take all objects payload.data and put it into a new array
       const current = [...action.payload.data];
-      console.log('Payload data', action.payload.data);
-      console.log('Payload', action.payload);
       // map over the object and create a mean array
       const array = current.map(job => {
         const mean = [Number((job.salary_min + job.salary_max) / 2), (Number(job.equity_min) + Number(job.equity_max)) / 2];
