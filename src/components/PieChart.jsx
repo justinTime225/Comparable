@@ -19,10 +19,16 @@ export default class PieGraph extends Component {
       values: skills,
     }
 
-    const sort = null;
+    const sort = (a,b) => {
+      return b-a;
+    }
+
+    const label = (a) => {
+      return false;
+    }
 
     let tooltipPie = (x, y) => {
-      return y.toString();
+      return (x.toString() + ': ' + y.toString());
     };
 
     return (
@@ -34,7 +40,9 @@ export default class PieGraph extends Component {
           margin={{top: 10, bottom: 10, left: 100, right: 100}}
           sort={sort}
           tooltipHtml={tooltipPie}
+          label={label}
           />
+        <div className="experimental">Note: This component is experimental.</div>
       </div>
     );
   }
