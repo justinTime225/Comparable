@@ -3,7 +3,6 @@ export const JOB_MATCH = 'JOB_MATCH';
 export const GET_USERS = 'GET_USERS';
 
 export function sendJob(data, userData) {
-  console.log('Send job', userData);
   const request = axios.get('/api/jobs', {
     params: {
       title: data.title,
