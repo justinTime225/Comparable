@@ -90,15 +90,17 @@ class Offer extends Component {
     const { offer, job, onJobClick, onJobClose, toggleChart } = this.props;
     const { display, userOffer, dataType } = offer;
 
-    let offerDisplayType = 'Users';
+    let offerDisplayType = 'Toggle Users';
     if (this.offerType === 'users') {
-      offerDisplayType = 'Jobs';
+      offerDisplayType = 'Toggle Jobs';
     }
     // Compile data to send to the display component
     const displayData = {
       userOffer: userOffer,
       jobs: job
     };
+
+    let existingJobs = displayData.jobs.length > 0;
 
     return (
       <div className="container">
@@ -110,9 +112,11 @@ class Offer extends Component {
             </div>
             <div className="panel panel-default">
               <div className="panel-body" >
+                {existingJobs &&
                   <div className="btn-group toggle-btn active" role="group" aria-label="...">
                     <button onClick={() => this.switchOffers()} type="button" className="btn btn-default">{offerDisplayType}</button>
                   </div>
+                }
                 <BarGraph { ...this.props } toggle={toggleChart} dataType={dataType} />
               </div>
             </div>
