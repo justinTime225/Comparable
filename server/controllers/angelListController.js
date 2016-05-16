@@ -46,8 +46,7 @@ module.exports = {
   filterAngelListData: (params, callback) => {
     const title = toTitleCase(params.title);
     const location = toTitleCase(params.location);
-    console.log('title', title);
-    console.log('location', location);
+
     // filter data in data file by job title and return to GET request as response
     const filteredData = _.filter(angelListFile.jobs, (job) => {
       if (job.title) {
