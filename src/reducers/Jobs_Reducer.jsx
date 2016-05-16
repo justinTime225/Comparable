@@ -24,13 +24,17 @@ export default function (state = [], action) {
           y: (Number(job.equity_min) + Number(job.equity_max)) / 2,
           r: 5
         }
-        // job.mean = mean;
         job.lowerRange = lowerRange;
         job.upperRange = upperRange;
         job.midRange = midRange;
         return job;
+      }).filter(job => {
+        if (job.lowerRange.x > 10000 && job.upperRange.y <= 7) {
+          return job;
+        }
       });
-
+      console.log(array);
+      // filter out jobs below 10k and equity above 10%
       // create the user data based on the offer input from meta
       const userData = {
         mean: [action.meta.salary, action.meta.equity],
