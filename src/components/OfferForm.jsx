@@ -6,11 +6,11 @@ import { reduxForm } from 'redux-form';
 const validate = values => {
   const errors = {};
 
-  if (!values.title) {
+  if (!values.title || values.title === 'Title') {
     errors.title = 'Required';
   }
 
-  if (!values.location) {
+  if (!values.location || values.location === 'Location') {
     errors.location = 'Required';
   }
 
@@ -39,26 +39,26 @@ class OfferForm extends Component {
             <div className="panel-body">
               <form onSubmit={handleSubmit} className="form-inline offer-input">
                 <div className="form-group has-warning">
-                  <label className="sr-only" htmlFor="title">Title</label>
-                  <input list="titles" type="text" className="form-control" placeholder="Title" autoComplete="off" { ...title } />
-                  <datalist id="titles">
-                    <option value="Software Engineer"></option>
-                    <option value="Frontend Engineer"></option>
-                    <option value="Backend Engineer"></option>
-                    <option value="UI Engineer"></option>
-                    <option value="Designer"></option>
-                  </datalist>
+                  <label htmlFor="s1"></label>
+                  <select id="s1" value="Title" className="form-control" { ...title } >
+                    <option value="Title">Title</option>
+                    <option value="Software Engineer">Software Engineer</option>
+                    <option value="Frontend Engineer">Frontend Engineer</option>
+                    <option value="Backend Engineer">Backend Engineer</option>
+                    <option value="UI Engineer">UI Engineer</option>
+                    <option value="Designer">Designer</option>
+                  </select>
                   {title.touched && title.error && <div style={{ color: 'red' }}>{title.error}</div>}
                 </div>
                 <div className="form-group has-warning">
-                  <label className="sr-only" htmlFor="location">Location</label>
-                  <input list="locations" className="form-control" placeholder="Location" autoComplete="off" { ...location } />
-                  <datalist id="locations">
-                    <option value="Austin"></option>
-                    <option value="Irvine"></option>
-                    <option value="Los Angeles"></option>
-                    <option value="San Francisco"></option>
-                  </datalist>
+                  <label htmlFor="s2"></label>
+                  <select id="s2" value="Location" className="form-control" { ...location } >
+                    <option value="Location">Location</option>
+                    <option value="Austin">Austin</option>
+                    <option value="Irvine">Irvine</option>
+                    <option value="Los Angeles">Los Angeles</option>
+                    <option value="San Francisco">San Francisco</option>
+                  </select>
                   {location.touched && location.error && <div style={{ color: 'red' }}>{location.error}</div>}
                 </div>
                 <div className="form-group has-warning">

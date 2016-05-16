@@ -212,6 +212,10 @@ footer a, i {
   margin: 0px 3px;
 }
 
+select.form-control:not([size]):not([multiple]) {
+  height: 2rem;
+}
+
 .offer-form {
   text-align: center;
 }
