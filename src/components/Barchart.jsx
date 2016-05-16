@@ -36,7 +36,7 @@ export default class BarGraph extends Component {
 
           equity.values.push({
             x: `${job.title},${job.salary},${job.equity}`,
-            y: job.equity,
+            y: Number(job.equity),
           });
         }
       });
