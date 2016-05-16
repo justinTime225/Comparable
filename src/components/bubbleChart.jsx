@@ -22,7 +22,7 @@ var tooltipProps = [{
   prop: 'colorValue',
   display: 'Change'
 }];
-
+const cities = ['San Francisco', 'Los Angeles', 'Austin', 'Irvine'];
 export default class BubbleChart extends Component {
   render() {
     const skills = this.props.skill.map((obj) =>{
@@ -34,7 +34,7 @@ export default class BubbleChart extends Component {
       }
       return myObj;
     }).filter((obj) => {
-      if (obj.displayText !== 'San Francisco' && obj.value > 6) {
+      if (cities.indexOf(obj.displayText) === -1 && obj.value > 6) {
         return obj;
       }
     });
