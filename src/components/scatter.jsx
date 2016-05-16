@@ -9,7 +9,7 @@ var globalColorFill;
 const ScatterPlotChart = {
 
   init(options) {
-      let {el, dataset } = options;
+      let {el, dataset, maxSet } = options;
       let chartWidth = 1060;
       let chartHeight= 700;
       this.dataset = dataset;
@@ -20,10 +20,10 @@ const ScatterPlotChart = {
       // Min & Max
       this.min = d3.min(dataset, (d) => d.y);
       this.max = d3.max(dataset, (d) => d.y);
-      var maxRangeX = dataset.map((obj) => {
+      var maxRangeX = maxSet.map((obj) => {
         return obj.x;
       });
-      var maxRangeY = dataset.map((obj) => {
+      var maxRangeY = maxSet.map((obj) => {
         return obj.y;
       });
       maxRangeX = _.reduce(maxRangeX, (a, b) => {
@@ -32,11 +32,9 @@ const ScatterPlotChart = {
       maxRangeY = _.reduce(maxRangeY, (a, b) => {
         return a > b ? a:b;
       });
-      maxRangeX = maxRangeX + (maxRangeX/3);
-      maxRangeY = maxRangeY + (maxRangeY);
       this.maxX = maxRangeX || 240000;
       this.maxY = maxRangeY || 5;
-      console.log(this.maxX, this.maxY);
+
       // Y Scale
       this.yScale = this.getYScale();
 
@@ -50,8 +48,6 @@ const ScatterPlotChart = {
 
       // render
       this.renderChart(el);
-      console.log('-------')
-      // console.log(dataset);
      
     },
     getYScale() {
@@ -177,18 +173,19 @@ let Chart = React.createClass({
   getInitialProps() {
       return {
         dataset: [],
+        maxSet: []
       };
     },
-    renderChart(dataset) {
+    renderChart(dataset, maxSet) {
       ScatterPlotChart.init({
         el: '#chart',
-        dataset: dataset
-        
+        dataset: dataset,
+        maxSet: maxSet
         // pass in another prop to determines the x and y axis to replace label
       });
     },
     componentDidMount() {
-      this.renderChart(this.props.dataset);
+      this.renderChart(this.props.dataset, this.props.maxSet);
     },
     componentWillReceiveProps: function(nextProps) {
       if (typeof(nextProps.dataset) !== "undefined") {
@@ -274,7 +271,8 @@ const ScatterPlot = React.createClass({
     },
     getInitialState() {
       return {
-        dataset: []
+        dataset: [],
+        maxSet: []
       };
     },
     render() {
@@ -283,7 +281,8 @@ const ScatterPlot = React.createClass({
       const userJob = _.last(this.props.job);
       ScatterPlotChart.init({
           el: '#chart',
-          dataset: this.getMid(userJob)
+          dataset: this.getMid(userJob),
+          maxSet: this.getUpper(userJob)
         });
       const max = (e) => {
         e.preventDefault();
@@ -303,7 +302,7 @@ const ScatterPlot = React.createClass({
       return (
         <div className="page">
           <div className="page-wrapper">   
-            <Chart dataset={this.state.dataset} />
+            <Chart dataset={this.state.dataset} maxSet={this.state.maxSet}/>
             <button className="pure-button" onClick={min}>Get Min <span className="glyphicon glyphicon-menu-right" aria-hidden="true"></span></button>
             <button className="pure-button" onClick={max}>Get Max <span className="glyphicon glyphicon-menu-right" aria-hidden="true"></span></button>
             <button className="pure-button" onClick={mid}>Get Mid <span className="glyphicon glyphicon-menu-right" aria-hidden="true"></span></button>
