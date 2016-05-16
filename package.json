@@ -9,7 +9,7 @@
     "test:watch": "npm run test -- --watch",
     "webpack:deploy": "NODE_ENV=production webpack --config webpack.prod.config.js --progress --colors",
     "heroku-postbuild": "npm run webpack:deploy",
-    "postinstall": "node ./server/angelList/angel_list.js",
+    "postinstall": "node ./server/utils/angelList.js",
     "lint": "eslint src server"
   },
   "repository": {

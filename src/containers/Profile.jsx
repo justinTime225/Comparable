@@ -9,6 +9,7 @@ import OfferSlider from '../components/OfferSlider';
 import BubbleChart from '../components/bubbleChart';
 import PieGraph from '../components/PieChart';
 import Scatter from '../components/scatter';
+import { Link } from 'react-router';
 
 const styles = {
   width: 1000,
@@ -29,7 +30,7 @@ const customStyles = {
 };
 
 class Profile extends Component {
-  skills: false
+  skills: false;
 
   componentWillMount() {
     const { getOffers, sendJob } = this.props;
@@ -43,22 +44,30 @@ class Profile extends Component {
     const { profileChart } = this.props.profileInfo;
 
     let profileData = this.props.profileOffer.data;
-
     if (profileData && !this.skills) {
       this.skills = true;
-      getSkills(profileData[0]);
+      getSkills(profileData[0] || '');
     }
 
     return (
       <div className="container">
-        <h1 className="offersHeading">My Offers</h1>
-      {profileData &&
-          <OfferSlider
-          profileData={profileData}
-          sendJob={this.props.sendJob}
-          getSkills={this.props.getSkills}>
-          </OfferSlider>
-      }
+        <div className="row">
+          {profileData && profileData.length > 0 &&
+            <div>
+              <h1 className="offersHeading">My Offers</h1>
+              <OfferSlider
+                profileData={profileData}
+                sendJob={this.props.sendJob}
+                getSkills={this.props.getSkills}>
+              </OfferSlider>
+            </div> ||
+            <div>
+              <Link to="/offers" className="add-offers">
+                <h1 className="offersHeading">Click To Add An Offer!</h1>
+              </Link>
+            </div>
+          }
+        </div>
         <div className="row">
           <div className="col-md-12">
             <div className="panel-heading">
