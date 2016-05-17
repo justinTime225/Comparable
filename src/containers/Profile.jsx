@@ -1,32 +1,43 @@
+/* React imports */
 import React, { Component } from 'react';
-import axios from 'axios';
 import { connect } from 'react-redux';
-import { getOffer } from '../actions/Profile_Offer';
-import { getSkills } from '../actions/Skills_Actions';
-import { sendJob } from '../actions/Job_Matches';
-import { togglePie, toggleBubble, toggleScatter } from '../actions/Profile_Actions';
+import { Link } from 'react-router';
+import axios from 'axios';
+
+/* Components */
 import OfferSlider from '../components/OfferSlider';
 import BubbleChart from '../components/bubbleChart';
 import PieGraph from '../components/PieChart';
 import Scatter from '../components/scatter';
-import { Link } from 'react-router';
+
+/* Action creators */
+import { togglePie, toggleBubble, toggleScatter } from '../actions/Profile_Actions';
+import { getSkills } from '../actions/Skills_Actions';
+import { getOffer } from '../actions/Profile_Offer';
+import { sendJob } from '../actions/Job_Matches';
 
 class Profile extends Component {
   skills: false;
+
   componentWillMount() {
     const { getOffers, sendJob } = this.props;
     const email = JSON.parse(localStorage.getItem('profile')).email;
     getOffers(email);
   }
+
   render() {
     const { getSkills, pieChart, bubbleChart, scatterChart } = this.props;
+
     // Grab the current displayed chart type
     const { profileChart } = this.props.profileInfo;
+
     let profileData = this.props.profileOffer.data;
+
     if (profileData && !this.skills) {
       this.skills = true;
       getSkills(profileData[0] || '');
     }
+    
     return (
       <div className="container">
         <div className="row">
@@ -80,6 +91,7 @@ class Profile extends Component {
 
 function mapStateToProps(state) {
   const { skill, profileOffer, job, profileInfo } = state;
+
   return {
     skill,
     profileOffer,
