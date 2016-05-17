@@ -128,10 +128,6 @@ class Offer extends Component {
   }
 };
 
-// <ScatterPlot {...this.props} {...styles} update={onJobClick} />
-// <h4 id="equity">Equity</h4>
-// <h4 id="salary">Salary</h4>
-
 function mapStateToProps(state) {
   const { offer, job } = state;
   return {

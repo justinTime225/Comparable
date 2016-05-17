@@ -113,8 +113,18 @@ export default class BarGraph extends Component {
       );
     } else {
       return (
-        <div className="loader-container">
-          <img className="loader-img" src="https://d13yacurqjgara.cloudfront.net/users/69182/screenshots/2179253/animated_loading__by__amiri.gif" alt="Loading..." />
+        <div>
+          <div className="row">
+            <h3 className="offersWaiting">Waiting for Offers...</h3>
+          </div>
+          <div className="loader-container">
+            <div className="sk-folding-cube">
+              <div className="sk-cube1 sk-cube"></div>
+              <div className="sk-cube2 sk-cube"></div>
+              <div className="sk-cube4 sk-cube"></div>
+              <div className="sk-cube3 sk-cube"></div>
+            </div>
+          </div>
         </div>
       );
     };
