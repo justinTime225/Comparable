@@ -13,7 +13,6 @@ import OfferDisplay from '../components/OfferDisplay';
 import { changeOffer, clickJob, closeJob, toggleChart } from '../actions/Offer_Actions';
 import { sendJob, getUserOffers } from '../actions/Job_Matches';
 import { displayJob } from '../actions/Job_Display';
-import { getSkills } from '../actions/Skills_Actions';
 
 class Offer extends Component {
   // Saves the users offer to DB
