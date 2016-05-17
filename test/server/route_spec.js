@@ -22,21 +22,6 @@ describe('routes', () => {
     });
   });
 
-
-  describe('/api/offer-filters', () => {
-    it('returns an object with keys for jobTitles and tags', (done) => {
-
-      request(app)
-        .get('/api/offer-filters')
-        .expect(200)
-        .expect(res => {
-          expect(res.body.jobTitles).to.exist;
-          expect(res.body.tags).to.exist;
-        })
-        .end(done);
-    });
-  });
-
   describe('/api/skills', () => {
     it('returns 200 success code', (done) => {
       request(app)

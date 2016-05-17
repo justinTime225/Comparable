@@ -6,13 +6,12 @@ module.exports = {
   getSkills: (title, callback) => {
     const skillCount = {};
     const skills = [];
-    var sample;
+    const filter = { sample: null };
 
     // filter collection based on title
-    // if title was provided
     if (title) {
       // returns array of objects containing just jobs and tags
-      sample = _.flatten(
+      filter.sample = _.flatten(
         _.pluck(_.filter(angelListFile.jobs, (job) => {
           if (job.title) {
             return job.title === title;
@@ -21,13 +20,13 @@ module.exports = {
       );
     } else {
       // returns array of objects containing skills only
-      sample = _.flatten(
+      filter.sample = _.flatten(
         _.pluck(angelListFile.jobs, 'tags')
       );
     }
 
     // caculate count of all skill tags
-    _.each(sample, (skill) => {
+    _.each(filter.sample, (skill) => {
       if (skillCount[skill.display_name]) {
         skillCount[skill.display_name]++;
       } else {
@@ -35,7 +34,7 @@ module.exports = {
       }
     });
 
-    // maps skill tags count into an array of objects
+    // creates an array of objects with skill tags & count
     _.mapObject(skillCount, (val, key) => {
       skills.push({ skill: key, count: val });
     });
@@ -55,28 +54,5 @@ module.exports = {
     });
 
     callback(null, filteredData);
-  },
-
-  getOfferFilters: callback => {
-    const filters = {};
-
-    // grab all job titles in database
-    // remove duplicate jobs
-    filters.jobTitles = _.pluck(angelListFile.jobs, 'title');
-    filters.jobTitles = _.uniq(filters.jobTitles);
-
-    // grab all tags tags: [][{}, {}], [{}, {}]]
-    // flatten tags into 1 array of objects
-    // replace filter.tags with only display_name in tags
-    // remove duplicate display_names
-    filters.tags = _.flatten(_.pluck(angelListFile.jobs, 'tags'));
-    filters.tags = _.pluck(filters.tags, 'display_name');
-    filters.tags = _.uniq(filters.tags);
-
-    return callback(null, filters);
-  },
-
-  getJobDetails: (id, callback) => {
-    callback(null, id);
   },
 };
