@@ -1,9 +1,11 @@
+/* React imports */
 import React, { Component } from 'react';
+
+/* Components */
 import { PieChart } from 'react-d3-components';
 
 export default class PieGraph extends Component {
   render() {
-    console.log(PieChart.propTypes);
     let { skill } = this.props;
 
     skill = skill.filter(function(item, index) {

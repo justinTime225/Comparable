@@ -1,5 +1,8 @@
+/* React imports */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+
+/* Action creators */
 import { login } from '../actions/Auth_Actions';
 
 class Home extends Component {

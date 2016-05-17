@@ -1,69 +1,44 @@
+/* React imports */
 import React, { Component } from 'react';
-import {connect} from 'react-redux';
-import OfferForm from '../components/OfferForm';
-import { displayJob } from '../actions/Job_Display';
-import { sendJob, getUserOffers } from '../actions/Job_Matches';
-import { getSkills } from '../actions/Skills_Actions';
+import { connect } from 'react-redux';
 import { reset } from 'redux-form';
-import { changeOffer, clickJob, closeJob, toggleChart } from '../actions/Offer_Actions';
-import BarGraph from '../components/Barchart'
-import OfferDisplay from '../components/OfferDisplay';
-import Modal from 'react-modal';
 import axios from 'axios';
 
-// Deafult styles for graph
-const styles = {
-  width: 1000,
-  height: 900,
-  padding: 30,
-};
+/* Components */
+import OfferForm from '../components/OfferForm';
+import BarGraph from '../components/Barchart'
+import OfferDisplay from '../components/OfferDisplay';
 
-// Styles for Modal
-const customStyles = {
-  content: {
-    top: '50%',
-    left: '50%',
-    right: 'auto',
-    bottom: 'auto',
-    marginRight: '-50%',
-    transform: 'translate(-50%, -50%)',
-  },
-};
-
-// When a circle/plot is clicked, modify
-// the clicked circles data
+/* Action creators */
+import { changeOffer, clickJob, closeJob, toggleChart } from '../actions/Offer_Actions';
+import { sendJob, getUserOffers } from '../actions/Job_Matches';
+import { displayJob } from '../actions/Job_Display';
 
 class Offer extends Component {
+  // Saves the users offer to DB
   saveOffer(data) {
-    var email = JSON.parse(localStorage.profile).email;
-    var offerObj = {
+    let email = JSON.parse(localStorage.profile).email;
+
+    let offerObj = {
       title: data.title,
       location: data.location,
       salary: data.salary,
       equity: data.equity,
-      userEmail: email
+      userEmail: email,
     };
-    axios.post('/api/offers', offerObj)
-    .then(function (response) {
-      // Do something?
-    })
-    .catch(function (response) {
-      // Do something?
-    });
 
-  }
+    axios.post('/api/offers', offerObj);
 
-  skillAction(data) {
-    this.props.getSkills(data);
   }
 
   handleSubmit(data, dispatch) {
-
+    // Dispatch actions
     dispatch(changeOffer(data));
-
     dispatch(sendJob(data, data));
+
+    // Save offer to DB
     this.saveOffer(data);
-    // this.skillAction.call(this, data);
+
     // Resets form fields after submission
     dispatch(reset('offer'));
   }
@@ -73,9 +48,6 @@ class Offer extends Component {
   switchOffers() {
     const { userOffer } = this.props.offer;
     const { userOffers, jobOffers } = this.props;
-
-
-    console.log(userOffer);
 
     if (this.offerType === 'jobs' || this.offerType === undefined) {
       userOffers(userOffer, userOffer);
@@ -87,19 +59,22 @@ class Offer extends Component {
   }
 
   render() {
-    const { offer, job, onJobClick, onJobClose, toggleChart } = this.props;
+    const { offer, job, toggleChart } = this.props;
     const { display, userOffer, dataType } = offer;
 
     let offerDisplayType = 'Toggle Users';
+
     if (this.offerType === 'users') {
       offerDisplayType = 'Toggle Jobs';
     }
+
     // Compile data to send to the display component
     const displayData = {
       userOffer: userOffer,
       jobs: job
     };
 
+    // Check for jobs in current state
     let existingJobs = displayData.jobs.length > 0;
 
     return (
@@ -122,7 +97,6 @@ class Offer extends Component {
             </div>
           </div>
         </div>
-
       </div>
     );
   }
@@ -131,7 +105,6 @@ class Offer extends Component {
 function mapStateToProps(state) {
   const { offer, job } = state;
   return {
-    // skill,
     offer,
     job,
   };
@@ -139,13 +112,6 @@ function mapStateToProps(state) {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onJobClick: (job) => {
-      dispatch(clickJob(job));
-    },
-
-    onJobClose: () => {
-      dispatch(closeJob());
-    },
     toggleChart: (dataType) => {
       dispatch(toggleChart(dataType));
     },

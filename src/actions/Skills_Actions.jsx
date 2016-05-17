@@ -1,4 +1,6 @@
+/* React imports */
 import axios from 'axios';
+
 export const SKILLS_ACTION = 'SKILLS_ACTION';
 
 export function getSkills(data) {

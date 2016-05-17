@@ -1,4 +1,6 @@
+/* React imports */
 import axios from 'axios';
+
 export const PROFILE_OFFER = "PROFILE_OFFER";
 
 export function getOffer(email) {
