@@ -1,8 +1,13 @@
+/* React imports */
 import React, { Component, PropTypes } from 'react';
+import { Link } from 'react-router';
+
+/* Components */
 import Login from './Login';
 import Logout from './Logout';
+
+/* Action creators */
 import { login, logoutUser } from '../actions/Auth_Actions';
-import { Link } from 'react-router';
 
 export default class Navbar extends Component {
   render() {
