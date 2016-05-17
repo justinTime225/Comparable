@@ -1,7 +1,9 @@
+/* React imports */
 import React, { Component } from 'react';
 import Slider from 'react-slick';
 
 export default class OfferSlider extends Component {
+  // Grabs the skills and the comparison job data for clicked job
   fetchSkills(profileOffer) {
     this.props.getSkills(profileOffer)
     this.props.sendJob(profileOffer);
