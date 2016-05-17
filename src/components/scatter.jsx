@@ -1,3 +1,4 @@
+/* React imports */
 import React, { Component } from 'react';
 import d3 from 'd3';
 import _ from 'lodash';
@@ -48,7 +49,7 @@ const ScatterPlotChart = {
 
       // render
       this.renderChart(el);
-     
+
     },
     getYScale() {
       return d3.scale.linear()
@@ -253,7 +254,7 @@ const ScatterPlot = React.createClass({
       }
       return (
         <div className="page">
-          <div className="page-wrapper">   
+          <div className="page-wrapper">
             <Chart dataset={this.state.dataset} maxSet={this.state.maxSet}/>
             <button className="btn btn-danger" onClick={min}>Get Min <span className="glyphicon glyphicon-menu-right" aria-hidden="true"></span></button>
             <button className="btn btn-primary" onClick={max}>Get Max <span className="glyphicon glyphicon-menu-right" aria-hidden="true"></span></button>
