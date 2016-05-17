@@ -1,5 +1,5 @@
 const expect = require('chai').expect;
-const angelList = require('../../../server/controllers/angelListController.js');
+const angelList = require('../../../server/controllers/angellist-controller');
 
 describe('AngelList Controller', () => {
   describe('filterAngelListData', () => {

@@ -1,5 +1,5 @@
-const angelListController = require('./controllers/angelListController');
-const OfferController = require('./db/controller');
+const angelListController = require('./controllers/angellist-controller');
+const OfferController = require('./controllers/offer-controller');
 // handle errors and send response
 const sendResponse = (res, err, data, status) => {
   if (err) {

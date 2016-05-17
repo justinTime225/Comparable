@@ -6,12 +6,12 @@ module.exports = {
   getSkills: (title, callback) => {
     const skillCount = {};
     const skills = [];
-    var sample;
+    const filter = { sample: null };
 
     // filter collection based on title
     if (title) {
       // returns array of objects containing just jobs and tags
-      sample = _.flatten(
+      filter.sample = _.flatten(
         _.pluck(_.filter(angelListFile.jobs, (job) => {
           if (job.title) {
             return job.title === title;
@@ -20,13 +20,13 @@ module.exports = {
       );
     } else {
       // returns array of objects containing skills only
-      sample = _.flatten(
+      filter.sample = _.flatten(
         _.pluck(angelListFile.jobs, 'tags')
       );
     }
 
     // caculate count of all skill tags
-    _.each(sample, (skill) => {
+    _.each(filter.sample, (skill) => {
       if (skillCount[skill.display_name]) {
         skillCount[skill.display_name]++;
       } else {
