@@ -8,8 +8,8 @@ export default function (state = [], action) {
       const current = [...action.payload.data];
       // map over the object and create a mean array
       const array = current.map(job => {
-        const mean = [Number((job.salary_min + job.salary_max) / 2), (Number(job.equity_min) + Number(job.equity_max)) / 2];
         const color = colorArray[Math.floor(Math.random() * 7)];
+        // Create scatterplot point object for min, max, and mid
         var lowerRange = {
           x: job.salary_min,
           y: Number(job.equity_min),
@@ -33,14 +33,16 @@ export default function (state = [], action) {
         job.midRange = midRange;
         return job;
       }).filter(job => {
+        // filter out jobs with no salary or unreal jobs
         if (job.lowerRange.x > 10000 && job.upperRange.y <= 7) {
           return job;
         }
       });
+      // create a userpoint plot from the meta data
       const userData = {
-        mean: [action.meta.salary, action.meta.equity],
-        title: action.meta.title,
-        user: true,
+        // mean: [action.meta.salary, action.meta.equity],
+        // title: action.meta.title,
+        // user: true,
         x: action.meta.salary,
         y: action.meta.equity,
         r: 10,
@@ -50,7 +52,6 @@ export default function (state = [], action) {
       return array;
 
     case GET_USERS:
-      // console.log(action.payload.data);
       return action.payload.data;
   }
   return state;

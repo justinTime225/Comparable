@@ -11,44 +11,22 @@ import PieGraph from '../components/PieChart';
 import Scatter from '../components/scatter';
 import { Link } from 'react-router';
 
-const styles = {
-  width: 1000,
-  height: 900,
-  padding: 30,
-};
-
-// Styles for Modal
-const customStyles = {
-  content: {
-    top: '50%',
-    left: '50%',
-    right: 'auto',
-    bottom: 'auto',
-    marginRight: '-50%',
-    transform: 'translate(-50%, -50%)',
-  },
-};
-
 class Profile extends Component {
   skills: false;
-
   componentWillMount() {
     const { getOffers, sendJob } = this.props;
     const email = JSON.parse(localStorage.getItem('profile')).email;
     getOffers(email);
   }
-
   render() {
     const { getSkills, pieChart, bubbleChart, scatterChart } = this.props;
     // Grab the current displayed chart type
     const { profileChart } = this.props.profileInfo;
-
     let profileData = this.props.profileOffer.data;
     if (profileData && !this.skills) {
       this.skills = true;
       getSkills(profileData[0] || '');
     }
-
     return (
       <div className="container">
         <div className="row">
@@ -99,10 +77,7 @@ class Profile extends Component {
     );
   }
 }
-  // <Scatter job={this.props.job}/>
-// <ScatterPlot {...this.props} {...styles}  />
-// <h4 id="equity">Equity</h4>
-// <h4 id="salary">Salary</h4>
+
 function mapStateToProps(state) {
   const { skill, profileOffer, job, profileInfo } = state;
   return {
@@ -121,8 +96,8 @@ const mapDispatchToProps = (dispatch) => {
     getSkills: (data) => {
       dispatch(getSkills(data));
     },
-    sendJob: (title, data) => {
-      dispatch(sendJob(title, data));
+    sendJob: (data) => {
+      dispatch(sendJob(data));
     },
     pieChart: () => {
       dispatch(togglePie());
