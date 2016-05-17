@@ -1,4 +1,4 @@
-// create bubble chart passing skills from offerContainer
+/* React imports */
 import React, { Component } from 'react';
 import ReactBubbleChart from 'react-bubble-chart';
 
