@@ -1,3 +1,4 @@
+/* React imports */
 import React, { Component } from 'react';
 import { BarChart } from 'react-d3-components'
 import _ from 'underscore';
@@ -7,13 +8,11 @@ export default class BarGraph extends Component {
 
     let data = '';
 
-    // data storage for barchart based on Job_Matches
-    // from OfferForm
+    // data storage for barchart based on Job_Matches from offerForm
     const salary = { label: 'Salary', values: [] };
     const equity = { label: 'Equity', values: [] };
 
-    // populate the data array with jobs only when
-    // jobs exists
+    // populate the data array with jobs only when a job exists
     if (this.props.job.length > 0) {
       _.each(this.props.job, (job) => {
 
