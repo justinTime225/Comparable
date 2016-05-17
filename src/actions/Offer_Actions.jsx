@@ -11,19 +11,7 @@ export function changeOffer(data) {
   };
 }
 
-export function clickJob(data) {
-  return {
-    type: CLICK_JOB,
-    job: data,
-  };
-}
-
-export function closeJob() {
-  return {
-    type: CLOSE_JOB,
-  };
-}
-
+// Action create to toggle the type of chart shown on page
 export function toggleChart(dataType) {
   return {
     type: TOGGLE_CHART,
