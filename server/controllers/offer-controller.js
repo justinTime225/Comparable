@@ -2,17 +2,17 @@ const Offer = require('../db/mongo');
 const toTitleCase = require('../utils/helpers');
 
 module.exports = {
-  getOffers: (req, res) => {
+  getOffers: (req, callback) => {
     Offer.find({ userEmail: req.query.userEmail }).then((data) => {
       if (data) {
-        res.status(200).send(data);
+        callback(null, data);
       } else {
-        res.status(200).send('cannot find data');
+        callback('cannot find data', data);
       }
     });
   },
 
-  createOffer: (req, res) => {
+  createOffer: (req, callback) => {
     const userOffer = req.body;
 
     userOffer.title = toTitleCase(userOffer.title);
@@ -22,9 +22,9 @@ module.exports = {
 
     offer.save().then((data) => {
       if (data) {
-        res.status(302).send(data);
+        callback(null, data);
       } else {
-        res.status(302).send('error occured');
+        callback('error occured', data);
       }
     });
   },
