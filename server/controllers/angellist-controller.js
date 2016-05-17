@@ -55,8 +55,4 @@ module.exports = {
 
     callback(null, filteredData);
   },
-
-  getJobDetails: (id, callback) => {
-    callback(null, id);
-  },
 };

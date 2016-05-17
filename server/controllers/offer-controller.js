@@ -1,26 +1,30 @@
-var Offer = require('./mongo');
+const Offer = require('../db/mongo');
 const toTitleCase = require('../utils/helpers');
 
 module.exports = {
-  getOffers: function(req, res) {
-    Offer.find({userEmail: req.query.userEmail}).then(function(data) {
-      if (data)  {
+  getOffers: (req, res) => {
+    Offer.find({ userEmail: req.query.userEmail }).then((data) => {
+      if (data) {
         res.status(200).send(data);
       } else {
         res.status(200).send('cannot find data');
       }
     });
   },
-  createOffer: function(req, res) {
-    req.body.title = toTitleCase(req.body.title);
-    req.body.location = toTitleCase(req.body.location);
 
-    var offer = new Offer(req.body);
-    offer.save().then(function(data) {
+  createOffer: (req, res) => {
+    const userOffer = req.body;
+
+    userOffer.title = toTitleCase(userOffer.title);
+    userOffer.location = toTitleCase(userOffer.location);
+
+    const offer = new Offer(userOffer);
+
+    offer.save().then((data) => {
       if (data) {
         res.status(302).send(data);
       } else {
-        res.status(302).send('error occured')
+        res.status(302).send('error occured');
       }
     });
   },

@@ -12,7 +12,6 @@ const sendResponse = (res, err, data, status) => {
 module.exports = (app) => {
   app.route('/api/jobs')
     .get((req, res) => {
-      // route for getting jobs from angelList data
       angelListController.filterAngelListData(req.query, (err, data) => {
         sendResponse(res, err, data, 200);
       });
@@ -25,6 +24,7 @@ module.exports = (app) => {
         sendResponse(res, err, data, 200);
       });
     });
+
   app.route('/api/offers')
     .get(OfferController.getOffers)
     .post(OfferController.createOffer);
