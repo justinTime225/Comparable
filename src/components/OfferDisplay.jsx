@@ -1,3 +1,4 @@
+/* React imports */
 import React, { Component } from 'react';
 
 export default class OfferDisplay extends Component {
@@ -32,6 +33,7 @@ export default class OfferDisplay extends Component {
       }
     });
 
+    // Calculate averages
     let salaryAvg = Math.round(salarySum / (count * 2));
     let equityAvg = Math.round(equitySum / (count * 2));
     let salaryDiff = Math.round(((userOffer.salary - salaryAvg) / salaryAvg) * 100);
@@ -41,6 +43,7 @@ export default class OfferDisplay extends Component {
     let circleClass = '';
     let arrowClass = '';
 
+    // Dynamic class for display arrow
     if (salaryDiff < 0) {
       circleClass = 'responsive-circle red-circle';
       arrowClass = 'arr-down';
