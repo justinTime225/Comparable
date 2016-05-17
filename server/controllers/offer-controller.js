@@ -1,4 +1,4 @@
-const Offer = require('../db/mongo');
+const Offer = require('../models/offer-model');
 const toTitleCase = require('../utils/helpers');
 
 module.exports = {
