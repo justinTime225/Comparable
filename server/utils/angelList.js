@@ -1,10 +1,9 @@
 const https = require('https');
 const fs = require('fs');
 const _ = require('underscore');
-const secret = require('../config/.secrets.json');
 
 // set angelList API key
-const angelListToken = process.env.AngelList || secret.angelList.access_token;
+const angelListToken = process.env.AngelList || require('../config/.secrets.json').angelList.access_token;
 
 // angelList job locations
 const locations = [1692, 1653, 1617, 1705];
