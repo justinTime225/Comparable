@@ -61,12 +61,12 @@ export default class OfferDisplay extends Component {
             <div className="circle-inner">{salaryDiff}%<br></br><i className={arrowClass}></i></div>
           </div>}
         </div>
-        <div className="col-md-5">
+        <div className="col-md-6">
           {userOffer &&
             <ul className="displayList">
               <li className="text-center offerTitle">{userOffer.title}</li>
               <li className="text-center">
-                Location: {userOffer.location} | Salary: {userOffer.salary} | Equity: {userOffer.equity}
+                Location: {userOffer.location} | Salary: ${userOffer.salary} | Equity: {userOffer.equity}
               </li>
             </ul>
           }

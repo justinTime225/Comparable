@@ -71,7 +71,7 @@ export default class BarGraph extends Component {
               <tr className="success">
                 <td>OFFER:</td>
                 <td>{this.props.offer.userOffer.title}</td>
-                <td>{this.props.offer.userOffer.salary}</td>
+                <td>${this.props.offer.userOffer.salary}</td>
                 <td>{this.props.offer.userOffer.equity}</td>
                 <td>{this.props.offer.userOffer.location}</td>
               </tr>

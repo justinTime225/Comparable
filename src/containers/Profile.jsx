@@ -37,13 +37,13 @@ class Profile extends Component {
       this.skills = true;
       getSkills(profileData[0] || '');
     }
-    
+
     return (
       <div className="container">
         <div className="row">
           {profileData && profileData.length > 0 &&
             <div>
-              <h1 className="offersHeading">My Offers</h1>
+              <h1 className="offersHeading heading-left">My Offers</h1>
               <OfferSlider
                 profileData={profileData}
                 sendJob={this.props.sendJob}
@@ -59,14 +59,13 @@ class Profile extends Component {
         </div>
         <div className="row">
           <div className="col-md-12">
-            <div className="panel-heading">
-              {profileChart === 'scatter' &&
-                <h1 className="offersHeading">Jobs</h1> ||
-              <h1 className="offersHeading">Related Skills</h1>}
-            </div>
             <div className="panel panel-default">
               <div className="panel-body">
-                <div className="btn-group toggle-btn active" role="group" aria-label="...">
+                {profileChart === 'scatter' &&
+                  <h1 className="offersHeading inline">Jobs</h1> ||
+                  <h1 className="offersHeading inline">Related Skills</h1>
+                }
+                <div className="btn-group toggle-btn btn-group-raised active" role="group" aria-label="...">
                   <button onClick={bubbleChart} type="button" className="btn btn-default">Bubbles</button>
                   <button onClick={pieChart} type="button" className="btn btn-default">Pie</button>
                   <button onClick={scatterChart} type="button" className="btn btn-default">Scatter</button>

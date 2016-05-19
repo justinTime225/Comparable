@@ -30,7 +30,7 @@ export default class OfferSlider extends Component {
               </tr>
             </tbody>
           </table>
-          <btn onClick={this.fetchSkills.bind(this, offer)} id="offer-btn">View</btn>
+          <btn onClick={this.fetchSkills.bind(this, offer)} className="card-btn">View</btn>
         </div>
       );
     });
