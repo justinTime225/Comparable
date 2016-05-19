@@ -16,6 +16,7 @@ export default class OfferSlider extends Component {
       return (
         <div className="offerCard text-center">
           <h4 className="cardTitle">{offer.title}</h4>
+          <h6 className="cardTitle">{offer.location}</h6>
           <table className="table">
             <thead>
               <tr>
